@@ -1,0 +1,981 @@
+{
+    "Sujetos": {
+        "Emisor": {
+            "NIF": "50588609V",
+            "ApellidosNombreRazonSocial": "mLVZYyi1n1hUo6cr5vhU1NUmyU02xoYPXLEcUCvZmXn4QrHGWzBUEfVCciTTtT1BGVnDo1gbtyJudzcwxlrdvnLFkMnMOvFnlM"
+        },
+        "VariosDestinatarios": "S",
+        "Destinatarios": [
+            {
+                "IDOtro": {
+                    "IDType": "04",
+                    "ID": "OzabKoUHq3sromE"
+                },
+                "ApellidosNombreRazonSocial": "LHcP0EGQzbYyxLj7vfptfnAwyAsljh6WpXTlbKcBFr2hyjnW7gwHhcTX",
+                "CodigoPostal": "43KMCiN",
+                "Direccion": "D0lV2TS9VevokPvFV"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "04",
+                    "ID": "WFJP7LUNZO"
+                },
+                "ApellidosNombreRazonSocial": "XVejSXu1K8ZryiDn7AyP6lzlNj0eUvkIDSdYws5MtY1aY2NIflXCxSeecTpjloQGcHmSE3KsAU1rQ3gJ1WI3c8ApIK",
+                "CodigoPostal": "9AhGYQF9q",
+                "Direccion": "k6zuWj6IwOYDj7fGQifRwOrPvO3dryr8MkgPmngG59KpLmBF3655e3W1bz7zyyDtFw4UE4NwfVXBjqSAcdHiQsN22uH3fj7NILulvVTcUV1xl83DkHjVjIL3sN8rIUoleAiIe"
+            },
+            {
+                "NIF": "30069960J",
+                "ApellidosNombreRazonSocial": "6iSJSHR2VRahx81PXn4AIKU0ruHhe5l1eDR30xa7LTRPLFtHGk9Og9J3",
+                "CodigoPostal": "aBlA6yDR9",
+                "Direccion": "LICUIEOIEBEuO62jTzL9ulb43nsdUwlom91TpkCMRoHkO6XhcwN7YhOfaWjuSABsLVpQfXeYQRlzM6ku1Tht0qzRHQvW5xvDZGFrluYe7LweABO1Iqs2J96hPvokozzFletO4ImfA7nDFof0PSZCLT9e1qg"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "06",
+                    "ID": "aQBxoj8q0W11R"
+                },
+                "ApellidosNombreRazonSocial": "ryVILZEJO25QyIKFyExw7tKlyzs5YWtkZ34oIrWSnAGnlgjPu8jEvWtiOn3gDvLSRnGjU1x69LcatGb",
+                "CodigoPostal": "K6R443B478TDD635Z",
+                "Direccion": "XdPYt9EYbl8U9Qw5LqSRTSkAgZO1fRhSWoLp1NhzskcWAeY8hMRxVY2sACm1iYTRFYzq2WXuOZhK5Z2GK88PtLa2fPavvUEWyXU281XlCV2tn1aPnndIPiYPcO3Ucdz7lCJvKZg"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": "mscDF6"
+                },
+                "ApellidosNombreRazonSocial": "oRE81B3TaRiCGp83qVKwpOaV2X1i57hxD9Zm77owBCUU64ZnBg",
+                "CodigoPostal": "APiS2U4",
+                "Direccion": "sbsxoRgrYvGH1N4ONOYKhMVZHuC6dIQAu9xDEIHgg1dGqTDTCyCU8Kk1j4ykSKBV3vvvRQLOYmMRG9c21EGPvNIq"
+            },
+            {
+                "NIF": "02307509B",
+                "ApellidosNombreRazonSocial": "sa7xEy79C08JsnJ95sLLasmFRpKXAI5XvVpqNr3ByOI7om",
+                "CodigoPostal": "Qr0EPVhiJPSjKL",
+                "Direccion": "M4A2tWP80i82O4j0SSMShdFI80cnUZOc8I5o7O7hCiAcoMz4RZDcTArPodWYu85cbQqz7LEUDyP1WplTWxUqxIaY2uXhXl5bZSt5vbI4bXv8AddG2TO43S5qVMwMkjPkpIJ6F763AbiBIT5HjV8nM0IJzaX05S5SRe9NBGq8yqGtOJhg2c2ZEixBLPJWdifGQvuBbZcnyLMhAfIShjpKY2dMqGv6xKAUaYboZ08Mv"
+            },
+            {
+                "NIF": "97175384Q",
+                "ApellidosNombreRazonSocial": "6j7pmrT0gGlqsxoUwJoVADjzUmPubgXWUSY",
+                "CodigoPostal": "wfgURk7",
+                "Direccion": "rJUdArFjqk2biCdl2yrSHDknEfflUPWHBrrIdrf5Cec0z1PW5pxeRFSxqIqmCNTHRdtOKoqXVA1Mzd2r9w6oUjDLgCzs9c9kr3bWn1NLSml4C3u07Oa0TT1HdvgqlIxuabKQT1lRH89KiXlqvknFkc4ycviBwqJVjky3rr6tdU4XxNLAYkXHTAqWgLQe"
+            },
+            {
+                "NIF": "90050717J",
+                "ApellidosNombreRazonSocial": "TZBs5upxDaNwfgh8TAThfXmuI84E",
+                "CodigoPostal": "lBOedFQcZC",
+                "Direccion": "6t1cYjvw5pxDB9hXBJIpgsRYP6xIvQ95J"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": "eXCPjmYuxYkO",
+                    "CodigoPais": "SK"
+                },
+                "ApellidosNombreRazonSocial": "7cz1DbEV0AAqrm9BQu1xBhWapMWzneimSzbnf",
+                "CodigoPostal": "KDc",
+                "Direccion": "6uTFv0lzphCLKkBKbVvwu1sR8uPtzGJpDN"
+            },
+            {
+                "NIF": "46074693N",
+                "ApellidosNombreRazonSocial": "XX8IiOWzWZIx2607aWkMH3qJU8QfhuXMCu3SM6gkGsx6o9MpZl2a2Pu9cz1ZqWG9u5YtZTqYnvYv0jB",
+                "CodigoPostal": "bDLqRtb",
+                "Direccion": "EOg10sxkzpPQS56mJQaddDg6R3kXKd3HKJLHATAXSKGgfLlWXtx0bdO9CMOT8dxBdQ8954fDjy1YNaDsUOUxI3DkYPFFjN5JrpsqnfJm0RQXYLMGDOqO2sZU9uXGbj6VAijb9rc2GaqxrMXfxjNU20kVXwVnWh78YK0dDDJ0SlhPT6ZDUgYumodfGBXiM4tWQXSBLAl28nEzXWrg79S2zBbs7BuFDRwXNTEMan7ADuJNRE3TFZNPO"
+            },
+            {
+                "NIF": "56055708Q",
+                "ApellidosNombreRazonSocial": "xbVIDLiEiAxV8252gK6TC1EhOO6bDJfX7O63OMTqwVicm9fKPPt0om7RfEFDgFohW5fbRyJzQ3XH6mCA998pL0zT6bN4881M8vxvdAX0HSH4",
+                "CodigoPostal": "e97dBPZDpsC",
+                "Direccion": "sILbUBqgEqT6ZTcPupWyKp3yUSWjLRmu1z6cSlfFDGeg9nWfPui18kra8RDCkpwQv5B3eBQHtRzDrcYRoj8g3faEWPZBDDva3WVlwYLsHn1hkRAvFIm4LYQ2nLi1iEaZGCU0nxbFFUOKsp3u50isjyzAiqNKqr95CoO4XOtWYP6rtPmHvzcRO0uNU5IoUnIcorr5Vbj"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "04",
+                    "ID": "CB26Ue",
+                    "CodigoPais": "BY"
+                },
+                "ApellidosNombreRazonSocial": "m6OmYLTWYeMHu5devWeDOZVTk2usYFp2A5qRlW2o225NBkNZeN8N6zCDyLD9k0Iehx3g8hCyFRTAGD6XQAA3fny0LETSQ0decc1qN6dyUXM7",
+                "CodigoPostal": "",
+                "Direccion": "jZXrgcJ9azeEl1h4DA0gUe6tb0qQv28x3zk7dSKfkyN1ESoPhDZgpFVE7rxaA7vxHZDY4IqH24quojEZneoKQl50lHZQuSknWHZD3GU61YPPFjjF"
+            },
+            {
+                "NIF": "07414342Q",
+                "ApellidosNombreRazonSocial": "8rdhlsfRy",
+                "CodigoPostal": "sC6rUbVyKtoycN2",
+                "Direccion": "VOEuaCH0se5wHFIaLE4XTTZBrT4hP1MrCBE0hpqGJQgNUxwjGokynRm2Na3irFh102S5YiHDr1Nea00a1ke3c8kTOPLMBNnRice2XqBlsM9ktHj3y3zh7OVVD94QF61mk8SmzBdgRPmq0Un4dKDtuhKYdUU3uexL5Qv9r302bsrX7HIvSLipKZ9mHgr5GxVDNx4b8gBobzR3PhexuN6WrVZKKfDC4eGOjOfNQxkeSU"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "02",
+                    "ID": "R1u6X"
+                },
+                "ApellidosNombreRazonSocial": "wHmlGiz970fCwQkoLQefZwpsT58JlR8Hlg1O9UbgD9c122xC0lGC7uY7idzGEJiC6fK5SgBxoVuy8plzm98c2XnyPERIaLi3mRCFJ7q7",
+                "CodigoPostal": "I25qJev8ssVCNZ4GhrPm",
+                "Direccion": "MmykYrj4t81SjusCumyIeIBcrs1tihsShJgqvme5jCGpnAqI05Zlowaa7k5SW6YeLBFnxl2bClWPMTybp9iH2eG0xPQGVyWPjZe1KRg3nmHXcMCzSAr54JrkIYoZzBxInNuADRimoK1PA3w8eEsOngfiKjQeV2KvPj1TByuHLeDPwsvOjNCeyEXfEnIs0CkFfaOsmxlbJk5M1eiZNqDF6xhWGQUn3BrvIX0rcIhl7zv9plvdxGrNDQVfV6"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "02",
+                    "ID": "6a2vD1",
+                    "CodigoPais": "UM"
+                },
+                "ApellidosNombreRazonSocial": "QhSWwe5XLADWpv8p9f54sVjXzP02HBAJVT664gl7htsgE7CyuVfsTzlQPm3uGNwD93pGgH9HiT2deUnstuCTRjcWprm8icnnMKluPFzcNUrKd0",
+                "CodigoPostal": "UKfM3S",
+                "Direccion": "hfJzlj4zAiK3a5TmMm5AmAOOvSwwWW4LsJGNM9dVIm7OXdBOIRVTLHLPVdaAapMAHwNyOJEGbIGXGecKhlAhTNUp7zmmazjwtl3rhlCN3focA6gRMnTCX6W4GlvoTg150UZ1ZviSxhXi2AjyIxzVtSVVfQTCWsOuicf2KMIwBj28reJinUFJRVYdYBTQkKcMgja"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "02",
+                    "ID": "crkic8BqaCId3tR"
+                },
+                "ApellidosNombreRazonSocial": "Ww2YnEVhpBWHIKEhqbxeKrE2PYzR172laOyWK269zUwP5XSkHwEUjn2d",
+                "CodigoPostal": "2X2GBkfu",
+                "Direccion": "aCdEN7i9wL0gHSkc65xd60EXqVupxQb4kSReju1dClpzVkQ0MRnsmQoBJZlR9rQo1Yt8vvr8YCEHo12fnzfdpy"
+            },
+            {
+                "NIF": "14861484B",
+                "ApellidosNombreRazonSocial": "i9l3xKsRG8irvSN6CBnXfNLotenkKpBd36pjb8rjz6afARyUami3YmS0j2iD3v3qVEUsXiuS2ZFg1Aqv8gM0LlktPvpbBT4ydUUtUCoZCGIgV2vzb3Mb2g",
+                "CodigoPostal": "a9KBncKXA06aF4qXAjzz",
+                "Direccion": "aEfGx0xF7gg3rY0SXjlLH821oLXgtEYwYmbMknjOsfV9N0lnyJJIG9WSQxyc6vTQuV9eKXdx0ycHRGNVujo9r0KdoNAjAG1r4oQhdf9khZMzJ3Vyh8PpozBWEnu2dRBN4RpvMLILVkJpEOvUh2JTcxBZRDsnmyPNPMvWXetcRLrtD6dtbQr74x8siFSa7onYBr"
+            },
+            {
+                "NIF": "55747654R",
+                "ApellidosNombreRazonSocial": "V",
+                "CodigoPostal": "fXKthWhOspYS0",
+                "Direccion": "iNUojjgOk58SYfqq1oejFFdYwgdxVHqhktJsMZMYGcYTEfeK1absdgeaTzCM2enqYuslk2iEFMyQgym6Q49kk2kzXwERaquC"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "05",
+                    "ID": "pJZfSs",
+                    "CodigoPais": "GL"
+                },
+                "ApellidosNombreRazonSocial": "xDQ0swbCzA8xYkLzvrpU9kFSof9uU0sceiMQsc0lxQoxibFp8qbDJUk",
+                "CodigoPostal": "MAppoe7goA",
+                "Direccion": "EeUmwFrWbTwRu2DcdVaDYbgLjOYsQ38ozRjncrOomEExNJRMnnncKwwW8PchrG1uxmzxVSFK4KYVgL4VxkeH7eupjve66rcpwJf2Ow1toLwU3Pk9S2qQzgAffMDHpe7skZMhVuNAeIMttyQNejNUfo0MyeWqh2o16mGN2ygIPFGp4iSjmSEJWO71rsUxb4rYSm21Ojidp4veJJuQ6Qchho01Zl"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "05",
+                    "ID": "UTdemzuLfirG",
+                    "CodigoPais": "SY"
+                },
+                "ApellidosNombreRazonSocial": "Knfrp6iVWLBHlC31SXnk535uICPRIxwo2BsuWTTd4UlOuJv8otXsqufYGhi7C6Ndupwee6AteCI",
+                "CodigoPostal": "",
+                "Direccion": "GNLVOkp3pdb3Vm8bZZt0DeGuxhmxr3JfzvicEEeRQljeYCi0mxk0TKxGikkUDYrtnIWFwtnfHT5KsvQ0MUzpYaiEp7qUGBw1LK05dq97AwORnbHLVcxD7pblnDHnBrFQg2m8cyFH5cXq7zM6E7fLp77z31UViCNzCQ4S4LnHpuwMpxq6iab485oQWrDR8QLPc8Oe1n1HmkUle4S62cIOZpSWXjTclOBBcrExdIaiEXWb"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "05",
+                    "ID": "t",
+                    "CodigoPais": "FK"
+                },
+                "ApellidosNombreRazonSocial": "ue6fx3bai",
+                "CodigoPostal": "sxxJqeuUyT6pEx",
+                "Direccion": "RQ5B5J7Wp4E3UUh016JwHw06736MFbRfTfgmUGYVdP4AJrFqCwYsbU3rNJhDP50SBmJQ6mu5X7i48NtlkklpXHWnT2TkPCyBKU5BmCmIHI"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "06",
+                    "ID": "Fko7hE"
+                },
+                "ApellidosNombreRazonSocial": "VgClZydFGJMq9Sxga0ncy3Jz14MKZ1BiIHJSqptSNF2zAb8RPjeyXKdlHC1L3Ue048djcfAD7",
+                "CodigoPostal": "",
+                "Direccion": "ep8ztFOCQys2Y4ANHd1io1ZWhVzRMd5y3FyHRGEfpUiybwnJzjSOgJaT7IJ5vaWyPXDOPFn6zW9bvTrWF6DxfQGSVynNyqpeLB6t3BfUf43l2LCa2NBO7vyZrJLpO9lAZvhxWpeZd6RLAtZde"
+            },
+            {
+                "NIF": "07439258T",
+                "ApellidosNombreRazonSocial": "uldcWfyWp",
+                "CodigoPostal": "rh943jHjyYqZ",
+                "Direccion": "OS5zDlyYxlpZgeIDEYff7NOXiGkysUVB18yFWVq3NwTcIcXEdlUGqIEjK6QFVkwsNx"
+            },
+            {
+                "NIF": "51066236A",
+                "ApellidosNombreRazonSocial": "c44yxK",
+                "CodigoPostal": "E18zOnbiabSrijGYqp9",
+                "Direccion": "XHQwkNX1MqTbUtSMv5XE6IGbua4rKCQPPt5xLEiAuyeXC7WjhQ8QxXdZxUS5H2oGWLCR9VePNq53faFYTv8lJlpyY2b7BgoPKttZM7SEG4xikMqnjtexs920lSrCpyO7GGACt0qjTjPVPDOt6ZG5hM3wBApaJBwDIN3TqdIZQ2KG4yUBE35rGAruBlNJhrDzfMH3MCkEm4Gjul9TO6tb70OgO46wLgdCMTC4Pbthg7tu011hz5Fs3tDR"
+            },
+            {
+                "NIF": "02534013B",
+                "ApellidosNombreRazonSocial": "NylwkJnfmJivNaOQzlqmyC5QBa11kjyUHQP12epxdHYJUNrMeVFpv3hOcIxxaceEzawmKTxOxea2Iw4dU9s7cRwX07drYtNLILXHYHCPvF79CEGUTvQQeK",
+                "CodigoPostal": "uEoqvRdwPmGp",
+                "Direccion": "WUVPvS60xYayc7Pn3JOhf1X16XexYtOrGnQOWG8gTSXuYi87DdAsynXPCoekue2h"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "04",
+                    "ID": "9Oryc7WDw"
+                },
+                "ApellidosNombreRazonSocial": "Rz1jLEKf2dHqRFy4eEPhPvFkvUdLTo50YwSDRnDezG9",
+                "CodigoPostal": "L7nhEKA3w",
+                "Direccion": "9lKj8hUy4rFGOmJloawnw6l"
+            },
+            {
+                "NIF": "60586216F",
+                "ApellidosNombreRazonSocial": "bAlwo2p73y66gkdIDgRRTTfT0FCfVxoVfOXk5lHnUzAbYt2VqQwwkh9lDb1RJBr92gPHvU4zJqiAZCLZnTQqapPF",
+                "CodigoPostal": "5Yn8gA9rW",
+                "Direccion": "HBvRftEHD6Ek27BXE9zQgGkGI8cIAihe0hy9x9ji8ydotIVPihog72dm2JPZRKzd5lvTk82qixq7HjSVYfuMTxccDCzRJx5xk4iCCDGB4zhSUCdJx3IVK0cngGFuvQHAbV0JbVtYESYMsOq0ndVDuWvJT9Em4yUzISHBHd"
+            },
+            {
+                "NIF": "34290138J",
+                "ApellidosNombreRazonSocial": "sJnRjeLp1sPJEepjrhwiPB9N0lL7Hwnbv1QDKmS4Vy6GEiQxnoo41",
+                "CodigoPostal": "f4mLjqdYTinLJxwrsP8L",
+                "Direccion": "bgpkLsUGIjDhA2K1z4AmgLlhqPOhFFQcCv4YKtl3jbZzpB9D4SFqAn6ew7qfE5H5B3TdjAHXGx7sEwPBb9HLwOAVGSidrLuHF0EUTnelSWw1zdYAuCiIiWbaDX"
+            },
+            {
+                "NIF": "65625450X",
+                "ApellidosNombreRazonSocial": "dgMly4qi2a92kk0UxrTiqB7V9cUtKKTYnBVwXQYI2xGGmuZU8hhlh9HG5q49jFjgUEyhpP2b1NHF4EEjE7akDE8ECzAraPrwV6eHi92Y9",
+                "CodigoPostal": "U1U4V",
+                "Direccion": "QcwySeLTF4gAsKNHTS5nWjTH4iiVehyBSsk6e6b8IlAhpNAzzy33Pw7xOrJ96VIffNAh1m9ZMUW68iIphrsT508X4e2tU563"
+            },
+            {
+                "NIF": "24091014D",
+                "ApellidosNombreRazonSocial": "bRVuA2sfnnskV20XSCPOgTNkhf58vOZHLz3L",
+                "CodigoPostal": "H2RCSPJmP",
+                "Direccion": "kvrtFOd3gvyAsO1CpFUGCn6D6KYFsqcW0skIuTM9EaIggPEeRNx7H3ZZVVHtFNlC3OlCwDuJdrbWT5n3TlR3jcXmv9glV4t7UDBtTRgkJ3ExI3xUrnrkAQekXDtMfb2Nsk"
+            },
+            {
+                "NIF": "84612469T",
+                "ApellidosNombreRazonSocial": "2w2LyfMgTlff60dZMdYGhS",
+                "CodigoPostal": "G",
+                "Direccion": "hAFzpcSv2yNNPeKpxiMUWrXGH7uY2i4vZSr2rvaUnQmWp98TT82iAQN9yhWtTxGucu7WRZDhJ4vIkV40ZngRiitTg2krPNuIyXTDz8oI3SXiByDD8wco8VFEKVVQ8Gnyv3dIdwTJs7LaI"
+            },
+            {
+                "NIF": "77596138A",
+                "ApellidosNombreRazonSocial": "n90R2JTxcax8CLwYdGTw4bJrK4qPgcqvHTe0zRpoJrUxu3HqXOgFD0jQGlsUJY95Bj7Oj2zkpTqdN6d",
+                "CodigoPostal": "v",
+                "Direccion": "vQhjOECcvQeNkpsSMYgPrPHB7tcoVUaklepfcoKLv0QTROirNKERoDsBbV43A38tU0NKVtnPgK3dHWMFXn0nJBRXzHQhLttEEjvye3IhDVOuHe"
+            },
+            {
+                "NIF": "69463406W",
+                "ApellidosNombreRazonSocial": "NZez3gmBq3",
+                "CodigoPostal": "uib",
+                "Direccion": "he8sdR6chKi5tuXDWssD46rRixR6NiaBuHiOctOq0BRvqHoUmkcXBzSTIOcJDi6qUj8LjHSkOGyrMHPJq4lCdxyQpIOvSmMeeH4HfJXH969PJHtDLkk0CJpvwXHF1XS3vVHf"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "05",
+                    "ID": "l695nXnOSz7gr"
+                },
+                "ApellidosNombreRazonSocial": "ld5i0",
+                "CodigoPostal": "uhTsD7pHp",
+                "Direccion": "xO"
+            },
+            {
+                "NIF": "56484757T",
+                "ApellidosNombreRazonSocial": "ceqfRFJ6sTgZX62z6QDfoHz77U2m7OWv5XTs6Vr2VdIBUhe49HHIF2VfdPf1zx1Z7oWCn8aY4",
+                "CodigoPostal": "5o8j",
+                "Direccion": "JzypHKNEYEyH8wmW7XN1Zd1UFRZcq8cEAbJTtj4pqLY2NSU5bwy9xgeDWIh96v8U8p"
+            },
+            {
+                "NIF": "55259519H",
+                "ApellidosNombreRazonSocial": "xjzYMJaIS9bYZcGT5fPLo8b5CbAbM0xUihr",
+                "CodigoPostal": "1Rewiky7HyldD4",
+                "Direccion": "dnixKscfGHzapL8XkEthwj6Z6Dq8UevcxX34h8GRCKIAuGcRzhQ7dpZ5PU9jJSG7Ads6ecppkbOn05sdDLRFjUkQvovfSs9jvta87FOEyI6icBwTJxfCBovwbgEwNi"
+            },
+            {
+                "NIF": "15492505G",
+                "ApellidosNombreRazonSocial": "5x3dOAGCBvlpSoXDm8cEp7YoRKjidHXPOMQNtE",
+                "CodigoPostal": "Yxp4ZDtJKlGWsKRO",
+                "Direccion": "fj1VgrSaQRWFIjUBOkF9ZIRZ1Xrroy5XLiMBYUa9CqfG8UFYO341cPspazLM3iexD81w5Hb"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "04",
+                    "ID": "WUF7HP",
+                    "CodigoPais": "PK"
+                },
+                "ApellidosNombreRazonSocial": "1vZ5nWjszm8Mjy0FplSi6mx3wsgAWET9",
+                "CodigoPostal": "buPVqzAHTk9",
+                "Direccion": "ckr04xDFQTaEjLs3LSmuXn5biNvNkwLj0JIzIxVOc9iGhTdR6TtvTDTmPbUktVusSLtjPhbX3mGFUJuZveABYwbxYok3jXwLIQUfjnyC16bA6pyMw3YRZvf2UdTwfhJN7rnsNpceutA9TzKar7E7uFjIpfR35WmenL5v2FDXTHkGsVlSxj3W475G5CVl7X"
+            },
+            {
+                "NIF": "93265398F",
+                "ApellidosNombreRazonSocial": "1q0lQ",
+                "CodigoPostal": "gXH5AgmvB7qsPsH4",
+                "Direccion": "5fPDEoSmAhIz9EGiTJtFBx5wytpgfmfnLINMP1XPeJeJSQktrwbOKYpq5lKR8JzB0cYAcPuaEXRhx01cCDEn0WZCjZl2zQBHdKXKGQxDSKUyKOBNlUQBqfOg0ApJDGiOPDt5hBqJiJPVLj7BZAutaMNekOzrgmHvz7RqDYH2mxIvhwhFHJo1LPxm1LV9DMeK913Tua5ET0PBxs6VAPnOZbMQEbBiRmHSA35Bh6ysjJBQ7lD3mtBlJJ5"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "06",
+                    "ID": "Bc2Eyhh1G9Mg2l54hcFU",
+                    "CodigoPais": "AT"
+                },
+                "ApellidosNombreRazonSocial": "2ptR7frFtc7lvUBAlsJdbHwBDSmyuM3zeIrs1gCgumwN9tI1msZWEGVSWNr",
+                "CodigoPostal": "YnzlydVPSbk4eF19",
+                "Direccion": "YThTNWLIH1gLP81VXeb3jTFiFq0sY2ZPwmAzNfhk9sHSVzM5BqGL8rfiznhzatLRfAQxfsvt2an191o7lihJnjEUvR0AHDGSy8DrzwAhUmo6T6Jg"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": "6RfciE5FAWrf8",
+                    "CodigoPais": "MW"
+                },
+                "ApellidosNombreRazonSocial": "eJa6oOlwZSktd",
+                "CodigoPostal": "MLVjYO",
+                "Direccion": "csmbbBv530fA1c8uUCnKPkF9nIrxbaLNbPsN77TAOS5pdphS2fwStekqRjmygmFVdwzMXRtqnjO1nuEhrLNaq3iHI6uy"
+            },
+            {
+                "NIF": "34651516S",
+                "ApellidosNombreRazonSocial": "pHA1t6HajL",
+                "CodigoPostal": "no0V5dDak",
+                "Direccion": "3SId1TJRJ5GiJLZ4vFiHah8aap0srBOkvHwTDgLlkQIRLB9kUBuwp7JlTQpKSEApOvpPomOd8bxpStM0XSTxUC2bwKjTnUYPQ7t0l8MFmQqke4jkiOlTs4c2MioDHpwEOm4acEPrCF3i4Ey1jGERfhCHX6lio"
+            },
+            {
+                "NIF": "77685582T",
+                "ApellidosNombreRazonSocial": "eAKLNj",
+                "CodigoPostal": "zKSVewdODtUs",
+                "Direccion": "zUMzbEokmyrlkYwSJ8t73iPlg6lPn33VgHHb2H14gVswbb9kJROhIru9yA0CxpKtle6GjS2J4vQJGwH6yXgsBumktNmq2pPv07XSzzIQBcIUsrEyPfhDDGQIpeIkJTe3db3ofUpMOgsh75O2V45xSWUV9zqpEf1rF"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": "GID0NlUC9N83g9vXw"
+                },
+                "ApellidosNombreRazonSocial": "pbewxoou9QfpQpceSAYUiGn3rB1T6BENBLurnlq4OAzN27ab8wrh6aUDjw2XCApAeIjcaOAqRpTPWjqTVXFe1TOUQfeoCXssliaKuboFiWXuGF9y",
+                "CodigoPostal": "kpn1fN",
+                "Direccion": "WrS8hDtSLfDmklcZS7WCUbij9b3JM9GEXt8rP2LarkDMInWMTiei247EpArQCOErAMZIiqH1"
+            },
+            {
+                "NIF": "24085757L",
+                "ApellidosNombreRazonSocial": "dDwM2r9xVoE0onkF9Am5uMgNjHSKjNOzPhVPKoTMh5zMtBeaS333PiXTdIzYir7wBR",
+                "CodigoPostal": "to",
+                "Direccion": "H5REivzKV8vskEBICJvDZDAo0cqzVfbBBGqHtKSE9QxYR4liJsYBnLRfOose9WszhTYdHokGbGdAbvxBLHcHX3ft0sHzqRHkJdtbL3nV42yCw5Wu98y5o8JaiH4lR2O97Ta"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "02",
+                    "ID": "Pt"
+                },
+                "ApellidosNombreRazonSocial": "p63hW9FTlcvaMUbarugPlu0rwJSmfXEL0U9RHpv8vaemElIurqfRYvcYoG232ZQuwqILhAQHzy4sqPRrcAb93qyjKX",
+                "CodigoPostal": "deY3",
+                "Direccion": "ol6hBJ7seNqRR5A8vg9CgyEtIsKIr4DngLX3kKWxVQpqOXeeM8IKGtQTwmkdYxKFS8VsrdMukQ3oV3Ccc4JN589gLDy5XOLUp7H"
+            },
+            {
+                "NIF": "92547391Z",
+                "ApellidosNombreRazonSocial": "bhHqayRkbkd6lLJKebdpYImqjUERgSeJIR6SXrCWWyqAhqF03",
+                "CodigoPostal": "t",
+                "Direccion": "CL3dHVyDZuDh8Qdq66ueIwz4pd6clNr5kSLk2I5K5gUNMcCYc2Bbg9acMj0BjDtrFiPO2fUtmG3htYs7lvVH5iMh3Vu1ynnidjWhXy6du087qJvHzAL4Isl6IUfFGka8puV7iIIg3qS8ssmfXjeWGPWwtQVg5HzV3kFWFT4PzVW7r5"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "02",
+                    "ID": "VzDa3cBy1Cjsa"
+                },
+                "ApellidosNombreRazonSocial": "SR3RIJZyQ1jqwmGRGbdKtxzfsC2RvNiLEIlgRajItXG5XvNmdgHXR5BJgldn3iQK2BIxkPk1KrIuuGtIIv6FoLaNCdCVVoGMot6fMCHiiANAPJRUK",
+                "CodigoPostal": "y6kU9ztXP",
+                "Direccion": "CPK6hRBYgmL9xPVsobkHWTkdkHlgsCY72tJjK3KbUhhq2rMlxYo80xgZVIMKbFzy7legfS2JR8M7uY34MhNjKBHBgQAQO6GpLdkGDg1npvjbhCeo97HQydrCNRuh"
+            },
+            {
+                "NIF": "40258285M",
+                "ApellidosNombreRazonSocial": "PQJ8tBN5NHErV17f7RT1sP56QoqzkvMOGL8RxTQp3ApB8z7Fi2wt31rUM6wf0x2SYyeOJ2JX0G4CY5EmGCx6mM4aPDFgE2wyAlI0qpRyRYXM3eeo4Ltj",
+                "CodigoPostal": "HwyEDum8tZGbUmqHYwCC",
+                "Direccion": "svRAjxbbMP1lRVvlFkRtM77yONEFdsoFd07sSS7nsOBNfGnip4fPLBiyxFwnI999aIfcQ85OsQx7qILHjJO9O0HXmn0nuE6jAQ0HLQPca3uVOt6Pc1vvEjIsmAyiOg4ObvSFllkANqfvL2v8DAMEC8CodCWrffs6TeuCFVwUAsIqRzjMmN26LJ2aW7zUAy2hgTrn7BabwVUxFE8GLNZbKDDwJTJdz9cdH9Cig9KIv6XBMl6LV"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "06",
+                    "ID": "rZSsga"
+                },
+                "ApellidosNombreRazonSocial": "ZbIS19uT0bZ2LyQmj3bRtuA5bkeobSQoRjSr39AG7c8gBZ",
+                "CodigoPostal": "UL",
+                "Direccion": "zBM"
+            },
+            {
+                "NIF": "43027594E",
+                "ApellidosNombreRazonSocial": "zeEQpgoOsatjxxZhxcvovfJJ87OV1yTVIxOKljXIbyf",
+                "CodigoPostal": "jnzm81pryb",
+                "Direccion": "qKMNNUeOPI0TYVqVbOXFfDTHQRDCZSV3hdN2uzm5XeVxbS3NXHxscFRT7OlRiVObggLvohPlyjoZC32kraRXxUYYF4mMlhEihpQi9fLMRfgfps00HD4O7bd4VPcAodDW4Qj0RTqXf8UzZaajy72fNpFnWLrIergW0R4wyJ9l9NsSuHucK1GsXdAAgvcD28cu7laBg9Oe5G1iHUAl1PGGke0DqxWdjyaXbwAwWeUQ8CIRcHgS5h1"
+            },
+            {
+                "NIF": "14429613B",
+                "ApellidosNombreRazonSocial": "CBgUiQjWNhMunakf4tJXhgcpfBkQEFlJT6Q0B0OKLAdd4iD8CzejMVmhxc3VjrKzFt50Wf",
+                "CodigoPostal": "lb5pdJ3WtsQWN9uAOMx9",
+                "Direccion": "XT55M4anCwPsfgxwGpK6MPbWiPq73MD3pFjIzE9Uy9ZijPR3t0SdcpgicmIYYBlpEAh5RHEabLkbLl5YeeOYTSx8YtsbjP0SlTRVYsZMqGTizY9HwegqKfYAcivTW6XflWZJjzpTMnvsS5u9eDmPqYXJJh1OW9NPMV8mUHCog9OJ"
+            },
+            {
+                "NIF": "08910143N",
+                "ApellidosNombreRazonSocial": "B6B1eLU0BI0Bgn1eQ6sfskomlemIwuApfs4qvmzHjyuquh4F7W60HlgFmJqOTSqbKVGsKG4nfqY6Esuwi2qBhEZAAJKc5govuYcRqPaZEs7PTPFc",
+                "CodigoPostal": "4PwQ",
+                "Direccion": "Ml2VBtp0k18guSmxj6OMp3iwuofEA5J8yeP4fpXESWJyCUvyBPtk62ZF98o6qiNGpjj32CKfC0VNMt3qHhJSpDZYkUTru6tG"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": ""
+                },
+                "ApellidosNombreRazonSocial": "yATKxLGd09SqUUzzwiYO2rjVapM5tXUGvTZ1jh8mg1Fcdl9ncI2Aye4vRJN2tpdqeXmVW",
+                "CodigoPostal": "dHy1zUs1IrOlxLurgWe",
+                "Direccion": "jGp4r23GsAsMQiMVN"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "04",
+                    "ID": "UrqA62h6sBG86"
+                },
+                "ApellidosNombreRazonSocial": "0kjTuA8jyP6L1wvvhwTUuOhdgM1OsoVPJUlwIZHzMoFUokdGnupkuNh4rNnKU08xHmKwG0dREhjD9CKHHRYzd4yV9EPanLzP7TxFS0bYjzcs0EzzF90tOj",
+                "CodigoPostal": "OSsoJEM",
+                "Direccion": "9dR8JPVuofrmAVpMm9oWg97XCjDtsJ7rlhbj9yFBim2dzPOWyUcpckKpjFPPpL97"
+            },
+            {
+                "NIF": "98639418P",
+                "ApellidosNombreRazonSocial": "X4zPETq0HgkbYC8ysw3FM0tWQp1KaSIr1MqcUqxWFswwx56XqE3zw4V5QQTpxSuTWwtSGA5x",
+                "CodigoPostal": "b0lgWYAg1n",
+                "Direccion": "fizZQSW"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "04",
+                    "ID": "X",
+                    "CodigoPais": "CU"
+                },
+                "ApellidosNombreRazonSocial": "TJn",
+                "CodigoPostal": "nwf3FunhR",
+                "Direccion": "mB6mU6zfNcnaguQFE5v6ezRZAXUdhTyDjkOalRzjPSQEMk6SRi5cyye2BWt6YmxRpYB0i06PSS4z357ySiqPSYafX9Xst8jLNK1FIs4b3Nal1yfEybQWXsORhpFhxh1oT0b5eROM0fuqXV1rp33JKBlSRq7xUHuo0ihEdbPOVLBF3J34O1cZx2nn0oWIpBLeJlMjs29VdwGtcuFmz"
+            },
+            {
+                "NIF": "17588909G",
+                "ApellidosNombreRazonSocial": "gZr9VYY7ukDLexa4zOfENOMIWIXjLl2fqJqakDcT8BcmjGC2Q53NhoBI21l5rvbugnBEbaePU",
+                "CodigoPostal": "ZK",
+                "Direccion": "BpWPkqXAQ2Yda5IjWQYAVK2ZDZRze1eQ1eAoQoyysKVbnsQNvDW"
+            },
+            {
+                "NIF": "64717373L",
+                "ApellidosNombreRazonSocial": "kLEXMFnTg0tKmR4tkMXVbXz8AYwnSmxLnBlzmLjuEwI6joe4OzWY82Q3NkQwpk9lSNhwXltSqRuoizmpD0F7himjGlqMUmq3I3pNVcQtdYAT3xskeBdO",
+                "CodigoPostal": "tDj0mN9Js5",
+                "Direccion": "hroGLN14a12byFisblym2NtSIJtgi7p8WZ2V64HpGmuHvOAy84a1P5neUOz0Rv28sDH6kTMfHtXcOy4DpYBB1EPr0mFgYbICsdaahbiNq6ueT7L6fH9P5NWHJI7j3HqzZl1x0wV7HOIe4OwexCH7amji"
+            },
+            {
+                "NIF": "27268142D",
+                "ApellidosNombreRazonSocial": "fUm5avJ34bUpVnFyYQzcTJPesQ5ETQCizYA2r8WgVphHG7Gv0vU1KnazLLvh37YJ",
+                "CodigoPostal": "",
+                "Direccion": "kAakMCXJ7VqD6Hh0wKrZi6vjhcUz18Htfq3EtRaFYU71vOEc2GQMbH9Gf2a7C26SWqzImXAg6Nj2ic4xGXBP9GEyTlBbJy179qUkEdFWBuonTNNjRzM61pCFtHbVIiLxyAW1eFPYkI7A4PpcYmkyi5hgfVzlTQ0OvsORlfsAQxaABYY2emwgNr8PQb9Oed3exm5qlJztRvojfyB14o6lTtJ5BrpeSzIOBBbC9PAD6oTMKcRoddrzW"
+            },
+            {
+                "NIF": "36511555K",
+                "ApellidosNombreRazonSocial": "NitqSacVJBpvPUAs9UVs8wH7JrPGYfFIRb68y2zwr0sXLewYZW98Tl5Bughk7k2FXGsDwQsnd2XsKyifFCo4q5RlzD819mYmKcmu17fGGlksSHT6bb",
+                "CodigoPostal": "xsLQq2WEZ",
+                "Direccion": "rGu7J3sAp9Dap1DTKc7UbIcLr6HSFuWlGmN0NrgHYl5ozxXlS154ZZA5rOZPqkQOa2JwQmoZB44OGK0lExl4TTVqnYEclFSSp8iHgq8k37afSSrRETeIgLfmTPC1gBaoaLfOSqxQUs5HKMyF6PHbJ1ow4sgeuZLR1k3kN"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "02",
+                    "ID": "fFu7GuKHqKqC9adBT6",
+                    "CodigoPais": "SR"
+                },
+                "ApellidosNombreRazonSocial": "UHRrgD1lhwOdOdwgKVgUOFqyJNAOS1bqRO5ARgCkPzXLIDCUpTCwV4NIeTOEQStJsWMx6MtPwTdpnsaAjoIBTcQKNIjvF9BVzIEWlA9VGkEfLnxkwc",
+                "CodigoPostal": "ZWwzPrNfEdY73L20y2Mm",
+                "Direccion": "xsqY7pP3YTbg2HSpYLYAPHxFr5q0L5ELW9DdeBCoSHuM2Hb2XsOvwKjT7ebDFegzw2uiYpQOIzj2J"
+            },
+            {
+                "NIF": "57461806D",
+                "ApellidosNombreRazonSocial": "abTnkQOPpVAfYvvPt1rBGHgbN1YTNDP6Urpq79228d0EhLqhboAfyNj",
+                "CodigoPostal": "",
+                "Direccion": "qeWTtGLy306mFt4J8aqe65tOhPovUfsCyeLjXNvrLIkEaNC3FPD8"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "05",
+                    "ID": "BgIcd0toOI0Gqf",
+                    "CodigoPais": "NR"
+                },
+                "ApellidosNombreRazonSocial": "baHE795EXjMdeFG5hOetyYDqZOzEeBMMJk0CMTpR2W6jQsvVxkNM846uoXQC",
+                "CodigoPostal": "BUFe",
+                "Direccion": "mL141DZZPDYNVQ9c1caY3ZxNrTmkO0HfZkflexH8PmC2R5SbJIQBSu4vEvU8u4bbVxfT6ViCiFopnq1sTTdCD6KfA9you4QBBU5mcPNMjjmCqCTgEJNBSQXfW4PutPs8ixhzV6Qf9pSq6RZbm2OwwrqrdgxhX5D0avq8p5VEPt2vXnM7HWahTJdusiIbvPeUMj5lY6L"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "05",
+                    "ID": "leb7y"
+                },
+                "ApellidosNombreRazonSocial": "Am9ncbxOoZfg9C8ucmd0PApPP5kjCYPvfz3CgUJjq8",
+                "CodigoPostal": "ubT7AXi9v3gCghV",
+                "Direccion": "ZlzpBhRmYOCdniUjIflWBGjZ6vR1a6g3gVCCmoln4lewpsFBf6yD59aFcctnBOhNac93i6RWFuKMOgNGNUM4JD1"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "05",
+                    "ID": "JxPQi"
+                },
+                "ApellidosNombreRazonSocial": "iH3BX0Kf",
+                "CodigoPostal": "W1DlLENv",
+                "Direccion": "wANIuEmQ2vQr3V5ME95PBfSsMcM7KJilYmXfyDmX6lLouJD8M1pqYeP3HwqykPYQHI600fF1Xfopv4nQGgFmcjp2V6"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "05",
+                    "ID": "NgfaXfw"
+                },
+                "ApellidosNombreRazonSocial": "573AmYAKMPlR3Qmnt4zMETO",
+                "CodigoPostal": "ujH5xi",
+                "Direccion": "mCQoTnPIXTp2UFA8oIwCZUYNH4IqxPr4oiPgp000diqqjHXDaQFHW7uDM84TocMBIVGwBl8odrNuGkiICU2BdCsqHCLORyo1tKvbreR0TYpEb0ULbmUVHyNs"
+            },
+            {
+                "NIF": "07061778L",
+                "ApellidosNombreRazonSocial": "pfSgOPQO5Tgjkx4G86ZqDZJA5tx6mcI5Dx53FUAMIX2bCN88f1TffqM1V7",
+                "CodigoPostal": "Fc6VgVT",
+                "Direccion": "xN7hyWSjH7dy5yCWBedgqgs7P9Wbmohq0PnqRUrJuC7BgY1CbdG6WDuGmRnAPI0ZUo1fV9zDGYEqRNND1tcuv2ekHqlKbKwpSEy1fPSlYG9WMRymn6"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "02",
+                    "ID": "gC3r5X4S0tKiUslHXR"
+                },
+                "ApellidosNombreRazonSocial": "lh25RvjOnfJ3Oy2L05J9ISJxbWrlLrynldc57LUNKT3Dswfkxb0qbHb3JCCWPS3EfVt29b7c4y1fotJVxNO3ktUN4ae2eBXzLQMYAITCSh8U6ikwk2P7k",
+                "CodigoPostal": "6umx7GIFdOh71TOXYuR",
+                "Direccion": "VhLZuSFlTLHj9sGDX75aXdqvT8MztycEizwYs9MnAUJ9i1FznxgbbutQYaR"
+            },
+            {
+                "NIF": "02731601Y",
+                "ApellidosNombreRazonSocial": "Y34vXb9wTwifmhcI3jc5LgIvjMEIaKDCaqwyAzStYMQVDVqxlIweNZ3aHeOcpgBcy28kWHXTXGOBBWDmNkAfE7mnR6SiSxlPY14rFU6mjVNkzneTECu",
+                "CodigoPostal": "K6qSMNak2zFRgG5",
+                "Direccion": "fOHpKuGaZEy0EZATm9W2r9Zhec4iG9XFWKGjEwkVrS1jAB2xfCmoGxkt2EW5qAWe6UsvvctuqlV8aKHKP2CqgRNuAdBqdaKjZ0OTaLrm3hPjIzToSHh8qN21G1R01EQ1nJw9TxtKo6A9pGSZBxrFBu7KBAg8ootJvusxT3JTCeaWOXXzSMjuH2XHtMcfnMS4EajaEgrWc14yS2cflvyOURKZNQwE2oRe7D4"
+            },
+            {
+                "NIF": "32327161V",
+                "ApellidosNombreRazonSocial": "kSmJfa6ouhntRsy5mPx",
+                "CodigoPostal": "SMTDHSoyV2ev6czD6Sg",
+                "Direccion": "XujPXPDy6fOZh5BKlqegx6EgY"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "02",
+                    "ID": "wjd79Kwcy6vlkm"
+                },
+                "ApellidosNombreRazonSocial": "fBjMPk6VGes3UM2oDjyw2YAeOtm4oSIVAlE48JfFDxNnZAfrAgH3cpA3HWbFP3qMSJLc8EZb6wiQgnUv1WEOTF3gi0AOY94Z8i",
+                "CodigoPostal": "Mqg57UskMnT7tm",
+                "Direccion": "hqmmQsb1svwIxwwtDN4bnqYncvw7l5ksZQQhtEKvDBPhCnhF92nuMiMN5C619MDy5ZWWNuNamH3ZZvSH8Yde0Y4ujh7mIfuAiroQhReovcezc4HH"
+            },
+            {
+                "NIF": "50738117W",
+                "ApellidosNombreRazonSocial": "jDFkwyKUQymctIhyFwrPhacwkT7sokcDsBpgZ7WDlu",
+                "CodigoPostal": "SY",
+                "Direccion": "rvGBkXdkrgZz6tv7Bkng0aUt"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "06",
+                    "ID": "K9krombHVxTbuS",
+                    "CodigoPais": "FO"
+                },
+                "ApellidosNombreRazonSocial": "xAlhR9OuertSwaplUbjSaZ3VgOivUS3deOsdwRSLp4pcMRlSh62OzngWL7IWGWB6B9zPuoZWz4vPf562KYo9iXsZP1CwMPrvvWZpii",
+                "CodigoPostal": "pwrFSeKaftoKx",
+                "Direccion": "VaVSdkepxPoF1yjdQK7RVS9ImE3zzw7bveOZ2RKOad9x2bzhELHv5O41qprHS9eT6tgPrjxVKeMEYu4wcsYbUFYFJUQnA7aQfZiying5TooqoDu1ACotRrCMRpH6Wup4FlVVOdOQl3mm1NFLtVHyJIRp0jVwAJZKQM"
+            },
+            {
+                "NIF": "40229252K",
+                "ApellidosNombreRazonSocial": "ff6peYxeSGrQVxnwjs5rEG53qxKSRGPs8qv2c99ErC05ZaKeFPqTo2iCRaE1FeBwFYdUkoTqtXxAUX5ym1ju748k2Q2MUdue8Q4sptGEwbKWbdy9uPDryc",
+                "CodigoPostal": "Nz0HbdrUSRchcmoB",
+                "Direccion": "McYlwPHGQKC9JkowpOClUcxyTQwfZ4w60KPZNz04ey7vdUja6F2WHw0zk11RVFvGhZUPs4YG1sPb5fWBvHFK7hjcP6ukkiS50QBRIhoPzXam9F54qr3u"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "06",
+                    "ID": "gBtE",
+                    "CodigoPais": "UZ"
+                },
+                "ApellidosNombreRazonSocial": "mIxhpWTbwwIyotFcaptQo2Yviz37GocgCfYsb0hgat5OteA1OEOQXnMhGPBPUvAORO33KY3oNTw7c5DE",
+                "CodigoPostal": "EvrN7X",
+                "Direccion": "WB7163JMh9U9pYTUk4rOHCDLniSwqLigkZ4TH3to0DrtzHgqQ9FIzTxwmhHdHCu7AbJ7jeQlfVfxOFEsbmNtNKQOY7Gpr4QwywhVjMfQu8VjgUWuhTZRylt7V1xCjtFAq"
+            },
+            {
+                "NIF": "94986491X",
+                "ApellidosNombreRazonSocial": "Z4Qiq6bfflDQjGeGUEsPE7DlgeyvhttYUsZkxIcrcL7SzFB7EUuxnoXjM1VlNLFndMouxK86RcCunuC8cmsBXvAd4Z84AhU",
+                "CodigoPostal": "S2SGh34t2UyXYv",
+                "Direccion": "qj99vaQ5Mj7asTGgHHtnKou2fhARiy0QFHhIckpjOwBNGq2yMgsvwziXxjSvM3YqJamwYhyvjnKh80YYbyOzRIIHyDCxill1sJbsOEDusNrM1GxnSdqJhbiS2kj1yUN1r3tdhLVtKg0fb9UNQseW77ruDn81Vz5rS4PNaBwZKjIJlB2aO52jbKJi8BRXe0U1BN61hdkkh451tSby"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": "6l",
+                    "CodigoPais": "RU"
+                },
+                "ApellidosNombreRazonSocial": "TgtXhuSc4BdmMHmWQKbhzt5p7hsVa20kdFsvlqRYMj08ch3cCzQQjSObB38l4f12pMwq3bXMKlMqzrSa0BVUtWsFgl3LbhSoxdXm95rgye44o7BKhgTzF",
+                "CodigoPostal": "jT7djDsNuyc",
+                "Direccion": "9AdqOkrehK3F0bakvt6VOFDy5HYvDp2LJttwNUQspkocgqLbOBstBbbViVrThzEPIFhkyczn6DSE"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "06",
+                    "ID": "hI5EGXEyVBu",
+                    "CodigoPais": "BY"
+                },
+                "ApellidosNombreRazonSocial": "Fc0nyt8B6j74hpKmV6ot1DIoSfQ0EdOGSYRNF1votRGPjnv",
+                "CodigoPostal": "Av35P8Ipfp7xfiTdX",
+                "Direccion": "lXu0vdQRlDHls2jRfxJYaoBsDXa8pf0kW1cNupjg7SOGcEkITwZMpn9dlr2HNma0NDXKsN07jKKa2DK7TidWgjsXbQnMD33PY1cWP4DMEYCv4oBrhRoZo7TIsxDMELG8Iu3aMfjP9RPFz0GckOU"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "04",
+                    "ID": "JU",
+                    "CodigoPais": "LV"
+                },
+                "ApellidosNombreRazonSocial": "QnyshnZv35HYX83H9GsEenDNyCrWeZnidqlTKacdITPf0m5UxIKZzFqIPEWMB0TZuN5XGsRd5KQwlrLD",
+                "CodigoPostal": "mPC8DWzEBoTbxjF21xM",
+                "Direccion": "gY03MghQLTGkKq5RyjtizbRykcm4TjzzbA7aqQOUkDIti637mmX98cEzkrjWEkP1XpmASMhEz6xWWU9Yra5bZiCLpgJeD1i9t6U78ymgc0GYilc6CXve0NAHOksE6OAdIhle5zECZmysLgBS1fHMdI77UIjyeBCdrhmQz56C4Zk341Uc3ahdk"
+            },
+            {
+                "NIF": "08790540D",
+                "ApellidosNombreRazonSocial": "KwX4Bu0d8K5wp8i2kPgzt1lp7KrzMJjrsgi2NXuBqRzG6O86J1hGU1LQDydUm7P7ijfPsm53xv",
+                "CodigoPostal": "BT01MmBWM",
+                "Direccion": "fPx84geKAUG0aF0j4B7mF8xXwIwchVIP2xXhwobKCXeXQIBOkmQlNJtMwlpBGQRlRnwApHER4eE4m95RrWVYltm4c5dAQDF8MEMhbSSkyyAAHyAR1JTOJxzU2EubFlgE8ZJi1qfXvwy6xgqOG42yLHXruPz4uXgumtXFIyZjF4qSdLIhoA2RijDbM"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "05",
+                    "ID": "dzhJYzKtn0",
+                    "CodigoPais": "GU"
+                },
+                "ApellidosNombreRazonSocial": "5sEdkuD2mKsBMoxhfZqtmpCQT61rZdMU6s74Zrmu8QTex1KZhiODPY5cpLErYVWP4PnkHzpPk4OXd4sGgb4sEJ4MPRlkhcRyo6zbiiKfqcLXIOQ",
+                "CodigoPostal": "uqR8KJiWKYfhNF74YV",
+                "Direccion": "WYqdCucccGumZaEX0MTOpUiupKas06w2sNxkC2WXl71zO6Z3xLtuB1MIR31ZP3zRjJVzl2M4lcerVcJ6GZcqUPf1yrj9E1GoFI5dAjn8L3DzhBg8UPA1utfxYiiZsdyKCdnMXSd8JIgAldmD"
+            },
+            {
+                "NIF": "63278150K",
+                "ApellidosNombreRazonSocial": "gH0vpXWTMaIJ",
+                "CodigoPostal": "XqV1qxz",
+                "Direccion": "eFHgHCxzDvbeJN25HQQtzWCmnKiVeWE2XObgWcszUVFSzHKablftS1snkudxHW4gTLhSENUh0gept2fgJOpGwsrWSYEUz9pqxIJxWPOPlMtdEmHauCZC6wYwET"
+            },
+            {
+                "NIF": "60363311H",
+                "ApellidosNombreRazonSocial": "RifugNfg7sCeuBWqgTIPahRrowRxTSi36sod2JQidxS9ZsNREipthb4SG11PUIFfIbfW01eQnXMurh1gylBWlhV4jKi3aBWzP1GBM79",
+                "CodigoPostal": "aENlS0AIkGHSAoY",
+                "Direccion": "vXaki53MHE1KnvYoeyzKfvJRcXcbdK3gTG44nRhqAQlHyG0b7FuLr7eEOAXgIGEwSsMJppXXyCvBjKfVuMrr2lZgAKad01W2PLFvBh1NRJVqDw3rg2CJSVhbFs68IqKx939zIOBGk0eBugA015rYsTMxbXO7pf71oF9hkCsdTkiAMDF"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": "uG6XklsZWWz",
+                    "CodigoPais": "CM"
+                },
+                "ApellidosNombreRazonSocial": "H31ME4fyij8ebBIM4KqdJiqJeywK8SBlJmr82Is3GB9eW7Miz05GsNR3dHDtvW0hl3LGZ54mlZHQyEGxU9QbQ61KcjwFJLDaoGuXjYaCS7wm2l",
+                "CodigoPostal": "pjMBAPF3IKrN4C7bMQ",
+                "Direccion": "GfBgINps1GNKUnoTS04jNH5HZaeywtxA2RcXk2682qtaNv4kwQuGj5Xj14ElaxILDtDlVGWotzwGJKRDSvWVjvwXqU4rOQQ212Vi8rOkI68xpmnxTTxnH9Ld9e0nChU2VK5OtEQ2VuCFXwbEzVc"
+            },
+            {
+                "NIF": "69740420G",
+                "ApellidosNombreRazonSocial": "4e8C8IN",
+                "CodigoPostal": "TyqBFvUZ5MrrNSB4um",
+                "Direccion": "QBsX7VWnNjCvGQxQRySF0Phfq1t5ARuyy3gNfhxjZBsOvUs2WaqHSnzPIPfG"
+            },
+            {
+                "NIF": "96070573X",
+                "ApellidosNombreRazonSocial": "TnTTIcoUkzD9ufy6K7WOizeILEfcMeskJdQDBPn60iutudWP3M",
+                "CodigoPostal": "",
+                "Direccion": "ZOjY8OVj14DyxP3RiOPzxTw029MoXV5D3D9pa5VidiE8c7tEfPRoz3Lj7qGkneBzZmX0e2NPJ9s7mDDqamqpstMSxFRpzER1r4uQ7bGpnBGFvFWuTSNTrCiBDUIGIJLQ1mFMfrDig4jos9Nz8r30iiEIxeqhI0lLJyM617874TxPwNp5IcUd4hC"
+            },
+            {
+                "NIF": "49578869T",
+                "ApellidosNombreRazonSocial": "WSneTRPoIjJp7yd3TjJIryJOcu9ru4Bq0sojit3Vlu8gGbnjInQQWFwKjz6fNWv1KbSSnLcXwG4AvZaKiQK",
+                "CodigoPostal": "LciCcqwSIwZ8LIA",
+                "Direccion": "h0kKeRcaOe5KQNal6Om1W3oe4AFhWQ4Qdi12kCf7BCR1tKx7kiC0VWoJb7SoAED9XstdPLOMC9lfSHfzAGPCIk70SzNIjzuEEem2hiWogz9yqmfV"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": "PvOTk8z3"
+                },
+                "ApellidosNombreRazonSocial": "VlhlJs0UYmuMg90S9zFcNylhVpXW6HSQWamPVifSZXcazm8zZqxVXsgvdNCMgcHQu4ihqrkoPX7P",
+                "CodigoPostal": "M17AHkNhZ6HhPj",
+                "Direccion": "BSqVdJxnb13eMH3Z0JyXqhCo3BNj0qo0yMKrf7w7OuvAVrWwtHYBCGlRhJ9A6zu0Fn5nHEsd"
+            },
+            {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": "mqe3n6YZw"
+                },
+                "ApellidosNombreRazonSocial": "tjPmqOxE5U5u5IRR8pZYT1TLwV7uYzstYagR9unm95bt7Dtim22WDr5MvL2VvadgZphupEYoK6DwfjNs",
+                "CodigoPostal": "00aoByfKKNx5wueGNH",
+                "Direccion": "sGo6xdP6H2tW73FKZjHtV1U8ShvR3cgC2afjliMV8sujnmB7GsivUaixKkG5M4wi39z2nsMQovQmLOAW76PwwywR0TJ2YK0Dnzq24xylG0qXeuMmaW1bDHBLjSgECltDx0TETUFal1gBjwkCD9KlUHdNbVX5B9vDX6pQwEI4dCZ9yNoXHP96g7dS743IWKMc6wRNNlIPxs"
+            },
+            {
+                "NIF": "97922068M",
+                "ApellidosNombreRazonSocial": "eI8Uq8QxE3AC",
+                "CodigoPostal": "G",
+                "Direccion": "cMQN4FzBcF1ZBSqiCvZXSP7tLlXqBCFm0ErEM6bqDUClQEm2DhWhmQb7BoynHhy8Q6J4sftqBAlvKgybdnzNf6hXHkGCYhNF3eLBp7MPgzpyLBbtFFj4f0eJkeTQYKxciglqF6QF"
+            },
+            {
+                "NIF": "12258506N",
+                "ApellidosNombreRazonSocial": "RRH7AGj5YP31d1Tvw7H45Y4IxoZP",
+                "CodigoPostal": "",
+                "Direccion": "ESaDFXVSouUzQwIavnDmSJdHlMnWl01H4JzgNnUg9RXlbFwtnKjCYGnDNZPmmbCBvY6ufMlZxqme4UTPvcJQHwOnQQsSWnStoeYFusnLOfcsP5mHGpBnaWsgryH1GQw8brHp1uWs98FFKfiCRwL1sCsfjn8fXOW"
+            },
+            {
+                "NIF": "12785150W",
+                "ApellidosNombreRazonSocial": "vL8CkzUYMRoyVW0gDhzTNTrnNHoiShm5sB5oV7Roza22ETAUmBdJxTCd84SzI4WNhpFHr3vM4XPLxgrnfaGFhjb34va37Z2dB6JERlDzI1o9SXO0ssm",
+                "CodigoPostal": "dq1I51W329wIqczZE",
+                "Direccion": "CwQcMVqIAjt5AqZJesJEbBlBkGk0zRPRCzPZk5eKCk93N15e7OrDItbbHFmpwCYDOGOPPFrqFl3W6OgAA8"
+            },
+            {
+                "NIF": "34246121H",
+                "ApellidosNombreRazonSocial": "adVBmoTiyQV4ZQ1LVT2FnQetCh90eGTZ0YClj7lF3vGst9rT4OPXiy6XNGEdKZ6RBgQOkDEQzX7uF2XqM6iXBg2TmYMZTWmG6HxuXHt",
+                "CodigoPostal": "qsGjCuN844IjtjMBsd4",
+                "Direccion": "7p74VQrgODo5iMzn1zSOShvyOR4wcVYwAaMeAeLLTvPQ4djTqCvLqjRNZDpWywMq7ATUu"
+            }
+        ],
+        "EmitidaPorTercerosODestinatario": "N"
+    },
+    "Factura": {
+        "Cabecera": {
+            "NumFactura": 58352,
+            "FechaExpedicionFactura": "28-12-2013",
+            "HoraExpedicionFactura": "06:57:11",
+            "FacturaSimplificada": "S",
+            "FacturaEmitidaSustitucionSimplificada": "S",
+            "FacturaRectificativa": {
+                "Codigo": "R4",
+                "Tipo": "I"
+            },
+            "FacturasRectificadasSustituidas": [
+                {
+                    "NumFactura": "EDok",
+                    "FechaExpedicionFactura": "02-05-2013",
+                    "SerieFactura": "UgPAYxS3sFw9aLYj"
+                }
+            ]
+        },
+        "DatosFactura": {
+            "DescripcionFactura": "IKMbfxvQeOxsK67BVuUpqpc0XthfcjMPV1eo46rlvJIqvJZnIyYEKdzrRRjkb62LG0Rqsy0p0SD6u3GFVi5CV",
+            "ImporteTotalFactura": "61443.70",
+            "DetallesFactura": [
+                {
+                    "DescripcionDetalle": "QjlxUoK0hQM3OHHauUkanZaI2sZdqCpdl0Lm5nzmlvHU9tBGtDByvpYzjg7ph1IlXNe4cHzhyfwVsOfQXKpp4qnqlBrGk4MU3kdWC87bR60mUdZLma2GdTB6V",
+                    "Cantidad": "80783.79",
+                    "ImporteUnitario": "38069.16441915",
+                    "ImporteTotal": "33395.11"
+                },
+                {
+                    "DescripcionDetalle": "LWXZG00KLgdOetyEWKiaAy3mbAOaf4yVkwQp4jDC8fGJqFUiz7MBvH6uKuY8VuFH2n77",
+                    "Cantidad": "34181.48",
+                    "ImporteUnitario": "25349.49652965",
+                    "ImporteTotal": "8074.02"
+                },
+                {
+                    "DescripcionDetalle": "uG3GSpzfSF5pMVbCdQINLbOlLkEkg8RCMP8S50nLFYC04r5N9lRqi2AkvIkZmnDNWs8HwrNTmiIy4GxUBdNVRXN7d9Q4TCHBGsmN0W60LXsQ7Tebma4wn4TKlDaCPX4b7bB0mAoOWhvqFN2V2Y7F0HkmdYqR",
+                    "Cantidad": "70691.72",
+                    "ImporteUnitario": "99126.10061237",
+                    "ImporteTotal": "47745.78",
+                    "Descuento": "77.85"
+                },
+                {
+                    "DescripcionDetalle": "gyavUlHMww2BhWKVdK7tJbtysn02LXfANwjP4gxW2pQchCmFKcJcJlEbeArsjcqolAfmh4ys02z3j6M9kV4olzZzv5XcfQSuf7IidL6cohp",
+                    "Cantidad": "49418.13",
+                    "ImporteUnitario": "46594.78233325",
+                    "ImporteTotal": "73224.87",
+                    "Descuento": "34.79"
+                },
+                {
+                    "DescripcionDetalle": "JkqUkodVh",
+                    "Cantidad": "66840.38",
+                    "ImporteUnitario": "78350.19727437",
+                    "ImporteTotal": "41739.13",
+                    "Descuento": "25.74"
+                },
+                {
+                    "DescripcionDetalle": "AiHsYdMoOayj71W8XBqWZjPzjjyY05Py8XaUIRXCANC6P5Kca2fg1oQFJxzvw3LyagyRZmRDHYRTolJb0NbN7z7WxO0kXn2ITm5HIuRSkTaLnM3AXAnj2CVVg98eDIw3wm2jIfbaaxujypmI9dNFReKQvZ1TYtDLOm5th50JTvDk1hkcsqZQMZZESQdxnGmkyfrroLIzbDN5NLZxkENp1291R8Zo5apljZ0LJs5sXfRRTKueFTO8eGl",
+                    "Cantidad": "62556.05",
+                    "ImporteUnitario": "27805.56061215",
+                    "ImporteTotal": "62696.73"
+                },
+                {
+                    "DescripcionDetalle": "4oZBP0GgefEpYfOmbEuQ7mJpO562Ob10yd9y5oIxzNhypkMKOnyXGzLxa7OE82I1",
+                    "Cantidad": "39708.75",
+                    "ImporteUnitario": "17226.91765267",
+                    "ImporteTotal": "17305.02",
+                    "Descuento": "71.90"
+                },
+                {
+                    "DescripcionDetalle": "3uRSuBPSMfLIb8oCaHPTkCmBUCOSDg65moBgZg1Uo1Lh46U6RD8VY1bGmyumfiHohLE3ZRN5",
+                    "Cantidad": "46840.03",
+                    "ImporteUnitario": "96238.43949278",
+                    "ImporteTotal": "87065.76"
+                },
+                {
+                    "DescripcionDetalle": "XqKJa19MSDfhmmcXE7xbgOTR7HLxfKlREh6ttV1bSbNeKfaC5rzOVWYZ3",
+                    "Cantidad": "61410.68",
+                    "ImporteUnitario": "12201.86234395",
+                    "ImporteTotal": "31760.15"
+                },
+                {
+                    "DescripcionDetalle": "jogW5e5FtKotjERsBop",
+                    "Cantidad": "61747.30",
+                    "ImporteUnitario": "59108.50342475",
+                    "ImporteTotal": "50621.30"
+                },
+                {
+                    "DescripcionDetalle": "H9H65LvY9tHcYuG69U9G0GoVuttDkwCRxP9JNVlTWehEfbaaHXaGtF1K4GRdVEDpYtZVbgvccHyv8lAcYsQaErNuStbFVUwEsfw34HlRTneIJYVnxlkEYHsQSTJ4d0gpwBSany2emE6QTHBzj2nFLMuWi2khjUYbWydtl3bs7",
+                    "Cantidad": "26688.91",
+                    "ImporteUnitario": "21907.89161444",
+                    "ImporteTotal": "91423.16"
+                },
+                {
+                    "DescripcionDetalle": "kQygv9q4Xq8dBQ5XttvZ6hZN43lrURQjX7hcTQbE1NZf0p1LY8BFCnBmB0uyuUn",
+                    "Cantidad": "68652.32",
+                    "ImporteUnitario": "93159.26884215",
+                    "ImporteTotal": "80792.70",
+                    "Descuento": "3.63"
+                },
+                {
+                    "DescripcionDetalle": "o3P8JB02A8tYOlNiVFMZbU10rybrfAjOEHjognBWiGsKGgy46VUMLBGXUbl4pSSc69RRMtDD1I7Ok5c4taaaHFmclXs9pWUoUlEJWZ0qyd42En4NvYKzUD1nzM",
+                    "Cantidad": "70156.78",
+                    "ImporteUnitario": "96002.42912778",
+                    "ImporteTotal": "65013.76"
+                },
+                {
+                    "DescripcionDetalle": "Qlv9aFAoY26LV",
+                    "Cantidad": "97170.31",
+                    "ImporteUnitario": "48402.31964768",
+                    "ImporteTotal": "48487.08",
+                    "Descuento": "100.87"
+                },
+                {
+                    "DescripcionDetalle": "3l7hpXM9usFJSSdojVXLEJsiUD2PjOTZ0qmplhz8wXYEFkvM5DZOezLQpNuuzRa5vHoMK6T9Gy17V6tIbt91lH913",
+                    "Cantidad": "50404.52",
+                    "ImporteUnitario": "7256.91875374",
+                    "ImporteTotal": "42051.24",
+                    "Descuento": "9.98"
+                },
+                {
+                    "DescripcionDetalle": "6m7SgzEd7TId5cHXuxs2wGaOpk5Y6nhgPLaQa0rkYUz8MX9E12GV4SFixukSymoSP8myoKwnG9q9JQ4rkELphzUE2AwMf7uzuiZBreDbCvj4dpiHgbSPZHNsL3sJbgz6GvLLEd82meDkcStPWeH9e9LDfyywUP0CcYmOonnYCgU3kXLikptTagk7Rtr0RPkZ88YH5ZzUs8ULoAEmpmXIXteLHnq1CjSf",
+                    "Cantidad": "56425.16",
+                    "ImporteUnitario": "75493.10701975",
+                    "ImporteTotal": "31170.93"
+                },
+                {
+                    "DescripcionDetalle": "1yBSGMFds2RhS18QYQEKQgZAhqXS3Kdyuqlc37NrGFsvk0svMtGVjO4NB1tUVQ9s4jJsK083yksUrdAbNYEn2LD6Dfm8epV2wrIY1l3A6EMCTGTmEnZcafOjGps2DxSoREaddE8S2VwGMEeB8DoFfcUj8iA4dPoTma5kGdsrcCrgWBVgxbWimLm0nB4qimtWkeOx9HGxEddApaCCtaGqJdupvchLdvu822MkSYLykTOIglJwO8",
+                    "Cantidad": "22507.94",
+                    "ImporteUnitario": "60258.41652597",
+                    "ImporteTotal": "82814.68"
+                },
+                {
+                    "DescripcionDetalle": "7WQYhPqapNk7Q3K3uXav9nkywTckFg759rCnRDvYlM7JXyBlFjnDVi7lKHMtcwWXxzbEjgbqGylHdVDgyWC0pnY5fbHVZ3Lr8yhogZW7lWK8d664fp2eoqtAWRZcCGf9usHgqS2EHQ4yB2Kd28OQKVvGJvPN10iZgj8BPz2Wp2nIaJmKpI6n0GRvbGa4mkzOT2odwSCFjMaDO7lR39sh",
+                    "Cantidad": "76982.51",
+                    "ImporteUnitario": "37132.25214246",
+                    "ImporteTotal": "3630.91"
+                },
+                {
+                    "DescripcionDetalle": "hhBEFdA96EkVmqPQsRKmFAsUJbAHpJsZbsxj7oJyH9rGeTHPMa2b9PYcVg45zZKa2Wwfv34zuO6Q5rkZuTPQliUAYMyaDVrvorBTweU4hLb75j1CMvHXviDmGVxH6MNTz9HyGXXGDZQWgznXqAtkWzxBxuX4Br4hZcA54qVhc0S4bgA6EZFPqFEDUxk",
+                    "Cantidad": "29347.12",
+                    "ImporteUnitario": "14973.22285225",
+                    "ImporteTotal": "11727.14",
+                    "Descuento": "16.88"
+                },
+                {
+                    "DescripcionDetalle": "gD7yQ5Mzv0AXD2gpQziqqaYrCO5OrZlzbmhT4XmuW6Y8XjkjKGBDsLa",
+                    "Cantidad": "51287.61",
+                    "ImporteUnitario": "24048.17143722",
+                    "ImporteTotal": "90185.47"
+                },
+                {
+                    "DescripcionDetalle": "4oRoe2tIDtcIGe1Savpp3abepQqAR0jaOho5zrnPcF",
+                    "Cantidad": "60463.67",
+                    "ImporteUnitario": "63991.54817320",
+                    "ImporteTotal": "81093.23",
+                    "Descuento": "54.94"
+                },
+                {
+                    "DescripcionDetalle": "FtJh5tv",
+                    "Cantidad": "92450.32",
+                    "ImporteUnitario": "18108.22492338",
+                    "ImporteTotal": "4328.82",
+                    "Descuento": "28.90"
+                },
+                {
+                    "DescripcionDetalle": "c0al6g2PfCan8VwHogFrMeqDNfltOlHsbMCdL4zSB2zSgyTGlAWQMLhy565EAu8m2ilDnxDcM5UhcRxBRa0LbtMkxRny0EdMe8mgfTrylid88",
+                    "Cantidad": "83867.01",
+                    "ImporteUnitario": "41583.72016937",
+                    "ImporteTotal": "64533.29"
+                },
+                {
+                    "DescripcionDetalle": "Lqiveqgrd6bK6pWK4Ersx2cWbImQDQQGFU5KNebskWxQr7qhBAlH4iR6XIA4LyazrWw5VKqpKoPzBUbNGBuOLEQgWrWYJMFt3jA8dFecrGsJzutJQKzEF4x5SMSvHZXgp8jZOeXFIr7oJvnnBlSlPLtAC1Wc8wykQWvKpBemjeOFAlQmXJ5GzogodDgTtiNKIZ9iXQicvf4cRc8x",
+                    "Cantidad": "27319.96",
+                    "ImporteUnitario": "78585.36542400",
+                    "ImporteTotal": "91883.19"
+                },
+                {
+                    "DescripcionDetalle": "hY80aYtxGim8n4hwmDDzu8GlTmWdrITJWHmaoHubgzakoV7HlJnK6ksvrr6R2SOXv5jBbX5aPHlvAaHPJLk41Vd1z6B4VJqZEKNPsXKHP3f2VzxHqgkolmA5IqCNmOWv6vSly9JnCH0aHYpYVNRzRCwbVzHCT39cuvNzOPlv",
+                    "Cantidad": "77686.79",
+                    "ImporteUnitario": "27229.99190612",
+                    "ImporteTotal": "81727.90",
+                    "Descuento": "47.84"
+                },
+                {
+                    "DescripcionDetalle": "CbJbF5KR8hXUyp238os3j17R9hrSwt25TUjF6EgnfJ4zt68Yr3KqZJASjOCOJf8mIetg4Sl4eANOzioZ1kQyK36Fd6xQuC6gSa",
+                    "Cantidad": "48004.99",
+                    "ImporteUnitario": "97221.75830750",
+                    "ImporteTotal": "935.30",
+                    "Descuento": "16.88"
+                },
+                {
+                    "DescripcionDetalle": "KuVDMmye56TUHs4zJkGDETsMUZtuFEfRLOY4xk0RVYdNe3xkGrPL1TaIqoHArBG12Om45oLZGYpyVvSrK1xuhF2P2",
+                    "Cantidad": "78242.47",
+                    "ImporteUnitario": "32129.82978078",
+                    "ImporteTotal": "72195.31",
+                    "Descuento": "18.31"
+                },
+                {
+                    "DescripcionDetalle": "EGhhlDVpsjHcZV8CiuKS7xrYjSrloVBKYWNHCHcEI1ZBmEnVbx7u6y9h8JGXgqPsJJp3O0AKRiVYfCMn4fk9yqfUORJ4lQmnFKShzmmJAvMz6Zp1TVymuAFRtNcjkSoqM7fbDR3NkJCvsOmK72pXLAw1XyVWuTYPW946c2efSf8NtaxmxiTgUVDa3YTiLfdl6OxiT",
+                    "Cantidad": "80110.32",
+                    "ImporteUnitario": "23161.14571819",
+                    "ImporteTotal": "50412.72",
+                    "Descuento": "9.31"
+                },
+                {
+                    "DescripcionDetalle": "v5RmNpabInWu15whUbIIBCGCtq5oPY1Wuv0GFxpLR8UTg0o7ZxxUsPD7JiLKbN8ZLywMiCCx1MXnNmuoJ9CoqUNGbB3u7dWIZLqSrHnYsClykUYBgzW2gaaNye4H",
+                    "Cantidad": "68121.49",
+                    "ImporteUnitario": "39909.74236373",
+                    "ImporteTotal": "94251.69",
+                    "Descuento": "80.73"
+                },
+                {
+                    "DescripcionDetalle": "rnosByHaXnqAVcKI2xJes5CdcGmeOWberRYCQIL0kUb215Kcw4aNN5QaSO3brZMGwUqc8z3zShWcgYNs9",
+                    "Cantidad": "92810.26",
+                    "ImporteUnitario": "73280.58079616",
+                    "ImporteTotal": "43730.08",
+                    "Descuento": "43.13"
+                }
+            ],
+            "BaseImponibleACoste": "22669.87",
+            "Claves": [
+                {
+                    "ClaveRegimenIvaOpTrascendencia": "12"
+                },
+                {
+                    "ClaveRegimenIvaOpTrascendencia": "14"
+                }
+            ]
+        },
+        "TipoDesglose": {
+            "DesgloseTipoOperacion": {
+                "Entrega": {
+                    "NoSujeta": [
+                        {
+                            "Causa": "RL",
+                            "Importe": "65025.64"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "HuellaTBAI": {
+        "Software": {
+            "LicenciaTBAI": "uaVLEsa460F2B22J",
+            "Nombre": "MWhLt9ZfL17zuiO1dNLUbE6u0O5mkiGSHAtymVeOjujJWuNd19baAJnxFFbGNVRQWBhJSl5fSSZH6IDQAM3aDsYwHl5IEjXpUnI6DrzFiN0Bj2S5aOo",
+            "Version": "ZC0EAoqWkBjCnmHNJ",
+            "EntidadDesarrolladora": {
+                "IDOtro": {
+                    "IDType": "03",
+                    "ID": "ksCPC9m",
+                    "CodigoPais": "SR"
+                }
+            }
+        },
+        "EncadenamientoFacturaAnterior": {
+            "NumFacturaAnterior": "hVZnxK",
+            "FechaExpedicionFacturaAnterior": "13-02-2021",
+            "SignatureValueFirmaFacturaAnterior": "O74dJw1bmf5a8fUKpzogndlZn58TTSxafFXaHOMPY96JjL9M1d4s9cxUrLolJDr79HkFPX9NEbUDS5khUrp3WIu0paSyYgiXUAdg"
+        },
+        "NumSerieDispositivo": ""
+    }
+}
