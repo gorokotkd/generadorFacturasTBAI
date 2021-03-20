@@ -1,5 +1,10 @@
 'use strict'
 
+const {uniqueNamesGenerator, names, adjectives, colors} = require('unique-names-generator');
+const namesConfig = {
+    dictionaries: [names, adjectives, colors]
+}
+
 const MAX_NUMBER = 100000;
 
 function formatNumberLength(num, length) {
@@ -28,6 +33,11 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
+/**
+ * Devuelve un string aleatorio de longitud length
+ * @param {Number} length Longitud del string
+ * @returns String aleatorio
+ */
 function getRandomString(length) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -38,10 +48,23 @@ function getRandomString(length) {
     return result;
  }
 
+ /**
+  * Numero aleatorio entre min (incluido) y max (excluido) con fix decimales
+  * @param {Number} min - Minimo numero posible
+  * @param {Number} max - Máximo número posible (Excluido)
+  * @param {Number} fix - Número de decimales
+  * @returns un número aleatorio
+  */
 function getRandomArbitrary(min, max, fix) {
     return (Math.random() * (max - min) + min).toFixed(fix);
 }
 
+/**
+ * Genera una fecha aleatoria entre las dos fechas que se pasan por parametro
+ * @param {Date} start 
+ * @param {Date} end 
+ * @returns Fecha en formato DD-MM-AAAA
+ */
 function randomDate(start, end) {
     var options = { year: 'numeric', month: 'numeric', day: 'numeric'};
     var dt = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));//.toLocaleDateString('es', options).replace('/','-').replace('/','-');
@@ -52,6 +75,12 @@ function randomDate(start, end) {
     return (day + "-" + month + "-" + year);
 }
 
+/**
+ * Devuelve la Hora aleatoria de un dia aleatorio entre las fechas dadas. 
+ * @param {Date} start
+ * @param {Date} end 
+ * @returns Hora aleatoria de un dia aleatorio entre start y end
+ */
 function randomHour(start, end) {
     var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var dt = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
@@ -149,13 +178,165 @@ function desgloseSujetaNoSujeta(desglose){
     return desglose;
 }//End function
 
+
+/**
+ * Crea numDest destinatarios aleatorios para una factura
+ * @param {JSON} json - Contenido del elemento "Sujetos" de la factura
+ * @param {number} numDest - Numero de destinatarios a crear
+ * @returns {JSON} - Contenido del elemento "Sujetos" actualizado con el numero de destinatarios correspondientes.
+ */
+function generarDestinatarios(json, numDest){
+    json.Destinatarios = [];
+
+    //var max_dest = getRandomInt(1, 101);
+    for(var i = 0; i < numDest; i++){
+        var destinatario = {};
+        if(getRandomInt(0,2) == 0){ //NIF
+            destinatario.NIF = rand_dni();
+        }else{//IDOtro
+            destinatario.IDOtro = {
+                "IDType" : "0" + getRandomInt(2,7),
+                "ID" : getRandomString(getRandomInt(1, 21))
+            };
+
+            if(getRandomInt(0,2) == 0){//Tengo Codigo Pais
+                destinatario.IDOtro.CodigoPais = country_list[getRandomInt(0, country_list.length)];
+            }
+        }
+
+        destinatario.ApellidosNombreRazonSocial = getRandomString(getRandomInt(1,121));
+        destinatario.CodigoPostal = getRandomString(getRandomInt(1,21));
+        destinatario.Direccion = getRandomString(getRandomInt(1,251));
+        json.Destinatarios.push(destinatario);
+    }//End for
+    return json;
+}
+
+/**
+ * Añade el elemento "FacturaRectificativa" al json con los datos
+ * @param {JSON} json - Elemento "Cabecera" de la factura
+ * @param {JSON} options - Elementos Opcionales de la factura Rectificativa
+ * @returns - El elemento "Cabecera" actualizado
+ */
+function facturaRectificativa(json, options = {importeRectificacion: false, cuotaRecargo: false}){
+
+    var importeRectificacion, cuotaRecargo = {};
+
+    json.FacturaRectificativa = {
+        "Codigo" : "R"+getRandomInt(1,6)
+    };
+
+    var rand = getRandomInt(0,2);
+    if(rand == 1){
+        json.FacturaRectificativa.Tipo = "S";
+    }else{
+        json.FacturaRectificativa.Tipo = "I";
+    }
+
+    console.log(options);
+    json.FacturaRectificativa.Tipo = rectificativaType_list[getRandomInt(0,rectificativaType_list.length)];
+    if(options.hasOwnProperty('importeRectificacion')){
+        if(options.importeRectificacion){
+            json.FacturaRectificativa.ImporteRectificacionSustitutiva = {
+                "BaseRectificada" : getRandomArbitrary(0, MAX_NUMBER, 2),
+                "CuotaRectificada" : getRandomArbitrary(0, MAX_NUMBER ,2)
+            };
+        }
+        if(options.hasOwnProperty('cuotaRecargo')){
+            if(options.cuotaRecargo){
+                json.FacturaRectificativa.ImporteRectificacionSustitutiva.CuotaRecargoRectificada = getRandomArbitrary(0, MAX_NUMBER,2);
+            }
+        }
+
+    }
+}
+
+function facturasRectificadasSustituidas(json, options = {
+    serieFactura: false,
+    numFacturas: 0
+}) {
+    //rand = getRandomInt(1,101);
+    json.FacturasRectificadasSustituidas = [];
+    var max = 0;
+    if(options.hasOwnProperty('numFacturas')){
+        if(options.numFacturas < 1){
+            max = getRandomInt(1, 101);
+        }else{
+            max = options.numFacturas;
+        }
+    }else{
+        max = getRandomInt(1, 101);
+    }
+    
+    for(var i = 0; i < max ; i ++){
+        var factRectSust = {
+            "NumFactura" : getRandomString(getRandomInt(0,21)),
+            "FechaExpedicionFactura" : randomDate(new Date(2012, 0, 1), new Date())
+        };
+        
+        if(options.hasOwnProperty('serieFactura')){
+            if(options.serieFactura){
+                factRectSust.SerieFactura = getRandomString(getRandomInt(0,21));
+            }
+        }
+        json.FacturasRectificadasSustituidas.push(factRectSust);
+    }//End for
+}
+
+
+/**
+ * 
+ * @param {JSON} json - Elemento "Cabecera" de la factura
+ * @param {JSON} options - Parametros opcionales de la Cabecera de la factura
+ */
+function generarCabeceraFactura(json, options = {
+    serieFactura : false,
+    facturaSimplificada: false,
+    facturaEmitidaSustitucionSimplificada: false,
+    facturaRectificativa: {importeRectificacion: false, cuotaRecargo: false},
+    facturaRectificadaSustituida: {serieFactura: false, numFacturas: 0}
+}) {
+    //json == json.Factura.Cabecera
+
+    if(options.hasOwnProperty('serieFactura')){
+        if(options.serieFactura){
+            json.SerieFactura = getRandomString(getRandomInt(1,20));
+        }
+    }
+
+    if(options.hasOwnProperty('facturaSimplificada')){
+        if(options.facturaSimplificada){
+            json.FacturaSimplificada = sinNo_list[getRandomInt(0,2)];
+        }
+    }
+
+    if(options.hasOwnProperty('facturaEmitidaSustitucionSimplificada')){
+        if(options.facturaEmitidaSustitucionSimplificada){
+            json.FacturaEmitidaSustitucionSimplificada = sinNo_list[getRandomInt(0,2)];
+        }
+    }
+
+    console.log(options.facturaRectificativa);
+    if(options.hasOwnProperty('facturaRectificativa')){
+        facturaRectificativa(json, options.facturaRectificativa);
+    }
+
+    if(options.hasOwnProperty('facturaRectificadaSustituida')){
+        facturasRectificadasSustituidas(json, options.facturaRectificadaSustituida);
+    }
+}
+
+
+
+
+
+
 module.exports = {
     generate : function generate(){
         var json = {
             "Sujetos" : {
                 "Emisor" : {
                     "NIF" : rand_dni(),
-                    //"ApellidosNombreRazonSocial" : nameList[getRandomInt(0,nameList.length)]
                     "ApellidosNombreRazonSocial" : getRandomString(getRandomInt(0,120))
                 }
             },
@@ -188,29 +369,8 @@ module.exports = {
 
         if(rand == 1){//Varios destinatarios
             json.Sujetos.VariosDestinatarios = "S";
-            json.Sujetos.Destinatarios = [];
-
             var max_dest = getRandomInt(1, 101);
-            for(var i = 0; i < max_dest; i++){
-                var destinatario = {};
-                if(getRandomInt(0,2) == 0){ //NIF
-                    destinatario.NIF = rand_dni();
-                }else{//IDOtro
-                    destinatario.IDOtro = {
-                        "IDType" : "0" + getRandomInt(2,7),
-                        "ID" : getRandomString(getRandomInt(1, 21))
-                    };
-
-                    if(getRandomInt(0,2) == 0){//Tengo Codigo Pais
-                        destinatario.IDOtro.CodigoPais = country_list[getRandomInt(0, country_list.length)];
-                    }
-                }
-
-                destinatario.ApellidosNombreRazonSocial = getRandomString(getRandomInt(1,121));
-                destinatario.CodigoPostal = getRandomString(getRandomInt(1,21));
-                destinatario.Direccion = getRandomString(getRandomInt(1,251));
-                json.Sujetos.Destinatarios.push(destinatario);
-            }//End for
+            json.Sujetos = generarDestinatarios(json.Sujetos, max_dest);
         }//Fin Destinatarios
 
         rand = getRandomInt(0,2);
@@ -220,11 +380,17 @@ module.exports = {
 
         /* FACTURA */
 
-        rand = getRandomInt(0,2);
+        /*rand = getRandomInt(0,2);
         if(rand == 0){
             json.Factura.Cabecera.SerieFactura = getRandomString(getRandomInt(1,20));
         }
 
+        rand = getRandomInt(0,2);
+        if(rand == 0){
+            json.Factura.Cabecera.FacturaSimplificada = sinNo_list[getRandomInt(0,2)];
+        }
+        */
+/*
         rand = getRandomInt(0,2);
         if(rand==0){
             rand = getRandomInt(0,2);
@@ -234,7 +400,13 @@ module.exports = {
                 json.Factura.Cabecera.FacturaSimplificada = "N";
             }   
         }
-
+*/
+/*
+        rand = getRandomInt(0,2);
+        if(rand == 0){
+            json.Factura.Cabecera.FacturaEmitidaSustitucionSimplificada = sinNo_list[getRandomInt(0,2)];
+        }*/
+/*
         rand = getRandomInt(0,2);
         if(rand==0){
             rand = getRandomInt(0,2);
@@ -244,7 +416,8 @@ module.exports = {
                 json.Factura.Cabecera.FacturaEmitidaSustitucionSimplificada = "N";
             }   
         }
-
+*/
+/*
         rand = getRandomInt(0,2);
         if(rand==0){
             json.Factura.Cabecera.FacturaRectificativa = {
@@ -270,7 +443,13 @@ module.exports = {
             }
 
         }//End facturaRectificativa
-
+*/
+        generarCabeceraFactura(json.Factura.Cabecera, {
+            serieFactura: true, facturaSimplificada: true, facturaEmitidaSustitucionSimplificada: true, facturaRectificativa: {
+                importeRectificacion: true, cuotaRecargo: false
+            }});
+        //facturaRectificativa(json.Factura.Cabecera, {importeRectificacion: true, cuotaRecargo: true})
+/*
         rand = getRandomInt(0,2);
         if(rand == 0){
             rand = getRandomInt(1,101);
@@ -292,7 +471,7 @@ module.exports = {
             }//End for
         }//End FacturaRectificadaSustituida
 
-
+*/
         json.Factura.DatosFactura.DetallesFactura = [];
         var detalle_size = getRandomInt(1, 1001);
         for(var i = 0 ; i < detalle_size; i++){
@@ -399,6 +578,8 @@ module.exports = {
     }
 };
 
+const rectificativaType_list = ["S", "I"];
+const sinNo_list = ["S", "N"];
 const emitidaPorTerceros_list = ["N", "T", "D"];
 const noSujeta_list = ["OT", "RL"];
 const ClaveRegimenIvaOpTrascendencia_list = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "51", "52", "53"];
