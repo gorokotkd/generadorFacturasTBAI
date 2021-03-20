@@ -327,7 +327,87 @@ function generarCabeceraFactura(json, options = {
 }
 
 
+function detallesDatosFactura(json, options = {
+    numDetalles: 0
+}) {
+    var detalle_size = 1;
+    if(options.hasOwnProperty('numDetalles')){
+        if(options.numDetalles < 1){
+            detalle_size = getRandomInt(1, 1001);
+        }else{
+            detalle_size = options.numDetalles;
+        }
+    }else{
+        detalle_size = getRandomInt(1, 1001);
+    }
 
+    json.DetallesFactura = [];
+    
+    for(var i = 0 ; i < detalle_size; i++){
+        var detalle = {
+            "DescripcionDetalle" : getRandomString(getRandomInt(0,251)),
+            "Cantidad" : getRandomArbitrary(0,MAX_NUMBER, 2),
+            "ImporteUnitario" : getRandomArbitrary(0, MAX_NUMBER, 8),
+            "ImporteTotal" : getRandomArbitrary(0, MAX_NUMBER, 2)
+        };
+
+        if(getRandomInt(0,2) == 0){
+            detalle.Descuento = getRandomArbitrary(0, 101, 2);
+        }
+
+        json.DetallesFactura.push(detalle);
+    }
+}
+
+function datosFactura(json, options = {
+    fechaOperacion: false,
+    detallesFactura: {numDetalles: 0},
+    retencionSoportada : false,
+    baseImponibleACoste: false,
+    numClaves: 0
+}) {
+    
+    if(options.hasOwnProperty('fechaOperacion')){
+        if(options.fechaOperacion){
+            json.FechaOperacion = randomDate(new Date(2012, 0, 1), new Date());
+        }
+    }
+
+    if(options.hasOwnProperty('detallesFactura')){
+        detallesDatosFactura(json, options.detallesFactura);
+    }
+
+    if(options.hasOwnProperty('retencionSoportada')){
+        if(options.retencionSoportada){
+            json.RetencionSoportada = getRandomArbitrary(0,MAX_NUMBER, 2);
+        }
+    }
+
+    if(options.hasOwnProperty('baseImponibleACoste')){
+        if(options.baseImponibleACoste){
+            json.BaseImponibleACoste = getRandomArbitrary(0,MAX_NUMBER, 2);
+        }
+    }
+
+    var claves_size = 1;
+    if(options.hasOwnProperty('numClaves')){
+        if(options.numClaves < 1 || options.numClaves > 3){
+            claves_size = getRandomInt(1,4);
+        }else{
+            claves_size = options.numClaves;
+        }
+    }else{
+        claves_size = getRandomInt(1,4);
+    }
+
+    json.Claves = [];
+    for(var i = 0; i < claves_size; i++){
+        var clave = {
+            "ClaveRegimenIvaOpTrascendencia" : ClaveRegimenIvaOpTrascendencia_list[getRandomInt(0, ClaveRegimenIvaOpTrascendencia_list.length)]
+        };
+        json.Claves.push(clave);
+    }
+}
 
 
 
@@ -472,7 +552,7 @@ module.exports = {
         }//End FacturaRectificadaSustituida
 
 */
-        json.Factura.DatosFactura.DetallesFactura = [];
+    /*    json.Factura.DatosFactura.DetallesFactura = [];
         var detalle_size = getRandomInt(1, 1001);
         for(var i = 0 ; i < detalle_size; i++){
             var detalle = {
@@ -508,7 +588,16 @@ module.exports = {
             };
             json.Factura.DatosFactura.Claves.push(clave);
         }
-
+*/
+    datosFactura(json.Factura.DatosFactura, {
+        fechaOperacion: true,
+        detallesFactura: {
+            numDetalles: 10
+        },
+        retencionSoportada: true,
+        baseImponibleACoste: true,
+        numClaves: 1
+    });
 
         //TIPO DESGLOSE
         rand = getRandomInt(0,2);
