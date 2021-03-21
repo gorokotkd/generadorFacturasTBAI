@@ -211,6 +211,25 @@ function desgloseSujetaNoSujeta(desglose, options = {
 }//End function
 
 
+function generarSujetos(json, options = {
+    destinatarios : -1,
+    emitidaPorTercerosODestinatario: false
+}) {
+    if(options.hasOwnProperty('destinatarios')){
+        if(options.destinatarios > 0){
+            generarDestinatarios(json, options.destinatarios);
+            json.VariosDestinatarios = "S";
+        }
+    }
+
+    if(options.hasOwnProperty('emitidaPorTercerosODestinatarios')){
+        if(options.emitidaPorTercerosODestinatario){
+            json.emitidaPorTercerosODestinatario = "S";
+        }
+    }
+}
+
+
 /**
  * Crea numDest destinatarios aleatorios para una factura
  * @param {JSON} json - Contenido del elemento "Sujetos" de la factura
@@ -492,6 +511,72 @@ function tipoDesglose(json, options = {
     }
 }
 
+function huellaTBAI(json, options = {
+    encademaniento : {
+        value: false,
+        serieFacturaAnterior: false
+    },
+    entidadNIF: true,
+    entidadIdOtro: false,
+    numSerieDispositivo: false
+}) {
+    
+    if(options.hasOwnProperty('encadenamiento')){
+        if(options.encademaniento.hasOwnProperty('value')){
+            if(options.encademaniento.value){
+                json.EncadenamientoFacturaAnterior = {
+                    "NumFacturaAnterior": getRandomString(getRandomInt(0, 21)),
+                    "FechaExpedicionFacturaAnterior": randomDate(new Date(2012, 0, 1), new Date()),
+                    "SignatureValueFirmaFacturaAnterior": getRandomString(100)
+                };
+                if (options.encademaniento.hasOwnProperty('serieFacturaAnterior')) {
+                    if(options.encademaniento.serieFacturaAnterior){
+                        json.EncadenamientoFacturaAnterior.SerieFacturaAnterior = getRandomString(getRandomInt(0, 21));
+                    }
+                    
+                }
+            }
+        }
+    }//Fin encadenamiento
+
+
+    if(options.hasOwnProperty('entidadNIF')){
+        if(options.entidadNIF){
+            json.Software.EntidadDesarrolladora = {
+                "NIF": rand_dni()
+            };
+        }else{
+            json.Software.EntidadDesarrolladora = {
+                "IDOtro": {
+                    "IDType": "0" + getRandomInt(2, 7),
+                    "ID": getRandomString(getRandomInt(0, 21))
+                }
+            };
+            var rand = getRandomInt(0, 2);
+            if (rand == 0) {
+                json.Software.EntidadDesarrolladora.IDOtro.CodigoPais = country_list[getRandomInt(0, country_list.length)];
+            }
+        }
+    }else{
+        json.Software.EntidadDesarrolladora = {
+            "IDOtro": {
+                "IDType": "0" + getRandomInt(2, 7),
+                "ID": getRandomString(getRandomInt(0, 21))
+            }
+        };
+        var rand = getRandomInt(0, 2);
+        if (rand == 0) {
+            json.Software.EntidadDesarrolladora.IDOtro.CodigoPais = country_list[getRandomInt(0, country_list.length)];
+        }
+    }
+
+    if(options.hasOwnProperty('numSerieDispositivo')){
+        if(options.numSerieDispositivo){
+            json.NumSerieDispositivo = getRandomString(getRandomInt(0, 31));
+        }
+    }
+}
+
 module.exports = {
     generate: function generate() {
         var json = {
@@ -525,19 +610,10 @@ module.exports = {
             }
         };
 
-
-        var rand = getRandomInt(0, 2);
-
-        if (rand == 1) {//Varios destinatarios
-            json.Sujetos.VariosDestinatarios = "S";
-            var max_dest = getRandomInt(1, 101);
-            json.Sujetos = generarDestinatarios(json.Sujetos, max_dest);
-        }//Fin Destinatarios
-
-        rand = getRandomInt(0, 2);
-        if (rand == 0) {//EmitaPorTerceros
-            json.Sujetos.EmitidaPorTercerosODestinatario = emitidaPorTerceros_list[getRandomInt(0, emitidaPorTerceros_list.length)];
-        }
+        generarSujetos(json.Sujetos, {
+            destinatarios: 2,
+            emitidaPorTercerosODestinatario: true
+        })
 
         /* FACTURA */
 
@@ -550,11 +626,11 @@ module.exports = {
         datosFactura(json.Factura.DatosFactura, {
             fechaOperacion: true,
             detallesFactura: {
-                numDetalles: 10
+                numDetalles: 2
             },
             retencionSoportada: true,
             baseImponibleACoste: true,
-            numClaves: 1
+            numClaves: 2
         });
 
         tipoDesglose(json.Factura.TipoDesglose, {
@@ -568,43 +644,14 @@ module.exports = {
 
         /* HUELLA TBAI*/
 
-        rand = getRandomInt(0, 2);
-        if (rand == 0) {
-            json.HuellaTBAI.EncadenamientoFacturaAnterior = {
-                "NumFacturaAnterior": getRandomString(getRandomInt(0, 21)),
-                "FechaExpedicionFacturaAnterior": randomDate(new Date(2012, 0, 1), new Date()),
-                "SignatureValueFirmaFacturaAnterior": getRandomString(100)
-            };
-            rand = getRandomInt(0, 2);
-            if (rand == 0) {
-                json.HuellaTBAI.EncadenamientoFacturaAnterior.SerieFacturaAnterior = getRandomString(getRandomInt(0, 21));
-            }
-        }//Fin Encadenamiento
-
-        rand = getRandomInt(0, 2);
-        if (rand == 0) {//Software NIF
-            json.HuellaTBAI.Software.EntidadDesarrolladora = {
-                "NIF": rand_dni()
-            };
-        } else {//Software IDOtro
-            json.HuellaTBAI.Software.EntidadDesarrolladora = {
-                "IDOtro": {
-                    "IDType": "0" + getRandomInt(2, 7),
-                    "ID": getRandomString(getRandomInt(0, 21))
-                }
-            };
-            rand = getRandomInt(0, 2);
-            if (rand == 0) {
-                json.HuellaTBAI.Software.EntidadDesarrolladora.IDOtro.CodigoPais = country_list[getRandomInt(0, country_list.length)];
-            }
-        }
-
-        rand = getRandomInt(0, 2);
-        if (rand == 0) {
-            json.HuellaTBAI.NumSerieDispositivo = getRandomString(getRandomInt(0, 31));
-        }
-
-
+        huellaTBAI(json.HuellaTBAI, {
+            encademaniento:{
+                value: true,
+                serieFacturaAnterior: true
+            },
+            entidadNIF: false,
+            numSerieDispositivo: true
+        });
 
         return json;
     }
