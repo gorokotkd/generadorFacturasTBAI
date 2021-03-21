@@ -22,13 +22,22 @@ function charDNI(dni) {
     return letter;
 }
 
+/**
+ * 
+ * @returns Número de DNI, con letra incluida.
+ */
 function rand_dni() {
     var num = Math.floor((Math.random() * 100000000));
     var sNum = formatNumberLength(num, 8);
     return sNum + charDNI(sNum);
 }
 
-
+/**
+ * Devuelve un número aleatorio entre [min,max)
+ * @param {Number} min - Limite inferior
+ * @param {Number} max - Limite superior (Excluido)
+ * @returns Numero aleatorio entre min y max
+ */
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -82,7 +91,6 @@ function randomDate(start, end) {
  * @returns Hora aleatoria de un dia aleatorio entre start y end
  */
 function randomHour(start, end) {
-    var options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var dt = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 
     var hours = (dt.getHours() + 1).toString().padStart(2, "0");
@@ -92,139 +100,170 @@ function randomHour(start, end) {
     return (hours + ":" + minutes + ":" + sec);
 }
 
-
+/**
+ * 
+ * @param {JSON} desglose - Elemento al que añadir el desglose de factura Sujeta y/o NoSujeta
+ * @param {JSON} options - Opciones de configuracion del desglose
+ * @returns El desglose actualizado
+ */
 function desgloseSujetaNoSujeta(desglose, options = {
     sujeta: {
-        exenta: { numDetallesExenta: -1 },
+        value: false,   //Indica si quiero o no que exista el elemento Sujeta, si es false lo demas no se evalua
+        exenta: { value: false, //Indica si quiero o no que exista el elemento Exenta.
+            numDetallesExenta: -1 //Numero de detalles en Exenta, si el valor no es valido se da uno aleatorio.
+        },
         noExenta: {
-            numDetallesNoExenta: -1,
-            numDetallesIVA: -1
+            value: false, //Indica si quiero o no que exista el elemento NoExenta.
+            numDetallesNoExenta: -1, //Indica el numero de detalles en NoExenta
+            numDetallesIVA: -1 //Indica el numero de detalles en el desglose de IVA
         }
     },
-    noSujeta: { numDetallesNoSujeta: -1 }
+    noSujeta: {
+        value: false, //Indica si quiero o no que exista el elemento NoSujeta
+        numDetallesNoSujeta: -1 //Indica el numero de detalles del elemento NoSujeta
+    }
 }) {
-    console.log(options.sujeta.exenta.numDetallesExenta);
     if (options.hasOwnProperty('sujeta')) {//Creo el desglose "Sujeta"
-        if (options.sujeta.hasOwnProperty('exenta')) {
-            if (options.sujeta.exenta.numDetallesExenta != -1) {
-                
-                var max = 1;
-                if (options.sujeta.exenta.hasOwnProperty('numDetallesExenta')) {
-                    if (options.sujeta.exenta.numDetallesExenta > 0 && options.sujeta.exenta.numDetallesExenta < 8) {
-                        max = options.sujeta.exenta.numDetallesExenta;
-                    } else {
-                        max = getRandomInt(1, 8);
-                    }
-                } else {
-                    max = getRandomInt(1, 8);
-                }
-                desglose.Sujeta.Exenta = [];
-                for (var i = 0; i < max; i++) {
-                    var exenta = {
-                        "CausaExencion": "E" + getRandomInt(1, 7),
-                        "BaseImponible": getRandomArbitrary(0, MAX_NUMBER, 2)
-                    };
-                    desglose.Sujeta.Exenta.push(exenta);
-                }
-            }
-        }//Fin Exenta
-
-        if (options.sujeta.hasOwnProperty('noExenta')) {
-            if (options.sujeta.noExenta.hasOwnProperty('numDetallesNoExenta')) {
-                if (options.sujeta.noExenta.numDetallesNoExenta != -1) {
-                    var maxDetallesNoExenta = getRandomInt(1, 3);
-                    var maxDetallesIVA = getRandomInt(1, 7);
-
-                    if (options.sujeta.noExenta.hasOwnProperty('numDetallesNoExenta')) {
-                        if (options.sujeta.noExenta.numDetallesNoExenta > 0 && options.sujeta.noExenta.numDetallesNoExenta < 3) {
-                            maxDetallesNoExenta = options.sujeta.noExenta.numDetallesNoExenta;
+        if (options.sujeta.hasOwnProperty('value')) {
+            if (options.sujeta.value) {
+                desglose.Sujeta = {};
+                if (options.sujeta.hasOwnProperty('exenta')) {
+                    if (options.sujeta.exenta.hasOwnProperty('value')) {
+                        if (options.sujeta.exenta.value) {
+                            if (options.sujeta.exenta.numDetallesExenta != -1) {
+                                var max = 1;
+                                if (options.sujeta.exenta.hasOwnProperty('numDetallesExenta')) {
+                                    if (options.sujeta.exenta.numDetallesExenta > 0 && options.sujeta.exenta.numDetallesExenta < 8) {
+                                        max = options.sujeta.exenta.numDetallesExenta;
+                                    } else {
+                                        max = getRandomInt(1, 8);
+                                    }
+                                } else {
+                                    max = getRandomInt(1, 8);
+                                }
+                                desglose.Sujeta.Exenta = [];
+                                for (var i = 0; i < max; i++) {
+                                    var exenta = {
+                                        "CausaExencion": "E" + getRandomInt(1, 7),
+                                        "BaseImponible": getRandomArbitrary(0, MAX_NUMBER, 2)
+                                    };
+                                    desglose.Sujeta.Exenta.push(exenta);
+                                }
+                            }
                         }
                     }
+                }//Fin Exenta
 
-                    if (options.sujeta.noExenta.hasOwnProperty('numDetallesIVA')) {
-                        if (options.sujeta.noExenta.numDetallesIVA > 0 && options.sujeta.noExenta.numDetallesIVA < 3) {
-                            maxDetallesIVA = options.sujeta.noExenta.numDetallesIVA;
+                if (options.sujeta.hasOwnProperty('noExenta')) {
+                    if (options.sujeta.noExenta.hasOwnProperty('value')) {
+                        if (options.sujeta.noExenta.value) {
+                            if (options.sujeta.noExenta.hasOwnProperty('numDetallesNoExenta')) {
+                                if (options.sujeta.noExenta.numDetallesNoExenta != -1) {
+                                    var maxDetallesNoExenta = getRandomInt(1, 3);
+                                    var maxDetallesIVA = getRandomInt(1, 7);
+
+                                    if (options.sujeta.noExenta.hasOwnProperty('numDetallesNoExenta')) {
+                                        if (options.sujeta.noExenta.numDetallesNoExenta > 0 && options.sujeta.noExenta.numDetallesNoExenta < 3) {
+                                            maxDetallesNoExenta = options.sujeta.noExenta.numDetallesNoExenta;
+                                        }
+                                    }
+
+                                    if (options.sujeta.noExenta.hasOwnProperty('numDetallesIVA')) {
+                                        if (options.sujeta.noExenta.numDetallesIVA > 0 && options.sujeta.noExenta.numDetallesIVA < 7) {
+                                            maxDetallesIVA = options.sujeta.noExenta.numDetallesIVA;
+                                        }
+                                    }
+
+                                    desglose.Sujeta.NoExenta = [];
+                                    for (var i = 0; i < maxDetallesNoExenta; i++) {
+                                        var noExenta = {
+                                            "TipoNoExenta": "S" + getRandomInt(1, 3),
+                                            "DesgloseIVA": []
+                                        };
+                                        for (var j = 0; j < maxDetallesIVA; j++) {
+                                            var desgloseIva = {
+                                                "BaseImponible": getRandomArbitrary(0, MAX_NUMBER, 2)
+                                            };
+
+                                            var rand = getRandomInt(0, 2);
+                                            if (rand == 0) {
+                                                desgloseIva.TipoImpositivo = getRandomArbitrary(0, 101, 2);
+                                            }
+
+                                            rand = getRandomInt(0, 2);
+                                            if (rand == 0) {
+                                                desgloseIva.CuotaImpuesto = getRandomArbitrary(0, MAX_NUMBER, 2);
+                                            }
+
+                                            rand = getRandomInt(0, 2);
+                                            if (rand == 0) {
+                                                desgloseIva.TipoRecargoEquivalencia = getRandomArbitrary(0, 101, 2);
+                                            }
+
+                                            rand = getRandomInt(0, 2);
+                                            if (rand == 0) {
+                                                desgloseIva.CuotaRecargoEquivalencia = getRandomArbitrary(0, MAX_NUMBER, 2);
+                                            }
+
+                                            rand = getRandomInt(0, 2);
+                                            if (rand == 0) {
+                                                desgloseIva.OperacionEnRecargoDeEquivalenciaORegimenSimplificado = sinNo_list[getRandomInt(0, 2)];
+                                            }
+                                            noExenta.DesgloseIVA.push(desgloseIva);
+                                        }//End for
+                                        desglose.Sujeta.NoExenta.push(noExenta);
+                                    }//End for
+                                }
+                            }
                         }
                     }
-
-                    desglose.Sujeta.NoExenta = [];
-                    for (var i = 0; i < maxDetallesNoExenta; i++) {
-                        var noExenta = {
-                            "TipoNoExenta": "S" + getRandomInt(1, 3),
-                            "DesgloseIVA": []
-                        };
-                        for (var j = 0; j < maxDetallesIVA; j++) {
-                            var desgloseIva = {
-                                "BaseImponible": getRandomArbitrary(0, MAX_NUMBER, 2)
-                            };
-
-                            var rand = getRandomInt(0, 2);
-                            if (rand == 0) {
-                                desgloseIva.TipoImpositivo = getRandomArbitrary(0, 101, 2);
-                            }
-
-                            rand = getRandomInt(0, 2);
-                            if (rand == 0) {
-                                desgloseIva.CuotaImpuesto = getRandomArbitrary(0, MAX_NUMBER, 2);
-                            }
-
-                            rand = getRandomInt(0, 2);
-                            if (rand == 0) {
-                                desgloseIva.TipoRecargoEquivalencia = getRandomArbitrary(0, 101, 2);
-                            }
-
-                            rand = getRandomInt(0, 2);
-                            if (rand == 0) {
-                                desgloseIva.CuotaRecargoEquivalencia = getRandomArbitrary(0, MAX_NUMBER, 2);
-                            }
-
-                            rand = getRandomInt(0, 2);
-                            if (rand == 0) {
-                                desgloseIva.OperacionEnRecargoDeEquivalenciaORegimenSimplificado = sinNo_list[getRandomInt(0, 2)];
-                            }
-                            noExenta.DesgloseIVA.push(desgloseIva);
-                        }//End for
-                        desglose.Sujeta.NoExenta.push(noExenta);
-                    }//End for
-                }
+                }//Fin NoExenta
             }
-        }//Fin NoExenta
+        }
     }//Fin Sujeta
 
     if (options.hasOwnProperty('noSujeta')) {//Creo el desglose "NoSujeta"
-        var maxDetallesNoSujeta = getRandomInt(1, 3);
-        if (options.noSujeta.hasOwnProperty('numDetallesNoSujeta')) {
-            if (options.noSujeta.numDetallesNoSujeta > 0 && options.noSujeta.numDetallesNoSujeta < 3) {
-                maxDetallesNoSujeta = options.noSujeta.numDetallesNoSujeta;
+        if (options.noSujeta.hasOwnProperty('value')) {
+            if (options.noSujeta.value) {
+                var maxDetallesNoSujeta = getRandomInt(1, 3);
+                if (options.noSujeta.hasOwnProperty('numDetallesNoSujeta')) {
+                    if (options.noSujeta.numDetallesNoSujeta > 0 && options.noSujeta.numDetallesNoSujeta < 3) {
+                        maxDetallesNoSujeta = options.noSujeta.numDetallesNoSujeta;
+                    }
+                }
+                desglose.NoSujeta = [];
+                for (var i = 0; i < maxDetallesNoSujeta; i++) {
+                    var desgloseNoSujeta = {
+                        "Causa": noSujeta_list[getRandomInt(0, noSujeta_list.length)],
+                        "Importe": getRandomArbitrary(0, MAX_NUMBER, 2)
+                    };
+                    desglose.NoSujeta.push(desgloseNoSujeta);
+                }//End for
             }
         }
-        desglose.NoSujeta = [];
-        for (var i = 0; i < maxDetallesNoSujeta; i++) {
-            var desgloseNoSujeta = {
-                "Causa": noSujeta_list[getRandomInt(0, noSujeta_list.length)],
-                "Importe": getRandomArbitrary(0, MAX_NUMBER, 2)
-            };
-            desglose.NoSujeta.push(desgloseNoSujeta);
-        }//End for
-    }//End If
+    }//End NoSujeeta
     return desglose;
 }//End function
 
-
+/**
+ * Genera el bloque Sujetos de la factura
+ * @param {JSON} json - JSON con el elemento Sujetos
+ * @param {JSON} options - Parametros de configuracion de los Sujetos
+ */
 function generarSujetos(json, options = {
-    destinatarios : -1,
-    emitidaPorTercerosODestinatario: false
+    destinatarios: -1, //Numero de destinatarios. (-1) si no existen destinatarios
+    emitidaPorTercerosODestinatario: false //Indica si quiero el elemento emitida por terceros
 }) {
-    if(options.hasOwnProperty('destinatarios')){
-        if(options.destinatarios > 0){
+    if (options.hasOwnProperty('destinatarios')) {
+        if (options.destinatarios > 0) {
             generarDestinatarios(json, options.destinatarios);
             json.VariosDestinatarios = "S";
         }
     }
 
-    if(options.hasOwnProperty('emitidaPorTercerosODestinatarios')){
-        if(options.emitidaPorTercerosODestinatario){
-            json.emitidaPorTercerosODestinatario = "S";
+    if (options.hasOwnProperty('emitidaPorTercerosODestinatarios')) {
+        if (options.emitidaPorTercerosODestinatario) {
+            json.emitidaPorTercerosODestinatario = emitidaPorTerceros_list[getRandomInt(0, emitidaPorTerceros_list.length)];
         }
     }
 }
@@ -276,13 +315,6 @@ function facturaRectificativa(json, options = { importeRectificacion: false, cuo
         "Codigo": "R" + getRandomInt(1, 6)
     };
 
-    var rand = getRandomInt(0, 2);
-    if (rand == 1) {
-        json.FacturaRectificativa.Tipo = "S";
-    } else {
-        json.FacturaRectificativa.Tipo = "I";
-    }
-
     json.FacturaRectificativa.Tipo = rectificativaType_list[getRandomInt(0, rectificativaType_list.length)];
     if (options.hasOwnProperty('importeRectificacion')) {
         if (options.importeRectificacion) {
@@ -300,21 +332,21 @@ function facturaRectificativa(json, options = { importeRectificacion: false, cuo
     }
 }
 
+/**
+ * 
+ * @param {JSON} json - Elemento Cabecera de la factura
+ * @param {JSON} options - Parametros de configuración de las facturas
+ */
 function facturasRectificadasSustituidas(json, options = {
-    serieFactura: false,
-    numFacturas: 0
+    serieFactura: false, //Indica si quiero o no el campo SerieFactura de las FacturasRectificadasSustituidas
+    numFacturas: -1 //Numero de Facturas Rectificadas Sustituidas a crear. Si el valor no esta en rango (1 a 100) se da uno aleatorio
 }) {
-    //rand = getRandomInt(1,101);
     json.FacturasRectificadasSustituidas = [];
-    var max = 0;
+    var max = getRandomInt(1,101);
     if (options.hasOwnProperty('numFacturas')) {
-        if (options.numFacturas < 1) {
-            max = getRandomInt(1, 101);
-        } else {
+        if (options.numFacturas > 0 && options.numFacturas < 101) {
             max = options.numFacturas;
         }
-    } else {
-        max = getRandomInt(1, 101);
     }
 
     for (var i = 0; i < max; i++) {
@@ -334,7 +366,7 @@ function facturasRectificadasSustituidas(json, options = {
 
 
 /**
- * 
+ * Genera la cabecera de la factura
  * @param {JSON} json - Elemento "Cabecera" de la factura
  * @param {JSON} options - Parametros opcionales de la Cabecera de la factura
  */
@@ -342,14 +374,21 @@ function generarCabeceraFactura(json, options = {
     serieFactura: false,
     facturaSimplificada: false,
     facturaEmitidaSustitucionSimplificada: false,
-    facturaRectificativa: { importeRectificacion: false, cuotaRecargo: false },
-    facturaRectificadaSustituida: { serieFactura: false, numFacturas: 0 }
+    facturaRectificativa: {
+        value: false, //Indica si quiero el elemento FacturaRectificativa
+        importeRectificacion: false, 
+        cuotaRecargo: false 
+    },
+    facturaRectificadaSustituida: { 
+        value: false, //Indica si quiero el elemento FacturaRectificadaSustituida
+        serieFactura: false,
+        numFacturas: -1 
+    }
 }) {
-    //json == json.Factura.Cabecera
 
     if (options.hasOwnProperty('serieFactura')) {
         if (options.serieFactura) {
-            json.SerieFactura = getRandomString(getRandomInt(1, 20));
+            json.SerieFactura = getRandomString(getRandomInt(1, 21));
         }
     }
 
@@ -366,27 +405,35 @@ function generarCabeceraFactura(json, options = {
     }
 
     if (options.hasOwnProperty('facturaRectificativa')) {
-        facturaRectificativa(json, options.facturaRectificativa);
+        if(options.facturaRectificativa.hasOwnProperty('value')){
+            if(options.facturaRectificativa.value){
+                facturaRectificativa(json, options.facturaRectificativa);
+            }
+        }
     }
 
-    if (options.hasOwnProperty('facturaRectificadaSustituida')) {
-        facturasRectificadasSustituidas(json, options.facturaRectificadaSustituida);
+    if (options.hasOwnProperty('facturaRectificadaSustituida')) {    
+        if(options.facturaRectificadaSustituida.hasOwnProperty('value')){
+            if(options.facturaRectificadaSustituida.value){
+                facturasRectificadasSustituidas(json, options.facturaRectificadaSustituida);
+            }
+        }
     }
 }
 
-
+/**
+ * 
+ * @param {JSON} json - Elemento DatosFactura de la factura
+ * @param {JSON} options - Opciones de los detalles (Numero de detalles)
+ */
 function detallesDatosFactura(json, options = {
-    numDetalles: 0
+    numDetalles: -1
 }) {
-    var detalle_size = 1;
+    var detalle_size = getRandomInt(1, 1001);
     if (options.hasOwnProperty('numDetalles')) {
-        if (options.numDetalles < 1) {
-            detalle_size = getRandomInt(1, 1001);
-        } else {
+        if (options.numDetalles > 0 && options.numDetalles < 1001) {
             detalle_size = options.numDetalles;
         }
-    } else {
-        detalle_size = getRandomInt(1, 1001);
     }
 
     json.DetallesFactura = [];
@@ -407,12 +454,17 @@ function detallesDatosFactura(json, options = {
     }
 }
 
+/**
+ * Genera el elemento DatosFactura de la factura
+ * @param {JSON} json - Elemento DatosFactura de la factura
+ * @param {JSON} options - Parametros de configuracion de los datos de la factura
+ */
 function datosFactura(json, options = {
     fechaOperacion: false,
-    detallesFactura: { numDetalles: 0 },
+    detallesFactura: { numDetalles: -1 },
     retencionSoportada: false,
     baseImponibleACoste: false,
-    numClaves: 0
+    numClaves: -1
 }) {
 
     if (options.hasOwnProperty('fechaOperacion')) {
@@ -437,15 +489,11 @@ function datosFactura(json, options = {
         }
     }
 
-    var claves_size = 1;
+    var claves_size = getRandomInt(1, 4);
     if (options.hasOwnProperty('numClaves')) {
-        if (options.numClaves < 1 || options.numClaves > 3) {
-            claves_size = getRandomInt(1, 4);
-        } else {
+        if (options.numClaves > 0 && options.numClaves < 4) {
             claves_size = options.numClaves;
         }
-    } else {
-        claves_size = getRandomInt(1, 4);
     }
 
     json.Claves = [];
@@ -457,29 +505,38 @@ function datosFactura(json, options = {
     }
 }
 
+/**
+ * 
+ * @param {JSON} json - Elemento TipoDesglose de la factura
+ * @param {JSON} options - Parametros de configuracion del desglose
+ */
 function tipoDesglose(json, options = {
-    desgloseFactura: false,
-    desgloseTipoOperacion: { prestacionServicios: false, entrega: false },
+    desgloseFactura: true, //TipoDesglose --> DesgloseFactura / Si es true da igual lo que valga desgloseTipoOperacion
+    desgloseTipoOperacion: { prestacionServicios: false, entrega: false }, // Solo se genera si desgloseFactura
+    //no esta definido o es false y ademas existe prestacionServicios o entrega y ademas es true alguno de los dos.
     desglose: {
         sujeta: {
-            exenta: { numDetallesExenta: 0 },
+            value: false, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
+            exenta: { 
+                value: false,// Si es true genero la factura sujeta exenta
+                numDetallesExenta: 0 //Numero de deralles de la factura exenta (1 a 7)
+            },
             noExenta: {
-                numDetallesNoExenta: 0,
-                numDetallesIVA: 0
+                value: false, // Si es true genero la factura NoExenta
+                numDetallesNoExenta: 0, //Numero de detalles (1 a 2)
+                numDetallesIVA: 0 //Numero de detalles de desglose de IVA (1 a 6)
             }
         },
-        noSujeta: { numDetallesNoSujeta: 0 }
+        noSujeta: {
+            value: false, //Si es true genero la factura NoSujeta
+            numDetallesNoSujeta: 0 //Numero de detalles de la factura NoSujeta
+        }
     }
 }) {
-    console.log(options.desglose);
     if (options.hasOwnProperty('desgloseFactura')) {
         if (options.desgloseFactura) {
-            if (!options.hasOwnProperty('desgloseTipoOperacion')) {
-                json.DesgloseFactura = {};
-                json.DesgloseFactura = desgloseSujetaNoSujeta(json.DesgloseFactura);
-            } else {
-                throw "Error en TipoDesglose --> desgloseFactura y desgloseTipoOperacion son EXCLUYENTES";
-            }
+            json.DesgloseFactura = {};
+            json.DesgloseFactura = desgloseSujetaNoSujeta(json.DesgloseFactura, options.desglose);
         } else {
             json.DesgloseTipoOperacion = {};
             if (options.hasOwnProperty('desgloseTipoOperacion')) {
@@ -497,13 +554,13 @@ function tipoDesglose(json, options = {
             }
         }
     } else {
-        if (options.hasOwnProperty('desgloseTipoOperacion')) {
-            json.DesgloseTipoOperacion = {};
-            if (options.hasOwnProperty('prestacionServicios')) {
-                if (options.prestacionServicios) {
+        json.DesgloseTipoOperacion = {};
+        if(options.hasOwnProperty('desgloseTipoOperacion')){
+            if (options.desgloseTipoOperacion.hasOwnProperty('prestacionServicios')) {
+                if (options.desgloseTipoOperacion.prestacionServicios) {
                     desgloseSujetaNoSujeta(json.DesgloseTipoOperacion.PrestacionServicios, options.desglose);
                 }
-                if (options.entrega) {
+                if (options.desgloseTipoOperacion.entrega) {
                     desgloseSujetaNoSujeta(json.DesgloseTipoOperacion.Entrega, options.desglose);
                 }
             }
@@ -511,41 +568,46 @@ function tipoDesglose(json, options = {
     }
 }
 
+/**
+ * Genera el contenido del elemento HuellaTBAI
+ * @param {JSON} json - Elemento HuellaTBAI de la factura
+ * @param {JSON} options - Parametros de configuracion
+ */
 function huellaTBAI(json, options = {
-    encademaniento : {
-        value: false,
-        serieFacturaAnterior: false
+    encademaniento: {
+        value: false, //Si es true genero el elemento EncadenamientoFacturaAnterior
+        serieFacturaAnterior: false //Si es true genero el campo SerieFacturaAnterior
     },
-    entidadNIF: true,
-    entidadIdOtro: false,
-    numSerieDispositivo: false
+    entidadNIF: true, //Si es true la entidad se identifica mediante el NIF. (Si es false o no existe se identifica con el otro metodo)
+    entidadIdOtro: false, // Si es true la entidad se identifica de otra forma
+    numSerieDispositivo: false //Indica si quiero el campo numSerieDispositivo
 }) {
-    
-    if(options.hasOwnProperty('encadenamiento')){
-        if(options.encademaniento.hasOwnProperty('value')){
-            if(options.encademaniento.value){
+
+    if (options.hasOwnProperty('encadenamiento')) {
+        if (options.encademaniento.hasOwnProperty('value')) {
+            if (options.encademaniento.value) {
                 json.EncadenamientoFacturaAnterior = {
                     "NumFacturaAnterior": getRandomString(getRandomInt(0, 21)),
                     "FechaExpedicionFacturaAnterior": randomDate(new Date(2012, 0, 1), new Date()),
                     "SignatureValueFirmaFacturaAnterior": getRandomString(100)
                 };
                 if (options.encademaniento.hasOwnProperty('serieFacturaAnterior')) {
-                    if(options.encademaniento.serieFacturaAnterior){
+                    if (options.encademaniento.serieFacturaAnterior) {
                         json.EncadenamientoFacturaAnterior.SerieFacturaAnterior = getRandomString(getRandomInt(0, 21));
                     }
-                    
+
                 }
             }
         }
     }//Fin encadenamiento
 
 
-    if(options.hasOwnProperty('entidadNIF')){
-        if(options.entidadNIF){
+    if (options.hasOwnProperty('entidadNIF')) {
+        if (options.entidadNIF) {
             json.Software.EntidadDesarrolladora = {
                 "NIF": rand_dni()
             };
-        }else{
+        } else {
             json.Software.EntidadDesarrolladora = {
                 "IDOtro": {
                     "IDType": "0" + getRandomInt(2, 7),
@@ -557,7 +619,7 @@ function huellaTBAI(json, options = {
                 json.Software.EntidadDesarrolladora.IDOtro.CodigoPais = country_list[getRandomInt(0, country_list.length)];
             }
         }
-    }else{
+    } else {
         json.Software.EntidadDesarrolladora = {
             "IDOtro": {
                 "IDType": "0" + getRandomInt(2, 7),
@@ -570,8 +632,8 @@ function huellaTBAI(json, options = {
         }
     }
 
-    if(options.hasOwnProperty('numSerieDispositivo')){
-        if(options.numSerieDispositivo){
+    if (options.hasOwnProperty('numSerieDispositivo')) {
+        if (options.numSerieDispositivo) {
             json.NumSerieDispositivo = getRandomString(getRandomInt(0, 31));
         }
     }
@@ -603,7 +665,6 @@ module.exports = {
             "HuellaTBAI": {
                 "Software": {
                     "LicenciaTBAI": getRandomString(getRandomInt(0, 21)),
-                    //"Nombre" : nameList[getRandomInt(0,nameList.length)],
                     "Nombre": getRandomString(getRandomInt(0, 121)),
                     "Version": getRandomString(getRandomInt(0, 21))
                 }
@@ -618,8 +679,13 @@ module.exports = {
         /* FACTURA */
 
         generarCabeceraFactura(json.Factura.Cabecera, {
-            serieFactura: true, facturaSimplificada: true, facturaEmitidaSustitucionSimplificada: true, facturaRectificativa: {
-                importeRectificacion: true, cuotaRecargo: false
+            serieFactura: true,
+            facturaSimplificada: true,
+            facturaEmitidaSustitucionSimplificada: true,
+            facturaRectificativa: {
+                value: false,
+                importeRectificacion: true,
+                cuotaRecargo: false
             }
         });
 
@@ -635,9 +701,21 @@ module.exports = {
 
         tipoDesglose(json.Factura.TipoDesglose, {
             desgloseFactura: true,
+            desgloseTipoOperacion: {
+                entrega: true,
+                prestacionServicios: true
+            },
             desglose: {
                 sujeta: {
-                    exenta: {numDetallesExenta: 4}
+                    value: true,
+                    exenta: {
+                        value:true,
+                        numDetallesExenta: 3
+                    }
+                },
+                noSujeta: {
+                    value: true,
+                    numDetallesNoSujeta: 2
                 }
             }
         });
@@ -645,7 +723,7 @@ module.exports = {
         /* HUELLA TBAI*/
 
         huellaTBAI(json.HuellaTBAI, {
-            encademaniento:{
+            encademaniento: {
                 value: true,
                 serieFacturaAnterior: true
             },
