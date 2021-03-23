@@ -7,6 +7,70 @@ const namesConfig = {
 
 const MAX_NUMBER = 100000;
 
+
+const sujetos_config = {
+    destinatarios: -1, //Numero de destinatarios. (-1) si no existen destinatarios
+    emitidaPorTercerosODestinatario: true //Indica si quiero el elemento emitida por terceros
+};
+
+const cabecera_factura_config = {
+    serieFactura: false,
+    facturaSimplificada: true,
+    facturaEmitidaSustitucionSimplificada: true,
+    facturaRectificativa: {
+        value: true, //Indica si quiero el elemento FacturaRectificativa
+        importeRectificacion: true,
+        cuotaRecargo: false
+    },
+    facturaRectificadaSustituida: {
+        value: false, //Indica si quiero el elemento FacturaRectificadaSustituida
+        serieFactura: true,
+        numFacturas: 1
+    }
+};
+const datos_factura_config = {
+    fechaOperacion: false,
+    detallesFactura: { numDetalles: 1 },
+    retencionSoportada: true,
+    baseImponibleACoste: true,
+    numClaves: 1
+};
+const tipo_desglose_config = {
+    desgloseFactura: false, //TipoDesglose --> DesgloseFactura / Si es true da igual lo que valga desgloseTipoOperacion
+    desgloseTipoOperacion: { prestacionServicios: false, entrega: false }, // Solo se genera si desgloseFactura
+    //no esta definido o es false y ademas prestacionServicios o entrega  o los dos es true.
+    desglose: {
+        sujeta: {
+            value: true, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
+            exenta: {
+                value: false,// Si es true genero la factura sujeta exenta
+                numDetallesExenta: 1 //Numero de deralles de la factura exenta (1 a 7)
+            },
+            noExenta: {
+                value: true, // Si es true genero la factura NoExenta
+                numDetallesNoExenta: 1, //Numero de detalles (1 a 2)
+                numDetallesIVA: 1 //Numero de detalles de desglose de IVA (1 a 6)
+            }
+        },
+        noSujeta: {
+            value: true, //Si es true genero la factura NoSujeta
+            numDetallesNoSujeta: 1 //Numero de detalles de la factura NoSujeta
+        }
+    }
+};
+
+const huellaTaBAI_config = {
+    encadenamiento: {
+        value: false, //Si es true genero el elemento EncadenamientoFacturaAnterior
+        serieFacturaAnterior: true //Si es true genero el campo SerieFacturaAnterior
+    },
+    entidadNIF: false, //Si es true la entidad se identifica mediante el NIF. (Si es false o no existe se identifica con el otro metodo)
+    entidadIdOtro: true, // Si es true la entidad se identifica de otra forma
+    numSerieDispositivo: true //Indica si quiero el campo numSerieDispositivo
+};
+
+
+
 function formatNumberLength(num, length) {
     var r = "" + num;
     while (r.length < length) {
@@ -109,7 +173,8 @@ function randomHour(start, end) {
 function desgloseSujetaNoSujeta(desglose, options = {
     sujeta: {
         value: false,   //Indica si quiero o no que exista el elemento Sujeta, si es false lo demas no se evalua
-        exenta: { value: false, //Indica si quiero o no que exista el elemento Exenta.
+        exenta: {
+            value: false, //Indica si quiero o no que exista el elemento Exenta.
             numDetallesExenta: -1 //Numero de detalles en Exenta, si el valor no es valido se da uno aleatorio.
         },
         noExenta: {
@@ -261,9 +326,9 @@ function generarSujetos(json, options = {
         }
     }
 
-    if (options.hasOwnProperty('emitidaPorTercerosODestinatarios')) {
+    if (options.hasOwnProperty('emitidaPorTercerosODestinatario')) {
         if (options.emitidaPorTercerosODestinatario) {
-            json.emitidaPorTercerosODestinatario = emitidaPorTerceros_list[getRandomInt(0, emitidaPorTerceros_list.length)];
+            json.EmitidaPorTercerosODestinatario = emitidaPorTerceros_list[getRandomInt(0, emitidaPorTerceros_list.length)];
         }
     }
 }
@@ -277,9 +342,12 @@ function generarSujetos(json, options = {
  */
 function generarDestinatarios(json, numDest) {
     json.Destinatarios = [];
-
-    //var max_dest = getRandomInt(1, 101);
-    for (var i = 0; i < numDest; i++) {
+    
+    var max_dest = getRandomInt(1, 101);
+    if(numDest > 0 && numDest < 101){
+        max_dest = numDest;
+    }
+    for (var i = 0; i < max_dest; i++) {
         var destinatario = {};
         if (getRandomInt(0, 2) == 0) { //NIF
             destinatario.NIF = rand_dni();
@@ -322,11 +390,12 @@ function facturaRectificativa(json, options = { importeRectificacion: false, cuo
                 "BaseRectificada": getRandomArbitrary(0, MAX_NUMBER, 2),
                 "CuotaRectificada": getRandomArbitrary(0, MAX_NUMBER, 2)
             };
-        }
-        if (options.hasOwnProperty('cuotaRecargo')) {
-            if (options.cuotaRecargo) {
-                json.FacturaRectificativa.ImporteRectificacionSustitutiva.CuotaRecargoRectificada = getRandomArbitrary(0, MAX_NUMBER, 2);
+            if (options.hasOwnProperty('cuotaRecargo')) {
+                if (options.cuotaRecargo) {
+                    json.FacturaRectificativa.ImporteRectificacionSustitutiva.CuotaRecargoRectificada = getRandomArbitrary(0, MAX_NUMBER, 2);
+                }
             }
+        
         }
 
     }
@@ -342,7 +411,7 @@ function facturasRectificadasSustituidas(json, options = {
     numFacturas: -1 //Numero de Facturas Rectificadas Sustituidas a crear. Si el valor no esta en rango (1 a 100) se da uno aleatorio
 }) {
     json.FacturasRectificadasSustituidas = [];
-    var max = getRandomInt(1,101);
+    var max = getRandomInt(1, 101);
     if (options.hasOwnProperty('numFacturas')) {
         if (options.numFacturas > 0 && options.numFacturas < 101) {
             max = options.numFacturas;
@@ -376,13 +445,13 @@ function generarCabeceraFactura(json, options = {
     facturaEmitidaSustitucionSimplificada: false,
     facturaRectificativa: {
         value: false, //Indica si quiero el elemento FacturaRectificativa
-        importeRectificacion: false, 
-        cuotaRecargo: false 
+        importeRectificacion: false,
+        cuotaRecargo: false
     },
-    facturaRectificadaSustituida: { 
+    facturaRectificadaSustituida: {
         value: false, //Indica si quiero el elemento FacturaRectificadaSustituida
         serieFactura: false,
-        numFacturas: -1 
+        numFacturas: -1
     }
 }) {
 
@@ -405,16 +474,16 @@ function generarCabeceraFactura(json, options = {
     }
 
     if (options.hasOwnProperty('facturaRectificativa')) {
-        if(options.facturaRectificativa.hasOwnProperty('value')){
-            if(options.facturaRectificativa.value){
+        if (options.facturaRectificativa.hasOwnProperty('value')) {
+            if (options.facturaRectificativa.value) {
                 facturaRectificativa(json, options.facturaRectificativa);
             }
         }
     }
 
-    if (options.hasOwnProperty('facturaRectificadaSustituida')) {    
-        if(options.facturaRectificadaSustituida.hasOwnProperty('value')){
-            if(options.facturaRectificadaSustituida.value){
+    if (options.hasOwnProperty('facturaRectificadaSustituida')) {
+        if (options.facturaRectificadaSustituida.hasOwnProperty('value')) {
+            if (options.facturaRectificadaSustituida.value) {
                 facturasRectificadasSustituidas(json, options.facturaRectificadaSustituida);
             }
         }
@@ -517,7 +586,7 @@ function tipoDesglose(json, options = {
     desglose: {
         sujeta: {
             value: false, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
-            exenta: { 
+            exenta: {
                 value: false,// Si es true genero la factura sujeta exenta
                 numDetallesExenta: 0 //Numero de deralles de la factura exenta (1 a 7)
             },
@@ -555,7 +624,7 @@ function tipoDesglose(json, options = {
         }
     } else {
         json.DesgloseTipoOperacion = {};
-        if(options.hasOwnProperty('desgloseTipoOperacion')){
+        if (options.hasOwnProperty('desgloseTipoOperacion')) {
             if (options.desgloseTipoOperacion.hasOwnProperty('prestacionServicios')) {
                 if (options.desgloseTipoOperacion.prestacionServicios) {
                     desgloseSujetaNoSujeta(json.DesgloseTipoOperacion.PrestacionServicios, options.desglose);
@@ -574,7 +643,7 @@ function tipoDesglose(json, options = {
  * @param {JSON} options - Parametros de configuracion
  */
 function huellaTBAI(json, options = {
-    encademaniento: {
+    encadenamiento: {
         value: false, //Si es true genero el elemento EncadenamientoFacturaAnterior
         serieFacturaAnterior: false //Si es true genero el campo SerieFacturaAnterior
     },
@@ -584,15 +653,15 @@ function huellaTBAI(json, options = {
 }) {
 
     if (options.hasOwnProperty('encadenamiento')) {
-        if (options.encademaniento.hasOwnProperty('value')) {
-            if (options.encademaniento.value) {
+        if (options.encadenamiento.hasOwnProperty('value')) {
+            if (options.encadenamiento.value) {
                 json.EncadenamientoFacturaAnterior = {
                     "NumFacturaAnterior": getRandomString(getRandomInt(0, 21)),
                     "FechaExpedicionFacturaAnterior": randomDate(new Date(2012, 0, 1), new Date()),
                     "SignatureValueFirmaFacturaAnterior": getRandomString(100)
                 };
-                if (options.encademaniento.hasOwnProperty('serieFacturaAnterior')) {
-                    if (options.encademaniento.serieFacturaAnterior) {
+                if (options.encadenamiento.hasOwnProperty('serieFacturaAnterior')) {
+                    if (options.encadenamiento.serieFacturaAnterior) {
                         json.EncadenamientoFacturaAnterior.SerieFacturaAnterior = getRandomString(getRandomInt(0, 21));
                     }
 
@@ -671,65 +740,19 @@ module.exports = {
             }
         };
 
-        generarSujetos(json.Sujetos, {
-            destinatarios: 2,
-            emitidaPorTercerosODestinatario: true
-        })
+        generarSujetos(json.Sujetos, sujetos_config);
 
         /* FACTURA */
 
-        generarCabeceraFactura(json.Factura.Cabecera, {
-            serieFactura: true,
-            facturaSimplificada: true,
-            facturaEmitidaSustitucionSimplificada: true,
-            facturaRectificativa: {
-                value: false,
-                importeRectificacion: true,
-                cuotaRecargo: false
-            }
-        });
+        generarCabeceraFactura(json.Factura.Cabecera, cabecera_factura_config);
 
-        datosFactura(json.Factura.DatosFactura, {
-            fechaOperacion: true,
-            detallesFactura: {
-                numDetalles: 2
-            },
-            retencionSoportada: true,
-            baseImponibleACoste: true,
-            numClaves: 2
-        });
+        datosFactura(json.Factura.DatosFactura, datos_factura_config);
 
-        tipoDesglose(json.Factura.TipoDesglose, {
-            desgloseFactura: true,
-            desgloseTipoOperacion: {
-                entrega: true,
-                prestacionServicios: true
-            },
-            desglose: {
-                sujeta: {
-                    value: true,
-                    exenta: {
-                        value:true,
-                        numDetallesExenta: 3
-                    }
-                },
-                noSujeta: {
-                    value: true,
-                    numDetallesNoSujeta: 2
-                }
-            }
-        });
+        tipoDesglose(json.Factura.TipoDesglose, tipo_desglose_config);
 
         /* HUELLA TBAI*/
 
-        huellaTBAI(json.HuellaTBAI, {
-            encademaniento: {
-                value: true,
-                serieFacturaAnterior: true
-            },
-            entidadNIF: false,
-            numSerieDispositivo: true
-        });
+        huellaTBAI(json.HuellaTBAI, huellaTaBAI_config);
 
         return json;
     }
