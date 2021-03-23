@@ -30,7 +30,7 @@ const cabecera_factura_config = {
 };
 const datos_factura_config = {
     fechaOperacion: false,
-    detallesFactura: { numDetalles: 1 },
+    detallesFactura: { numDetalles: 2 },
     retencionSoportada: true,
     baseImponibleACoste: true,
     numClaves: 1
@@ -494,6 +494,7 @@ function generarCabeceraFactura(json, options = {
  * 
  * @param {JSON} json - Elemento DatosFactura de la factura
  * @param {JSON} options - Opciones de los detalles (Numero de detalles)
+ * @returns {Number} - Importe total de los detalles de la factura
  */
 function detallesDatosFactura(json, options = {
     numDetalles: -1
@@ -521,6 +522,8 @@ function detallesDatosFactura(json, options = {
 
         json.DetallesFactura.push(detalle);
     }
+    var res = json.DetallesFactura.map(detalle => parseFloat(detalle.ImporteTotal)).reduce((acc, detalle) => detalle + acc);
+    return res.toFixed(2);
 }
 
 /**
@@ -536,6 +539,7 @@ function datosFactura(json, options = {
     numClaves: -1
 }) {
 
+    var importe_total = 0;
     if (options.hasOwnProperty('fechaOperacion')) {
         if (options.fechaOperacion) {
             json.FechaOperacion = randomDate(new Date(2012, 0, 1), new Date());
@@ -543,8 +547,10 @@ function datosFactura(json, options = {
     }
 
     if (options.hasOwnProperty('detallesFactura')) {
-        detallesDatosFactura(json, options.detallesFactura);
+        importe_total = detallesDatosFactura(json, options.detallesFactura);
     }
+
+    json.ImporteTotalFactura = importe_total;
 
     if (options.hasOwnProperty('retencionSoportada')) {
         if (options.retencionSoportada) {
@@ -724,8 +730,8 @@ module.exports = {
                     "HoraExpedicionFactura": randomHour(new Date(2012, 0, 1), new Date())
                 },
                 "DatosFactura": {
-                    "DescripcionFactura": getRandomString(getRandomInt(0, 250)),
-                    "ImporteTotalFactura": getRandomArbitrary(0, MAX_NUMBER, 2)
+                    "DescripcionFactura": getRandomString(getRandomInt(0, 250))
+                    //"ImporteTotalFactura": getRandomArbitrary(0, MAX_NUMBER, 2)
                 },
                 "TipoDesglose": {
 

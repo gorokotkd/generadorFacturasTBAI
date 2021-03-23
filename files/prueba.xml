@@ -5,43 +5,50 @@
     </Cabecera>
     <Sujetos>
         <Emisor>
-            <NIF>12187509Q</NIF>
-            <ApellidosNombreRazonSocial>G6Rav048Zc61hef7FaRuD9xzxPRpTAa85IRrndOKp6YZUSCjVTWz2MuMH1SfXXBpntUZ4WNIChNzPVsF6kHn3yyTns3kkcIQxkCmDq</ApellidosNombreRazonSocial>
+            <NIF>90610674N</NIF>
+            <ApellidosNombreRazonSocial>T19p1ZaCgw4YIjZKs15jps6HbcZOfoILuuXIghG9F1U7</ApellidosNombreRazonSocial>
         </Emisor>
         <EmitidaPorTercerosODestinatario>T</EmitidaPorTercerosODestinatario>
     </Sujetos>
     <Factura>
         <CabeceraFactura>
-            <NumFactura>85252</NumFactura>
-            <FechaExpedicionFactura>25-04-2015</FechaExpedicionFactura>
-            <HoraExpedicionFactura>21:22:10</HoraExpedicionFactura>
-            <FacturaSimplificada>S</FacturaSimplificada>
-            <FacturaEmitidaSustitucionSimplificada>S</FacturaEmitidaSustitucionSimplificada>
+            <NumFactura>1981</NumFactura>
+            <FechaExpedicionFactura>16-07-2020</FechaExpedicionFactura>
+            <HoraExpedicionFactura>16:58:02</HoraExpedicionFactura>
+            <FacturaSimplificada>N</FacturaSimplificada>
+            <FacturaEmitidaSustitucionSimplificada>N</FacturaEmitidaSustitucionSimplificada>
             <FacturaRectificativa>
                 <Codigo>R5</Codigo>
                 <Tipo>I</Tipo>
                 <ImporteRectificacionSustitutiva>
-                    <BaseRectificada>50239.54</BaseRectificada>
-                    <CuotaRectificada>90447.35</CuotaRectificada>
+                    <BaseRectificada>12334.96</BaseRectificada>
+                    <CuotaRectificada>42394.30</CuotaRectificada>
                 </ImporteRectificacionSustitutiva>
             </FacturaRectificativa>
         </CabeceraFactura>
         <DatosFactura>
-            <DescripcionFactura>cN1VvygTyTYWotITqDGWMxflTZCRUJaGZpJP491VazIMxwPhPm55BKsjLfom2H1Kc62DDAnE4i4OKcjgELWTB8HSOeMpRaRrDOtlVPSIKqsUgJzrr2</DescripcionFactura>
+            <DescripcionFactura>Nd3xzJkXB3hEBbW8DPEs4gyTbRAzLdgYluChBWvsNjr59UFcDsDTkFBEHsuS2vl05MHiRRqW4qerfNDvaW</DescripcionFactura>
             <DetallesFactura>
                 <IDDetalleFactura>
-                    <DescripcionDetalle>oQewi6SBRzV0H9ViiWEERuwAK0gwfPCIdpk</DescripcionDetalle>
-                    <Cantidad>24476.92</Cantidad>
-                    <ImporteUnitario>7541.29567829</ImporteUnitario>
-                    <ImporteTotal>7564.99</ImporteTotal>
+                    <DescripcionDetalle>fspHZR5xmFP4PlUdaRUXI6ymWEcBsa3Bvmse1</DescripcionDetalle>
+                    <Cantidad>86212.95</Cantidad>
+                    <ImporteUnitario>56004.92429262</ImporteUnitario>
+                    <ImporteTotal>57474.93</ImporteTotal>
+                </IDDetalleFactura>
+                <IDDetalleFactura>
+                    <DescripcionDetalle>dI3cOhJj3IOoRU3SwHhEPOpdwZfm7YJxwKirpW9Fd1XFMsvsqfewshD9Tvlyd3EU3vKyBVUQAN2y4ZhP5IH4vooqE7fnwAmywmBDOmHKGTfeNIYUQnMgBeEJcFvgYgXzmN8qNJRSzrD7cqj6NANWVbWqXTmVSiJsktdx7oYCZtfwfYYPLoJZkw03FBLCCBlf71TMVLaucQZrAJj7FwXdm4qEAPKaUii9H</DescripcionDetalle>
+                    <Cantidad>71242.39</Cantidad>
+                    <ImporteUnitario>8158.90441162</ImporteUnitario>
+                    <ImporteTotal>94380.30</ImporteTotal>
+                    <Descuento>89.72</Descuento>
                 </IDDetalleFactura>
             </DetallesFactura>
-            <ImporteTotalFactura>88072.68</ImporteTotalFactura>
-            <RetencionSoportada>10793.33</RetencionSoportada>
-            <BaseImponibleACoste>64896.49</BaseImponibleACoste>
+            <ImporteTotalFactura>151855.23</ImporteTotalFactura>
+            <RetencionSoportada>78612.36</RetencionSoportada>
+            <BaseImponibleACoste>30069.79</BaseImponibleACoste>
             <Claves>
                 <IDClave>
-                    <ClaveRegimenIvaOpTrascendencia>15</ClaveRegimenIvaOpTrascendencia>
+                    <ClaveRegimenIvaOpTrascendencia>11</ClaveRegimenIvaOpTrascendencia>
                 </IDClave>
             </Claves>
         </DatosFactura>
@@ -51,16 +58,17 @@
     </Factura>
     <HuellaTBAI>
         <Software>
-            <LicenciaTBAI>UBJb8SFSw2</LicenciaTBAI>
+            <LicenciaTBAI></LicenciaTBAI>
             <EntidadDesarrolladora>
                 <IDOtro>
-                    <IDType>04</IDType>
-                    <ID>J3eykh5</ID>
+                    <IDType>03</IDType>
+                    <ID>CMmloiuVSyN29iSYdBt</ID>
+                    <CodigoPais>ST</CodigoPais>
                 </IDOtro>
             </EntidadDesarrolladora>
-            <Nombre>tamBwD9VmRtgDA9GNFfbjmNzQJy3EZqM4parFfNdLFe4X8ebKYpl2</Nombre>
-            <Version>MdBQF</Version>
+            <Nombre>lCWtVApnSqAd6Q0Yx9oTSgXjlKUXZDBaJO73MlA6rmER9rwY1QqJCaho4JUjBG4vo31SQ7neWlQLVcSGJ7x6LKAxnrMjCMOX</Nombre>
+            <Version>tupk0zre04444mQrywp5</Version>
         </Software>
-        <NumSerieDispositivo>If9DqsoIg9I6TOmi0</NumSerieDispositivo>
+        <NumSerieDispositivo>mJNwNIPwH4NqHEqimTk3</NumSerieDispositivo>
     </HuellaTBAI>
 </T:TicketBai>
