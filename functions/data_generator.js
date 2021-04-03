@@ -30,8 +30,8 @@ const cabecera_factura_config = {
 };
 const datos_factura_config = {
     fechaOperacion: false,
-    detallesFactura: { numDetalles: 2 },
-    retencionSoportada: true,
+    detallesFactura: { numDetalles: 1 },
+    retencionSoportada: false,
     baseImponibleACoste: true,
     numClaves: 1
 };
@@ -41,7 +41,7 @@ const tipo_desglose_config = {
     //no esta definido o es false y ademas prestacionServicios o entrega  o los dos es true.
     desglose: {
         sujeta: {
-            value: true, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
+            value: false, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
             exenta: {
                 value: false,// Si es true genero la factura sujeta exenta
                 numDetallesExenta: 1 //Numero de deralles de la factura exenta (1 a 7)
@@ -53,7 +53,7 @@ const tipo_desglose_config = {
             }
         },
         noSujeta: {
-            value: true, //Si es true genero la factura NoSujeta
+            value: false, //Si es true genero la factura NoSujeta
             numDetallesNoSujeta: 1 //Numero de detalles de la factura NoSujeta
         }
     }
@@ -61,7 +61,7 @@ const tipo_desglose_config = {
 
 const huellaTaBAI_config = {
     encadenamiento: {
-        value: false, //Si es true genero el elemento EncadenamientoFacturaAnterior
+        value: true, //Si es true genero el elemento EncadenamientoFacturaAnterior
         serieFacturaAnterior: true //Si es true genero el campo SerieFacturaAnterior
     },
     entidadNIF: false, //Si es true la entidad se identifica mediante el NIF. (Si es false o no existe se identifica con el otro metodo)

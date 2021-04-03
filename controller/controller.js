@@ -8,6 +8,7 @@ var FileKeyinfo = require('xml-crypto').FileKeyInfo;
 var schema_validator = require('xsd-schema-validator');
 var generator = require('../functions/generator')
 var dataGenerator = require('../functions/data_generator');
+var crcCalculator = require('../functions/calculate-crc');
 
 
 
@@ -31,6 +32,7 @@ var controller = {
 
         fs.writeFileSync("./signed-files/signed.xml", sig.getSignedXml());
 
+        crcCalculator.getCrc(sig.getSignedXml());
         //Validacion del xml frente al Schema
         /*schema_validator.validateXML(sig.getSignedXml(), './signed-files/ticketBai_schema.xsd', function(err, result){
             if (err) {
