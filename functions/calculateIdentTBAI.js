@@ -29,7 +29,7 @@ function calculateCRC(identTBAI){
 
 
 module.exports = {
-    getCrc: function(xml){
+    getIdent: function(xml){
         var doc = new dom().parseFromString(xml)
         var identTBAISinCRC = getIdentTicketBai(doc);
         var crc = calculateCRC(identTBAISinCRC);

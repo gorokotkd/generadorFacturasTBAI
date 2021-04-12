@@ -8,7 +8,7 @@ var FileKeyinfo = require('xml-crypto').FileKeyInfo;
 var schema_validator = require('xsd-schema-validator');
 var generator = require('../functions/generator')
 var dataGenerator = require('../functions/data_generator');
-var crcCalculator = require('../functions/calculate-crc');
+var crcCalculator = require('../functions/calculateIdentTBAI');
 
 
 
