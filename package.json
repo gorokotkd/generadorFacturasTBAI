@@ -10,10 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
     "crc": "^3.8.0",
     "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.3",
     "nodemon": "^2.0.7",
+    "pako": "^2.0.3",
     "unique-names-generator": "^4.4.0",
     "xml-crypto": "^2.1.0",
     "xml-js": "^1.6.11",

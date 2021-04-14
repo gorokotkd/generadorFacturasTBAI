@@ -14,7 +14,7 @@ const sujetos_config = {
 };
 
 const cabecera_factura_config = {
-    serieFactura: false,
+    serieFactura: true,
     facturaSimplificada: true,
     facturaEmitidaSustitucionSimplificada: true,
     facturaRectificativa: {
@@ -157,9 +157,9 @@ function randomDate(start, end) {
 function randomHour(start, end) {
     var dt = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 
-    var hours = (dt.getHours() + 1).toString().padStart(2, "0");
-    var minutes = (dt.getMinutes() + 1).toString().padStart(2, "0");
-    var sec = (dt.getSeconds() + 1).toString().padStart(2, "0");
+    var hours = (dt.getHours()).toString().padStart(2, "0");
+    var minutes = (dt.getMinutes()).toString().padStart(2, "0");
+    var sec = (dt.getSeconds()).toString().padStart(2, "0");
 
     return (hours + ":" + minutes + ":" + sec);
 }
@@ -426,7 +426,7 @@ function facturasRectificadasSustituidas(json, options = {
 
         if (options.hasOwnProperty('serieFactura')) {
             if (options.serieFactura) {
-                factRectSust.SerieFactura = getRandomString(getRandomInt(0, 21));
+                factRectSust.SerieFactura = getRandomString(getRandomInt(1, 21));
             }
         }
         json.FacturasRectificadasSustituidas.push(factRectSust);
@@ -510,7 +510,7 @@ function detallesDatosFactura(json, options = {
 
     for (var i = 0; i < detalle_size; i++) {
         var detalle = {
-            "DescripcionDetalle": getRandomString(getRandomInt(0, 251)),
+            "DescripcionDetalle": getRandomString(getRandomInt(1, 251)),
             "Cantidad": getRandomArbitrary(0, MAX_NUMBER, 2),
             "ImporteUnitario": getRandomArbitrary(0, MAX_NUMBER, 8),
             "ImporteTotal": getRandomArbitrary(0, MAX_NUMBER, 2)
@@ -662,13 +662,13 @@ function huellaTBAI(json, options = {
         if (options.encadenamiento.hasOwnProperty('value')) {
             if (options.encadenamiento.value) {
                 json.EncadenamientoFacturaAnterior = {
-                    "NumFacturaAnterior": getRandomString(getRandomInt(0, 21)),
+                    "NumFacturaAnterior": getRandomString(getRandomInt(1, 21)),
                     "FechaExpedicionFacturaAnterior": randomDate(new Date(2012, 0, 1), new Date()),
                     "SignatureValueFirmaFacturaAnterior": getRandomString(100)
                 };
                 if (options.encadenamiento.hasOwnProperty('serieFacturaAnterior')) {
                     if (options.encadenamiento.serieFacturaAnterior) {
-                        json.EncadenamientoFacturaAnterior.SerieFacturaAnterior = getRandomString(getRandomInt(0, 21));
+                        json.EncadenamientoFacturaAnterior.SerieFacturaAnterior = getRandomString(getRandomInt(1, 21));
                     }
 
                 }
@@ -686,7 +686,7 @@ function huellaTBAI(json, options = {
             json.Software.EntidadDesarrolladora = {
                 "IDOtro": {
                     "IDType": "0" + getRandomInt(2, 7),
-                    "ID": getRandomString(getRandomInt(0, 21))
+                    "ID": getRandomString(getRandomInt(1, 21))
                 }
             };
             var rand = getRandomInt(0, 2);
@@ -698,7 +698,7 @@ function huellaTBAI(json, options = {
         json.Software.EntidadDesarrolladora = {
             "IDOtro": {
                 "IDType": "0" + getRandomInt(2, 7),
-                "ID": getRandomString(getRandomInt(0, 21))
+                "ID": getRandomString(getRandomInt(1, 21))
             }
         };
         var rand = getRandomInt(0, 2);
@@ -709,28 +709,28 @@ function huellaTBAI(json, options = {
 
     if (options.hasOwnProperty('numSerieDispositivo')) {
         if (options.numSerieDispositivo) {
-            json.NumSerieDispositivo = getRandomString(getRandomInt(0, 31));
+            json.NumSerieDispositivo = getRandomString(getRandomInt(1, 31));
         }
     }
 }
 
 module.exports = {
-    generate: function generate() {
+    generate: function generate(nif) {
         var json = {
             "Sujetos": {
                 "Emisor": {
-                    "NIF": rand_dni(),
-                    "ApellidosNombreRazonSocial": getRandomString(getRandomInt(0, 120))
+                    "NIF": nif,
+                    "ApellidosNombreRazonSocial": getRandomString(getRandomInt(1, 120))
                 }
             },
             "Factura": {
                 "Cabecera": {
                     "NumFactura": getRandomInt(0, MAX_NUMBER),
-                    "FechaExpedicionFactura": randomDate(new Date(2012, 0, 1), new Date()),
-                    "HoraExpedicionFactura": randomHour(new Date(2012, 0, 1), new Date())
+                    "FechaExpedicionFactura": randomDate(new Date(2020, 0, 1), new Date(2020, 1, 1)),
+                    "HoraExpedicionFactura": randomHour(new Date(2020, 0, 1), new Date(2020, 1, 1))
                 },
                 "DatosFactura": {
-                    "DescripcionFactura": getRandomString(getRandomInt(0, 250))
+                    "DescripcionFactura": getRandomString(getRandomInt(1, 250))
                     //"ImporteTotalFactura": getRandomArbitrary(0, MAX_NUMBER, 2)
                 },
                 "TipoDesglose": {
@@ -739,9 +739,9 @@ module.exports = {
             },
             "HuellaTBAI": {
                 "Software": {
-                    "LicenciaTBAI": getRandomString(getRandomInt(0, 21)),
-                    "Nombre": getRandomString(getRandomInt(0, 121)),
-                    "Version": getRandomString(getRandomInt(0, 21))
+                    "LicenciaTBAI": getRandomString(getRandomInt(1, 21)),
+                    "Nombre": getRandomString(getRandomInt(1, 121)),
+                    "Version": getRandomString(getRandomInt(1, 21))
                 }
             }
         };

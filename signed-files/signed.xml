@@ -5,43 +5,43 @@
     </Cabecera>
     <Sujetos Id="_1">
         <Emisor>
-            <NIF>82430643T</NIF>
-            <ApellidosNombreRazonSocial>hjFrp1QBT8OtJbF907KH</ApellidosNombreRazonSocial>
+            <NIF>17520425Z</NIF>
+            <ApellidosNombreRazonSocial>F8q3StB4WAJkUgUpjdwStrvO8D5FVPSMOvIJdsfIQYs</ApellidosNombreRazonSocial>
         </Emisor>
-        <EmitidaPorTercerosODestinatario>N</EmitidaPorTercerosODestinatario>
+        <EmitidaPorTercerosODestinatario>D</EmitidaPorTercerosODestinatario>
     </Sujetos>
     <Factura Id="_2">
         <CabeceraFactura>
-            <NumFactura>54963</NumFactura>
-            <FechaExpedicionFactura>25-03-2017</FechaExpedicionFactura>
-            <HoraExpedicionFactura>09:23:49</HoraExpedicionFactura>
+            <NumFactura>87416</NumFactura>
+            <FechaExpedicionFactura>25-01-2018</FechaExpedicionFactura>
+            <HoraExpedicionFactura>16:28:02</HoraExpedicionFactura>
             <FacturaSimplificada>S</FacturaSimplificada>
             <FacturaEmitidaSustitucionSimplificada>S</FacturaEmitidaSustitucionSimplificada>
             <FacturaRectificativa>
-                <Codigo>R2</Codigo>
+                <Codigo>R4</Codigo>
                 <Tipo>S</Tipo>
                 <ImporteRectificacionSustitutiva>
-                    <BaseRectificada>94791.23</BaseRectificada>
-                    <CuotaRectificada>80779.83</CuotaRectificada>
+                    <BaseRectificada>68358.66</BaseRectificada>
+                    <CuotaRectificada>93179.20</CuotaRectificada>
                 </ImporteRectificacionSustitutiva>
             </FacturaRectificativa>
         </CabeceraFactura>
         <DatosFactura>
-            <DescripcionFactura>G5ch6bjStqntdQkzcEnR4rwQjYqyxwFubLarD1z5d0wE9g9dp2wRLLpWxqL7fRe4AAQy6mbOnkNG4ZIONy1NA9NG7BCjM</DescripcionFactura>
+            <DescripcionFactura>GxyOruIAU8UW9pOTZL6fQ9XUNuG72Jszmf3vQOuIPByz0d13TALRMOIiDK0dPDc8GW9EqSuflNuMdsDYpkeJbWFIeN6qqTloBHrqTXt4sNUaQOOsejUaYaFJZZeAn6SPWuCvhZqXbqoOvNEKv1R2fFACo2WDaeuqEgTQ2hu15tIAK4hK1JtaYC9lveQi64cMScZzuyWvzqpwaY07w9dygQQQCFphaRQigvxrPpjK7P0VMSYQ1WtXjeT8H</DescripcionFactura>
             <DetallesFactura>
                 <IDDetalleFactura>
-                    <DescripcionDetalle>Uo1aSIOM07o63sW9skFcseag8Y96ePlykGDuslot1CUt19Lv0oouH9SeQYSULzWl5p2AG4L3BpFgLdQl8dY78cShicGZuc7a9GSTqpc1ZuTs4i2q3oFsr9903i2AmvL1lj4zwWhnIh8LpIzefwfuZcx6TB3XfggVKAqbz4nuFoZVe</DescripcionDetalle>
-                    <Cantidad>25747.88</Cantidad>
-                    <ImporteUnitario>7164.71877184</ImporteUnitario>
-                    <ImporteTotal>40609.49</ImporteTotal>
-                    <Descuento>81.09</Descuento>
+                    <DescripcionDetalle>YnZ18z1yQkXyi82grNOqHGoQI5i51</DescripcionDetalle>
+                    <Cantidad>35237.90</Cantidad>
+                    <ImporteUnitario>23150.79847160</ImporteUnitario>
+                    <ImporteTotal>88171.77</ImporteTotal>
+                    <Descuento>97.23</Descuento>
                 </IDDetalleFactura>
             </DetallesFactura>
-            <ImporteTotalFactura>40609.49</ImporteTotalFactura>
-            <BaseImponibleACoste>10391.59</BaseImponibleACoste>
+            <ImporteTotalFactura>88171.77</ImporteTotalFactura>
+            <BaseImponibleACoste>36382.23</BaseImponibleACoste>
             <Claves>
                 <IDClave>
-                    <ClaveRegimenIvaOpTrascendencia>08</ClaveRegimenIvaOpTrascendencia>
+                    <ClaveRegimenIvaOpTrascendencia>01</ClaveRegimenIvaOpTrascendencia>
                 </IDClave>
             </Claves>
         </DatosFactura>
@@ -51,23 +51,23 @@
     </Factura>
     <HuellaTBAI Id="_3">
         <Software>
-            <LicenciaTBAI>jTJx9rylEgbBwsmS8YE</LicenciaTBAI>
+            <LicenciaTBAI>vw8MVxP18NKWtdbn6l</LicenciaTBAI>
             <EntidadDesarrolladora>
                 <IDOtro>
-                    <IDType>02</IDType>
-                    <ID>XdtT2vCu</ID>
-                    <CodigoPais>KN</CodigoPais>
+                    <IDType>05</IDType>
+                    <ID>dXwUEB</ID>
+                    <CodigoPais>LI</CodigoPais>
                 </IDOtro>
             </EntidadDesarrolladora>
-            <Nombre>Pt3vIqwlgaOwlT4VINyF8cE9UYCd9ncxZBHsGg031V7K6EmfhoxXypDfRwfh8H6A</Nombre>
-            <Version>hvgyMd6oRgFnO</Version>
+            <Nombre>kQKuTEIcX6yob04q5</Nombre>
+            <Version>H</Version>
         </Software>
-        <NumSerieDispositivo>6uoNZZZsmPxmo46uzI</NumSerieDispositivo>
+        <NumSerieDispositivo>tOgIQq9boVs7IAbcT2jAuWm</NumSerieDispositivo>
         <EncadenamientoFacturaAnterior>
-            <NumFacturaAnterior>RYtTEf</NumFacturaAnterior>
-            <FechaExpedicionFacturaAnterior>13-02-2018</FechaExpedicionFacturaAnterior>
-            <SignatureValueFirmaFacturaAnterior>jJ1Cxb41LDVr5cRhU47wpG0zVdhe9RJhOA0wFswLVhzW3ywtVnzOVwb59INjvUsYiPiei3GNrghOVi3x5lWsV2YzRd4IyLE7h3yq</SignatureValueFirmaFacturaAnterior>
-            <SerieFacturaAnterior>HpK8El8IEODyyXlMThhY</SerieFacturaAnterior>
+            <NumFacturaAnterior>giT</NumFacturaAnterior>
+            <FechaExpedicionFacturaAnterior>14-09-2015</FechaExpedicionFacturaAnterior>
+            <SignatureValueFirmaFacturaAnterior>FRXTilhzrXDfz57KlXzEg4tqpNg1mNzp9jdSU2L19TpNfApsmooC8VknQHCW1tlAMLQz5ZXecCrSvSvUBYXT5FamEsB1kqP4Yl7u</SignatureValueFirmaFacturaAnterior>
+            <SerieFacturaAnterior>jGnX</SerieFacturaAnterior>
         </EncadenamientoFacturaAnterior>
     </HuellaTBAI>
-<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#_0"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>FA/NiEW9Ag/z4gx8ypLJNGleVSg=</DigestValue></Reference><Reference URI="#_1"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>+rs1dgjPQkbsfMfJxxeqzeiHH/M=</DigestValue></Reference><Reference URI="#_2"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>RMf0PYKWsglDoyRnWANiqCuzT7o=</DigestValue></Reference><Reference URI="#_3"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>cc7VcQozolc6FeOK4L0fBzy2oug=</DigestValue></Reference></SignedInfo><SignatureValue>Pn+QjXuPTbUnnr0l4k03WIds4tMzeumdulTWP6WnlX+CDJxc5c0l3yZtomOMwYKFVgIAO8k/S3AMMuwgyDQbtTgxzmOCnnaS8gg1p6lCcJ0N54HaLJ3hIGhHa8RWONkELw2PXXm7+JRHP8olIHKPV/88mM6YlkqG+XNeHMInSf0u01eGTSGLw1PQGI+oY+kWyP/mm33Qvlp09tDctdklHFMzrn76fOZ+aCc6ijYJRt4sDYm33h09DsQXOMn0dqa6h87TC3CJLYc1Hw5/yj3KIZQxrjRi2QimfvYJ0GemyxKXUWTp33Td8T6gwHF34Gf/cRMXRwAG9OlT75SRS26fuw==</SignatureValue></Signature></T:TicketBai>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#_0"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>FA/NiEW9Ag/z4gx8ypLJNGleVSg=</DigestValue></Reference><Reference URI="#_1"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>I3AKmr6rU+s+I+izmUna6hkfk/I=</DigestValue></Reference><Reference URI="#_2"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>tKDH/rsuGxwsgYsgf7y/Sil5mGI=</DigestValue></Reference><Reference URI="#_3"><Transforms><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>6HG94x13idc7mkSikORU/AF0nNk=</DigestValue></Reference></SignedInfo><SignatureValue>IB2aq8gDaa9cYJYPtO8xgBxzy1yc9RxDd9z6g9488G8j13HpTLIhMZ3rcj/jXKeBCNFrjqhPd0MzONtuZCGn/TCVuQt22EeWNWEviKyA8r8Qm+/nEjROVv4V6ob7IPaRTNrRsZJKbVMBzdRoebJYLFm/L/eVXCFnYR0TGCxFmKnulsoq9xemN4S45PI7oBabdHfmuuHscd2WT3J4JG2jyuy038Z1rZWAXVB67hmbG2xb0Fb3mx2EhU1JU/Bd7t/ZnhOqwVINz+S7tdHovBl/xTbQcaZKdRbza/Uwtgfk5pi8A4mWjGmQ4mMeuQapz5i7ln+L18OGzxvs1YJxGZ5Klw==</SignatureValue></Signature></T:TicketBai>

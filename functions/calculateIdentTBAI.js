@@ -34,7 +34,6 @@ module.exports = {
         var identTBAISinCRC = getIdentTicketBai(doc);
         var crc = calculateCRC(identTBAISinCRC);
         crc = crc.padStart(3,"0");
-        console.log(identTBAISinCRC+crc);
         return identTBAISinCRC+crc;
     }
 
