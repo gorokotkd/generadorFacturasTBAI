@@ -18,7 +18,7 @@ const { StringDecoder } = require('string_decoder');
 var Factura = require('../model/factura');
 var DATA = require('../functions/getData');
 const GZIP_LEVEL = 1;
-const NUM_FACTURAS = 1;
+const NUM_FACTURAS = 200000;
 
 
 function formatNumberLength(num, length) {
@@ -114,26 +114,33 @@ var controller = {
     },
     createDb : function (req, res) {
         var privateKey = fs.readFileSync('./keys/user1.pem');
-        
-
         var sig = new SignedXml();
         sig.addReference("//*[local-name(.)='Cabecera' or local-name(.) = 'Sujetos' or local-name(.) = 'Factura' or local-name(.) = 'HuellaTBAI']");
         sig.signingKey = privateKey;
+        var facturaTbai;
+        var factura;
+        var nif_pos;
+        var nif;
+        var data;
+        var xml;
 
         for(var i = 0; i < NUM_FACTURAS; i++){
-            var nif_pos = Math.floor(Math.random() * nif_list.length);
-            var nif = nif_list[nif_pos];
+            nif_pos = Math.floor(Math.random() * nif_list.length);
+            nif = nif_list[nif_pos];
 
-            var data = dataGenerator.generate(nif);
-            var xml = generator.generate(data).toString();
+            data = dataGenerator.generate(nif);
+            xml = generator.generate(data).toString();
 
             sig.computeSignature(xml);
+        
 
-            var facturaTbai = sig.getSignedXml();
-            fs.writeFileSync("./facturas/factura"+i+".xml", facturaTbai);
+            facturaTbai = sig.getSignedXml();
+
+            //var long = facturaTbai.length * 2 / 1000000 * 0.9537;
+            //console.log(long);
             
             
-            var factura = new Factura();
+            factura = new Factura();
             factura._id                     = DATA.getIdentTBAI(facturaTbai);
             factura.NIF                     = DATA.getNif(facturaTbai);
             factura.FechaExpedicionFactura  = moment(DATA.getFechaExp(facturaTbai), "YYYY-MM-DD");
@@ -145,10 +152,11 @@ var controller = {
             factura.DetallesFactura         = DATA.getDetallesFactura(facturaTbai);
             factura.FacturaComprimida       = pako.gzip(facturaTbai, {level: GZIP_LEVEL});
             factura.save();
-            console.log("Guardada factura --> " + i);
+
+            if(i % 1000 == 0){
+                console.log("Se ha guardado la factura --> "+i);
+            }
             
-            console.log(factura.FacturaComprimida);
-            console.log(pako.gzip(facturaTbai, {level: GZIP_LEVEL}));
         }//End for
 
         res.status(200).send("OK");
@@ -156,7 +164,7 @@ var controller = {
     },
     getFacturaByTbai : function(req, res){
         var tbai_id = req.query.id;
-        console.log(tbai_id);
+        //console.log(tbai_id);
         
         
         if(tbai_id == null){
@@ -171,7 +179,7 @@ var controller = {
             var array = JSON.parse("["+factura.FacturaComprimida+"]");
             var facturaDescom = pako.inflate(array);
 
-            console.log(facturaDescom);
+            //console.log(facturaDescom);
             return res.status(200).send({factura: factura,
                 xml: new TextDecoder().decode(facturaDescom)
             });
