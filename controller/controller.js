@@ -124,7 +124,11 @@ var controller = {
         var data;
         var xml;
 
+        var array = [];
+        var json = {};
+
         for(var i = 0; i < NUM_FACTURAS; i++){
+            json = {};
             nif_pos = Math.floor(Math.random() * nif_list.length);
             nif = nif_list[nif_pos];
 
@@ -140,26 +144,35 @@ var controller = {
             //console.log(long);
             
             
-            factura = new Factura();
-            factura._id                     = DATA.getIdentTBAI(facturaTbai);
-            factura.NIF                     = DATA.getNif(facturaTbai);
-            factura.FechaExpedicionFactura  = moment(DATA.getFechaExp(facturaTbai), "YYYY-MM-DD");
-            factura.HoraExpedicionFactura   = moment(DATA.getHoraExpedionFactura(facturaTbai), "hh:mm:ss");
-            factura.ImporteTotalFactura     = DATA.getImporteTotalFactura(facturaTbai);
-            factura.SerieFactura            = DATA.getSerieFactura(facturaTbai);
-            factura.NumFactura              = DATA.getNumFactura(facturaTbai);
-            factura.Descripcion             = DATA.getDescripcion(facturaTbai);
-            factura.DetallesFactura         = DATA.getDetallesFactura(facturaTbai);
-            factura.FacturaComprimida       = pako.gzip(facturaTbai, {level: GZIP_LEVEL});
-            factura.save();
-
-            if(i % 1000 == 0){
-                console.log("Se ha guardado la factura --> "+i);
+            //factura = new Factura();
+            json._id                     = DATA.getIdentTBAI(facturaTbai);
+            json.NIF                     = DATA.getNif(facturaTbai);
+            json.FechaExpedicionFactura  = moment(DATA.getFechaExp(facturaTbai), "YYYY-MM-DD");
+            json.HoraExpedicionFactura   = moment(DATA.getHoraExpedionFactura(facturaTbai), "hh:mm:ss");
+            json.ImporteTotalFactura     = DATA.getImporteTotalFactura(facturaTbai);
+            json.SerieFactura            = DATA.getSerieFactura(facturaTbai);
+            json.NumFactura              = DATA.getNumFactura(facturaTbai);
+            json.Descripcion             = DATA.getDescripcion(facturaTbai);
+            json.DetallesFactura         = DATA.getDetallesFactura(facturaTbai);
+            json.FacturaComprimida       = pako.gzip(facturaTbai, {level: GZIP_LEVEL});
+            //factura.save();
+            array.push(json);
+            if(i % 100 == 0){
+                console.log("Se ha creado la factura --> "+i);
             }
             
         }//End for
+        factura = new Factura();
+        factura.collection.insertMany(array, function(err, docs){
+            if(err){
+                console.log(err);
+            }else{
+                //console.log(docs);
+                res.status(200).send(docs.insertedCount + " facturas guardadas correctamente");
+            }
+        });
 
-        res.status(200).send("OK");
+        
 
     },
     getFacturaByTbai : function(req, res){
