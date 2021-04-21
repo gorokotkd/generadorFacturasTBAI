@@ -218,7 +218,7 @@ var controller = {
         var data;
         var xml;
         let nif;
-        const MAX_AGRUPACION = 20000;
+        const MAX_AGRUPACION = 700;
         const MAX_REPEAT = 10;
         var agrupacion = "";
         var tbai_idents = [];
@@ -226,8 +226,9 @@ var controller = {
         nif = nif_list[nif_pos];
         let grupo;
 
-        for(var j = 50; j < MAX_AGRUPACION; j += 50){
+        for(var j = 25; j < MAX_AGRUPACION; j += 25){
             let array_time = [];
+            let array_decom = [];
             for(var w = 0; w < MAX_REPEAT; w++){
                 for(var i = 0; i < j; i ++){
                     data = dataGenerator.generate(nif);
@@ -241,11 +242,19 @@ var controller = {
                 grupo = pako.gzip(agrupacion, {level: GZIP_LEVEL});
                 let time_stop = performance.now();
                 array_time.push((time_stop-time_start));
+
+                let decom_start = performance.now();
+                let grupoDesc = pako.inflate(grupo);
+                let decom_stop = performance.now();
+                array_decom.push(decom_stop-decom_start);
             }
-            console.log(array_time);
+            //console.log(array_time);
             const sum = array_time.reduce((a, b) => a + b, 0);
             const avg = (sum / array_time.length) || 0;
-            console.log("El tiempo medio en comprimir "+j+ " ha sido de --> "+(avg)+" ms");
+
+            const sum_decom = array_decom.reduce((a, b) => a + b, 0);
+            const avg_decom = (sum_decom / array_decom.length) || 0;
+            console.log("El tiempo medio en comprimir "+j+ " ha sido de --> "+(avg)+" ms\nEl Tiempo medio en descomprimir "+j+" ha sido de -->"+avg_decom+" ms");
         }
         
         res.send("OK");
