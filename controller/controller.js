@@ -14,11 +14,13 @@ const nif_list = require('../files/nif_list').nif_list;
 const moment = require('moment');
 const pako = require('pako');
 const { StringDecoder } = require('string_decoder');
+const {performance} = require('perf_hooks');
 
 var Factura = require('../model/factura');
+var AgrupacionFactura = require('../model/facturaAgrupada');
 var DATA = require('../functions/getData');
 const GZIP_LEVEL = 1;
-const NUM_FACTURAS = 200000;
+const NUM_FACTURAS = 100000;
 
 
 function formatNumberLength(num, length) {
@@ -127,47 +129,54 @@ var controller = {
         var array = [];
         var json = {};
 
-        for(var i = 0; i < NUM_FACTURAS; i++){
-            json = {};
-            nif_pos = Math.floor(Math.random() * nif_list.length);
-            nif = nif_list[nif_pos];
+        for(var i = 0; i < NUM_FACTURAS/1000; i++){
+            array = [];
+            factura = new Factura();
+            for(var j = 0; j < 1000; j++){
+                json = {};
+                nif_pos = Math.floor(Math.random() * nif_list.length);
+                nif = nif_list[nif_pos];
 
-            data = dataGenerator.generate(nif);
-            xml = generator.generate(data).toString();
+                data = dataGenerator.generate(nif);
+                xml = generator.generate(data).toString();
 
-            sig.computeSignature(xml);
-        
+                sig.computeSignature(xml);
+                
 
-            facturaTbai = sig.getSignedXml();
+                facturaTbai = sig.getSignedXml();
+
+                json._id                     = DATA.getIdentTBAI(facturaTbai);
+                json.NIF                     = DATA.getNif(facturaTbai);
+                json.FechaExpedicionFactura  = moment(DATA.getFechaExp(facturaTbai), "YYYY-MM-DD");
+                json.HoraExpedicionFactura   = moment(DATA.getHoraExpedionFactura(facturaTbai), "hh:mm:ss");
+                json.ImporteTotalFactura     = DATA.getImporteTotalFactura(facturaTbai);
+                json.SerieFactura            = DATA.getSerieFactura(facturaTbai);
+                json.NumFactura              = DATA.getNumFactura(facturaTbai);
+                json.Descripcion             = DATA.getDescripcion(facturaTbai);
+                json.DetallesFactura         = DATA.getDetallesFactura(facturaTbai);
+                json.FacturaComprimida       = pako.gzip(facturaTbai, {level: GZIP_LEVEL});
+                //factura.save();
+                array.push(json);
+            }
+
+            //save(array).then(console.log);
+            factura.collection.insertMany(array, {ordered: false});
 
             //var long = facturaTbai.length * 2 / 1000000 * 0.9537;
             //console.log(long);
             
             
             //factura = new Factura();
-            json._id                     = DATA.getIdentTBAI(facturaTbai);
-            json.NIF                     = DATA.getNif(facturaTbai);
-            json.FechaExpedicionFactura  = moment(DATA.getFechaExp(facturaTbai), "YYYY-MM-DD");
-            json.HoraExpedicionFactura   = moment(DATA.getHoraExpedionFactura(facturaTbai), "hh:mm:ss");
-            json.ImporteTotalFactura     = DATA.getImporteTotalFactura(facturaTbai);
-            json.SerieFactura            = DATA.getSerieFactura(facturaTbai);
-            json.NumFactura              = DATA.getNumFactura(facturaTbai);
-            json.Descripcion             = DATA.getDescripcion(facturaTbai);
-            json.DetallesFactura         = DATA.getDetallesFactura(facturaTbai);
-            json.FacturaComprimida       = pako.gzip(facturaTbai, {level: GZIP_LEVEL});
-            //factura.save();
-            array.push(json);
-            if(i % 100 == 0){
-                console.log("Se ha creado la factura --> "+i);
-            }
+            
+            console.log("Se ha creado la factura --> "+(i+1)*1000);
             
         }//End for
+        //res.status(200).send("OK");
         factura = new Factura();
         factura.collection.insertMany(array, function(err, docs){
             if(err){
                 console.log(err);
             }else{
-                //console.log(docs);
                 res.status(200).send(docs.insertedCount + " facturas guardadas correctamente");
             }
         });
@@ -199,9 +208,64 @@ var controller = {
 
         });
 
+    },
+    agruparFacturas: function(req, res){
+        var privateKey = fs.readFileSync('./keys/user1.pem');
+        var sig = new SignedXml();
+        sig.addReference("//*[local-name(.)='Cabecera' or local-name(.) = 'Sujetos' or local-name(.) = 'Factura' or local-name(.) = 'HuellaTBAI']");
+        sig.signingKey = privateKey;
+
+        var data;
+        var xml;
+        let nif;
+        const MAX_AGRUPACION = 20000;
+        const MAX_REPEAT = 10;
+        var agrupacion = "";
+        var tbai_idents = [];
+        let nif_pos = Math.floor(Math.random() * nif_list.length);
+        nif = nif_list[nif_pos];
+        let grupo;
+
+        for(var j = 50; j < MAX_AGRUPACION; j += 50){
+            let array_time = [];
+            for(var w = 0; w < MAX_REPEAT; w++){
+                for(var i = 0; i < j; i ++){
+                    data = dataGenerator.generate(nif);
+                    xml = generator.generate(data).toString();
+                    sig.computeSignature(xml);
+                    let factura = sig.getSignedXml();
+                    agrupacion += factura;
+                    tbai_idents.push(DATA.getIdentTBAI(factura));
+                }
+                let time_start = performance.now();
+                grupo = pako.gzip(agrupacion, {level: GZIP_LEVEL});
+                let time_stop = performance.now();
+                array_time.push((time_stop-time_start));
+            }
+            console.log(array_time);
+            const sum = array_time.reduce((a, b) => a + b, 0);
+            const avg = (sum / array_time.length) || 0;
+            console.log("El tiempo medio en comprimir "+j+ " ha sido de --> "+(avg)+" ms");
+        }
+        
+        res.send("OK");
+
+        /*var facturaAgrupada = new AgrupacionFactura();
+        facturaAgrupada.nifFecha = nif.toString()+"/01-01-2021";
+        facturaAgrupada.idents  = tbai_idents;
+        var time_start = performance.now();
+        facturaAgrupada.agrupacion = pako.gzip(agrupacion, {level: GZIP_LEVEL});
+        var time_stop = performance.now();
+        console.log("El tiempo en comprimir "+TOTAL_FACTURAS_AGRUPADAS+ " ha sido de --> "+(time_stop-time_start)+" ms");*/
+        /*facturaAgrupada.save(function(err, doc){
+            if(err){
+                console.log(err);
+            }else{
+                res.status(200).send("Facturas guardadas correctamente\nEl tiempo en comprimir "+TOTAL_FACTURAS_AGRUPADAS+ " ha sido de --> "+(time_stop-time_start)+" ms");
+            }
+        });*/
     }
 
 };
-
 
 module.exports = controller;

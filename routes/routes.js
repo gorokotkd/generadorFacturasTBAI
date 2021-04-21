@@ -18,6 +18,7 @@ router.get('/generator', controller.generate);
 router.get('/generate-data', controller.generateData);
 router.get('/createdb', controller.createDb);
 router.get('/gr', controller.getFacturaByTbai);
+router.get('/agrupar', controller.agruparFacturas);
 
 
 
