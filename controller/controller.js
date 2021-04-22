@@ -20,8 +20,21 @@ var Factura = require('../model/factura');
 var AgrupacionFactura = require('../model/facturaAgrupada');
 var DATA = require('../functions/getData');
 const GZIP_LEVEL = 1;
-const NUM_FACTURAS = 100000;
+const NUM_FACTURAS = 1000000;
 
+
+function insert(data){
+
+    return new Promise(resolve => {
+        const fact = new Factura();
+        fact.collection.insertMany(data, {ordered: false}, (err, docs) => {
+            if(err){console.log(err)}
+            else{resolve("Insertados "+docs.length+" datos");}
+        });
+    });
+
+    
+}
 
 function formatNumberLength(num, length) {
     var r = "" + num;
@@ -114,7 +127,7 @@ var controller = {
     generateData : function(req, res){
         return res.status(200).send(dataGenerator.generate());
     },
-    createDb : function (req, res) {
+    createDb : async function (req, res) {
         var privateKey = fs.readFileSync('./keys/user1.pem');
         var sig = new SignedXml();
         sig.addReference("//*[local-name(.)='Cabecera' or local-name(.) = 'Sujetos' or local-name(.) = 'Factura' or local-name(.) = 'HuellaTBAI']");
@@ -128,11 +141,13 @@ var controller = {
 
         var array = [];
         var json = {};
+        var total_fact = 0;
 
-        for(var i = 0; i < NUM_FACTURAS/1000; i++){
+        for(var i = 0; i < NUM_FACTURAS/10; i++){
             array = [];
             factura = new Factura();
-            for(var j = 0; j < 1000; j++){
+            for(var j = 0; j < 10; j++){
+                //console.log(j);
                 json = {};
                 nif_pos = Math.floor(Math.random() * nif_list.length);
                 nif = nif_list[nif_pos];
@@ -147,28 +162,34 @@ var controller = {
 
                 json._id                     = DATA.getIdentTBAI(facturaTbai);
                 json.NIF                     = DATA.getNif(facturaTbai);
-                json.FechaExpedicionFactura  = moment(DATA.getFechaExp(facturaTbai), "YYYY-MM-DD");
-                json.HoraExpedicionFactura   = moment(DATA.getHoraExpedionFactura(facturaTbai), "hh:mm:ss");
+                json.FechaExpedicionFactura  = moment(DATA.getFechaExp(facturaTbai), "YYYY-MM-DD").toISOString();
+                json.HoraExpedicionFactura   = moment(DATA.getHoraExpedionFactura(facturaTbai), "hh:mm:ss").toISOString();
                 json.ImporteTotalFactura     = DATA.getImporteTotalFactura(facturaTbai);
                 json.SerieFactura            = DATA.getSerieFactura(facturaTbai);
                 json.NumFactura              = DATA.getNumFactura(facturaTbai);
                 json.Descripcion             = DATA.getDescripcion(facturaTbai);
                 json.DetallesFactura         = DATA.getDetallesFactura(facturaTbai);
-                json.FacturaComprimida       = pako.gzip(facturaTbai, {level: GZIP_LEVEL});
+                json.FacturaComprimida       = pako.gzip(facturaTbai, {level: GZIP_LEVEL}).toString();
                 //factura.save();
                 array.push(json);
             }
 
             //save(array).then(console.log);
-            factura.collection.insertMany(array, {ordered: false});
-
+            await insert(array);
+            total_fact += 1000;
+            console.log("Creadas un total de --> "+total_fact);
+            /*
+            factura.collection.insertMany(array, {ordered: false}, function(err, docs){
+                if(err){console.log(err);}
+                else{console.log("Insertados --> "+docs.length);}
+            });*/
             //var long = facturaTbai.length * 2 / 1000000 * 0.9537;
             //console.log(long);
             
             
             //factura = new Factura();
             
-            console.log("Se ha creado la factura --> "+(i+1)*1000);
+            //console.log("Se ha creado la factura --> "+(i+1)*100);
             
         }//End for
         //res.status(200).send("OK");
@@ -218,19 +239,19 @@ var controller = {
         var data;
         var xml;
         let nif;
-        const MAX_AGRUPACION = 700;
+        const MAX_AGRUPACION = req.query.num;
         const MAX_REPEAT = 10;
         var agrupacion = "";
         var tbai_idents = [];
         let nif_pos = Math.floor(Math.random() * nif_list.length);
         nif = nif_list[nif_pos];
         let grupo;
-
-        for(var j = 25; j < MAX_AGRUPACION; j += 25){
+        var agrupacion_fact = new AgrupacionFactura();
+        //for(var j = 700; j < MAX_AGRUPACION; j += 25){
             let array_time = [];
             let array_decom = [];
-            for(var w = 0; w < MAX_REPEAT; w++){
-                for(var i = 0; i < j; i ++){
+           // for(var w = 0; w < MAX_REPEAT; w++){
+                for(var i = 0; i < MAX_AGRUPACION; i ++){
                     data = dataGenerator.generate(nif);
                     xml = generator.generate(data).toString();
                     sig.computeSignature(xml);
@@ -238,26 +259,36 @@ var controller = {
                     agrupacion += factura;
                     tbai_idents.push(DATA.getIdentTBAI(factura));
                 }
+                let total_start = performance.now();
                 let time_start = performance.now();
                 grupo = pako.gzip(agrupacion, {level: GZIP_LEVEL});
                 let time_stop = performance.now();
                 array_time.push((time_stop-time_start));
+                agrupacion_fact.nifFecha = nif+"/01-01-2021";
+                agrupacion_fact.agrupacion = grupo;
+                agrupacion_fact.idents = tbai_idents;
 
                 let decom_start = performance.now();
                 let grupoDesc = pako.inflate(grupo);
                 let decom_stop = performance.now();
                 array_decom.push(decom_stop-decom_start);
-            }
+            //}
             //console.log(array_time);
             const sum = array_time.reduce((a, b) => a + b, 0);
             const avg = (sum / array_time.length) || 0;
 
             const sum_decom = array_decom.reduce((a, b) => a + b, 0);
             const avg_decom = (sum_decom / array_decom.length) || 0;
-            console.log("El tiempo medio en comprimir "+j+ " ha sido de --> "+(avg)+" ms\nEl Tiempo medio en descomprimir "+j+" ha sido de -->"+avg_decom+" ms");
-        }
+            console.log("El tiempo medio en comprimir "+MAX_AGRUPACION+ " ha sido de --> "+(avg)+" ms\nEl Tiempo medio en descomprimir "+MAX_AGRUPACION+" ha sido de --> "+avg_decom+" ms");
+            agrupacion_fact.save(function(err, doc){
+                let total_stop = performance.now();
+                if(err) {res.status(500).send("Error al guardar");}
+                else {res.send("El tiempo en comprimir "+MAX_AGRUPACION+ " ha sido de --> "+(avg)+" ms\n"+
+                "El Tiempo en descomprimir "+MAX_AGRUPACION+" ha sido de --> "+avg_decom+" ms\nEl tiempo total ha sido de --> "+total_stop-total_start+" ms");}
+            });
+        //}
         
-        res.send("OK");
+        //res.send("El tiempo medio en comprimir "+MAX_AGRUPACION+ " ha sido de --> "+(avg)+" ms\nEl Tiempo medio en descomprimir "+MAX_AGRUPACION+" ha sido de --> "+avg_decom+" ms");
 
         /*var facturaAgrupada = new AgrupacionFactura();
         facturaAgrupada.nifFecha = nif.toString()+"/01-01-2021";
