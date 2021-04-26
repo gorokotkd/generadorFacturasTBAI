@@ -16,11 +16,17 @@ const pako = require('pako');
 const { StringDecoder } = require('string_decoder');
 const { performance } = require('perf_hooks');
 
+var mongoose = require('mongoose');
+const Grid = require('gridfs-stream');
+const {Readable} = require('stream');
+var streamToString = require('stream-to-string');
+
 var Factura = require('../model/factura');
 var AgrupacionFactura = require('../model/facturaAgrupada');
 var DATA = require('../functions/getData');
+const MB = 1000000;
 const GZIP_LEVEL = 1;
-const NUM_FACTURAS = 1000000;
+const NUM_FACTURAS = 2000000;
 
 
 function insert(data) {
@@ -34,14 +40,24 @@ function insert(data) {
     });
 }
 
-function insert_agrupadas(data){
-    return new Promise((resolve)=> {
+function insert_agrupadas(data) {
+    return new Promise((resolve) => {
         const group = new AgrupacionFactura();
-        group.collection.insertMany(data, {ordered: false}, (err, docs) => {
-            if(err) {console.log(err);}
-            else {resolve("Insertadas "+docs.length+" agrupaciones");}
+        group.collection.insertMany(data, { ordered: false }, (err, docs) => {
+            if (err) { console.log(err); }
+            else { resolve("Insertadas " + docs.length + " agrupaciones"); }
         });
     });
+}
+
+function randomDate(start, end) {
+    var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    var dt = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));//.toLocaleDateString('es', options).replace('/','-').replace('/','-');
+    var year = dt.getFullYear();
+    var month = (dt.getMonth() + 1).toString().padStart(2, "0");
+    var day = dt.getDate().toString().padStart(2, "0");
+
+    return (day + "-" + month + "-" + year);
 }
 
 function formatNumberLength(num, length) {
@@ -151,10 +167,10 @@ var controller = {
         var json = {};
         var total_fact = 0;
 
-        for (var i = 0; i < NUM_FACTURAS / 10; i++) {
+        for (var i = 0; i < NUM_FACTURAS / 100; i++) {
             array = [];
             factura = new Factura();
-            for (var j = 0; j < 10; j++) {
+            for (var j = 0; j < 100; j++) {
                 //console.log(j);
                 json = {};
                 nif_pos = Math.floor(Math.random() * nif_list.length);
@@ -170,7 +186,7 @@ var controller = {
 
                 json._id = DATA.getIdentTBAI(facturaTbai);
                 json.NIF = DATA.getNif(facturaTbai);
-                json.FechaExpedicionFactura = moment(DATA.getFechaExp(facturaTbai), "YYYY-MM-DD").toISOString();
+                json.FechaExpedicionFactura = moment(DATA.getFechaExp(facturaTbai), "DD-MM-YYYY").toISOString();
                 json.HoraExpedicionFactura = moment(DATA.getHoraExpedionFactura(facturaTbai), "hh:mm:ss").toISOString();
                 json.ImporteTotalFactura = DATA.getImporteTotalFactura(facturaTbai);
                 json.SerieFactura = DATA.getSerieFactura(facturaTbai);
@@ -184,7 +200,7 @@ var controller = {
 
             //save(array).then(console.log);
             await insert(array);
-            total_fact += 1000;
+            total_fact += 100;
             console.log("Creadas un total de --> " + total_fact);
 
         }//End for
@@ -201,7 +217,7 @@ var controller = {
 
 
     },
-    getFacturaByTbai: function (req, res) {
+    getFacturaByTbai: async function (req, res) {
         var tbai_id = req.query.id;
         //console.log(tbai_id);
 
@@ -211,38 +227,38 @@ var controller = {
         }
         //"TBAI-82275936Z-010120-dPmfSHpsGqWpI-120"
 
+
+
+
         Factura.findById(tbai_id, (err, factura) => {
             if (err) return res.status(500).send("Error al devolver los datos");
             if (!factura) {//No he encontrado una factura con esa id (Estará comprimida)
                 //return res.status(404).send("No se ha encontrado la factura con ese identificador");
-                AgrupacionFactura.find({idents:tbai_id}, (err, facturas_agrupadas) => {
-                    if(err) return res.status(500).send("Error al devolver los datos");
-                    if(!facturas_agrupadas) {
-                        return res.status(404).send("No se ha encontrado la factura con ese identificador");
-                    }else{
+                AgrupacionFactura.find({ idents: tbai_id }, (err, facturas_agrupadas) => {
+                    if (err) return res.status(500).send("Error al devolver los datos");
+                    if (!facturas_agrupadas) {
+                        res.status(404).send("No se ha encontrado la factura con ese identificador");
+                    } else {
                         var pos = Array.from(facturas_agrupadas[0].idents).indexOf(tbai_id);
 
-                        var array = JSON.parse("["+facturas_agrupadas[0].agrupacion+"]");
+                        var array = JSON.parse("[" + facturas_agrupadas[0].agrupacion + "]");
                         var facturasDescom = pako.inflate(array);
                         var facturas_string = new TextDecoder().decode(facturasDescom);
                         var facturas_array = facturas_string.split(/(?=\<\?xml version="1\.0" encoding="utf-8"\?\>)/);
                         res.status(200).send(facturas_array[pos]);
                     }
-                    
+
                 });
 
-            }else{
+            } else {
                 var array = JSON.parse("[" + factura.FacturaComprimida + "]");
                 var facturaDescom = pako.inflate(array);
 
                 //console.log(facturaDescom);
-                return res.status(200).send({
-                    factura: factura,
-                    xml: new TextDecoder().decode(facturaDescom)
-                });
+                return res.status(200).send(new TextDecoder().decode(facturaDescom));
             }
 
-            
+
 
         });
 
@@ -256,38 +272,98 @@ var controller = {
         var data;
         var xml;
         let nif;
-        const MAX_AGRUPACION = 100; //Más o menos la media de facturas de una semana de una empresa.
-        const MAX_FACTURAS_AGRUPADAS = 25000;
-        const repeat = 10;
+        var MAX_GRUPO = 10;
+        //const MAX_AGRUPACION = 100;
+        //const MAX_FACTURAS_AGRUPADAS = 1000;
+        //const repeat = 10;
         var agrupacion = "";
-        for(var i = 0; i < MAX_FACTURAS_AGRUPADAS/repeat; i++){
+        while (MAX_GRUPO <= 10000) {
             var array = [];
-            for(var j = 0; j < repeat; j++){
-                agrupacion = "";
-                var tbai_idents = [];
-                let nif_pos = Math.floor(Math.random() * nif_list.length);
-                nif = nif_list[nif_pos];
-                var agrupacion_fact = {};
-                for (var k = 0; k < MAX_AGRUPACION; k++) {
-                    data = dataGenerator.generate(nif);
-                    xml = generator.generate(data).toString();
-                    sig.computeSignature(xml);
-                    let factura = sig.getSignedXml();
-                    agrupacion += factura;
-                    tbai_idents.push(DATA.getIdentTBAI(factura));
+            //for(var j = 0; j < grupo; j++){
+            agrupacion = "";
+            var tbai_idents = [];
+            let nif_pos = Math.floor(Math.random() * nif_list.length);
+            nif = nif_list[nif_pos];
+            var fechaExpInicio = randomDate(new Date(2021, 0, 1), new Date(2021, 1, 21));
+
+            let time = moment(fechaExpInicio, "DD-MM-YYYY").toDate();
+
+            time.setDate(time.getDate() + 7);
+ 
+            var fechaExpFin = time.getDate().toString().padStart(2, "0")+"-"+(time.getMonth() + 1).toString().padStart(2, "0")+"-"+time.getFullYear();
+
+            var agrupacion_fact = {};
+            for (var k = 0; k < MAX_GRUPO; k++) {
+                data = dataGenerator.generate(nif, randomDate(moment(fechaExpInicio, "DD-MM-YYYY").toDate(), moment(fechaExpFin, "DD-MM-YYYY").toDate()));
+                xml = generator.generate(data).toString();
+                sig.computeSignature(xml);
+                let factura = sig.getSignedXml();
+                agrupacion += factura;
+                tbai_idents.push(DATA.getIdentTBAI(factura));
+                if(pako.gzip(agrupacion_, {level: GZIP_LEVEL}).byteLength > 15*MB){
+                    var nueva_agrupacion
                 }
-                let grupo = pako.gzip(agrupacion, { level: GZIP_LEVEL });
-                agrupacion_fact.nifFecha = nif + "/01-01-2021/01-02-2021";
-                agrupacion_fact.agrupacion = grupo.toString();
-                agrupacion_fact.idents = tbai_idents;
-                array.push(agrupacion_fact);
             }
+            let grupo = pako.gzip(agrupacion, { level: GZIP_LEVEL });
+            agrupacion_fact.nif = nif;
+            agrupacion_fact.fechaInicio = moment(fechaExpInicio, "DD-MM-YYYY").toISOString();
+            agrupacion_fact.fechaFin = moment(fechaExpFin, "DD-MM-YYYY").toISOString();
+            agrupacion_fact.agrupacion = grupo.toString();
+            agrupacion_fact.idents = tbai_idents;
+            array.push(agrupacion_fact);
+
+            //}
+
+/*
+            var bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+                bucketName: "facturas_grandes",
+            });
+            bucket.find({"metadata.idents" : "TBAI-37505005D-090121-UpXnLAy+hTkV6-163"})
+
+            //fs.createReadStream('./files/fileToInsert.txt').
+            let s = new Readable();
+            s._read = () => {};
+            s.push(agrupacion_fact.agrupacion);
+            s.push(null);
+
+            s.pipe(bucket.openUploadStream(agrupacion_fact.nif+"/"+moment(agrupacion_fact.fechaInicio).format("DD-MM-YYYY")+"/"+moment(agrupacion_fact.fechaFin).format("DD-MM-YYYY"), {
+                metadata : {
+                    nif: agrupacion_fact.nif,
+                    fechaInicio: agrupacion_fact.fechaInicio,
+                    fechaFin: agrupacion_fact.fechaFin,
+                    idents: agrupacion_fact.idents
+                }
+            })).
+            on('error', function(err){
+                console.log(err);
+            }).
+            on('finish', function(){
+                console.log('done');
+
+            });
+
+*/
             await insert_agrupadas(array);
 
-            console.log("Insertadas " +(i+1)*10 +" agrupaciones.");
+            //fs.writeFileSync('./files/identsGrupos.txt', MAX_GRUPO + " / " + tbai_idents[tbai_idents.length - 1] + "\n", { flag: 'a' });
+            console.log("Insertadas " + MAX_GRUPO + " agrupaciones.");
+            MAX_GRUPO += 10;
 
         }
+
         res.status(200).send("OK");
+    },
+    agrupar: async function(req, res){
+        var privateKey = fs.readFileSync('./keys/user1.pem');
+        var sig = new SignedXml();
+        sig.addReference("//*[local-name(.)='Cabecera' or local-name(.) = 'Sujetos' or local-name(.) = 'Factura' or local-name(.) = 'HuellaTBAI']");
+        sig.signingKey = privateKey;
+
+        const MAX_GRUPO = 8000
+
+        for(var i = 10; i <= MAX_GRUPO; i+=10){
+            
+        }
     }
 
 };

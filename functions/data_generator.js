@@ -715,7 +715,7 @@ function huellaTBAI(json, options = {
 }
 
 module.exports = {
-    generate: function generate(nif) {
+    generate: function generate(nif, fechaExp) {
         var json = {
             "Sujetos": {
                 "Emisor": {
@@ -726,7 +726,7 @@ module.exports = {
             "Factura": {
                 "Cabecera": {
                     "NumFactura": getRandomInt(0, MAX_NUMBER),
-                    "FechaExpedicionFactura": randomDate(new Date(2020, 0, 1), new Date(2020, 1, 1)),
+                    "FechaExpedicionFactura": fechaExp,
                     "HoraExpedicionFactura": randomHour(new Date(2020, 0, 1), new Date(2020, 1, 1))
                 },
                 "DatosFactura": {
