@@ -1,0 +1,410 @@
+[
+    {
+        "busqueda_directa": 29.572999998927116,
+        "busqueda_comprimida": 377.58009999990463
+    },
+    {
+        "busqueda_directa": 3.8788999915122986,
+        "busqueda_comprimida": 348.92679999768734
+    },
+    {
+        "busqueda_directa": 3.9741999953985214,
+        "busqueda_comprimida": 305.74509999156
+    },
+    {
+        "busqueda_directa": 9.186700001358986,
+        "busqueda_comprimida": 309.74519999325275
+    },
+    {
+        "busqueda_directa": 3.6515000015497208,
+        "busqueda_comprimida": 352.3483999967575
+    },
+    {
+        "busqueda_directa": 3.378700003027916,
+        "busqueda_comprimida": 275.02730000019073
+    },
+    {
+        "busqueda_directa": 2.343999996781349,
+        "busqueda_comprimida": 331.96809999644756
+    },
+    {
+        "busqueda_directa": 3.535300001502037,
+        "busqueda_comprimida": 359.57259999215603
+    },
+    {
+        "busqueda_directa": 3.336999997496605,
+        "busqueda_comprimida": 362.73839999735355
+    },
+    {
+        "busqueda_directa": 3.739999994635582,
+        "busqueda_comprimida": 303.8922999948263
+    },
+    {
+        "busqueda_directa": 3.268799990415573,
+        "busqueda_comprimida": 332.8804000020027
+    },
+    {
+        "busqueda_directa": 3.287900000810623,
+        "busqueda_comprimida": 363.5087999999523
+    },
+    {
+        "busqueda_directa": 3.396499991416931,
+        "busqueda_comprimida": 302.69619999825954
+    },
+    {
+        "busqueda_directa": 3.943900004029274,
+        "busqueda_comprimida": 336.25789999961853
+    },
+    {
+        "busqueda_directa": 3.16729998588562,
+        "busqueda_comprimida": 344.4987999945879
+    },
+    {
+        "busqueda_directa": 3.1152999997138977,
+        "busqueda_comprimida": 306.56650000810623
+    },
+    {
+        "busqueda_directa": 3.2738000005483627,
+        "busqueda_comprimida": 334.15770000219345
+    },
+    {
+        "busqueda_directa": 3.1397999972105026,
+        "busqueda_comprimida": 354.81659999489784
+    },
+    {
+        "busqueda_directa": 6.295800000429153,
+        "busqueda_comprimida": 292.52080000936985
+    },
+    {
+        "busqueda_directa": 3.437399998307228,
+        "busqueda_comprimida": 371.26089999079704
+    },
+    {
+        "busqueda_directa": 3.1499000042676926,
+        "busqueda_comprimida": 345.42080000042915
+    },
+    {
+        "busqueda_directa": 3.222800001502037,
+        "busqueda_comprimida": 335.87090000510216
+    },
+    {
+        "busqueda_directa": 4.157799988985062,
+        "busqueda_comprimida": 290.9487000107765
+    },
+    {
+        "busqueda_directa": 3.2097999900579453,
+        "busqueda_comprimida": 315.77879999578
+    },
+    {
+        "busqueda_directa": 3.274299994111061,
+        "busqueda_comprimida": 322.0503000020981
+    },
+    {
+        "busqueda_directa": 3.1842000037431717,
+        "busqueda_comprimida": 351.5640000104904
+    },
+    {
+        "busqueda_directa": 3.1718000024557114,
+        "busqueda_comprimida": 296.2707999944687
+    },
+    {
+        "busqueda_directa": 3.154799997806549,
+        "busqueda_comprimida": 337.9836999922991
+    },
+    {
+        "busqueda_directa": 3.3511999994516373,
+        "busqueda_comprimida": 348.37260000407696
+    },
+    {
+        "busqueda_directa": 3.173899993300438,
+        "busqueda_comprimida": 297.16230000555515
+    },
+    {
+        "busqueda_directa": 3.5375999957323074,
+        "busqueda_comprimida": 354.6245999932289
+    },
+    {
+        "busqueda_directa": 3.2298000007867813,
+        "busqueda_comprimida": 346.6140000075102
+    },
+    {
+        "busqueda_directa": 3.1392000019550323,
+        "busqueda_comprimida": 298.4059000015259
+    },
+    {
+        "busqueda_directa": 3.1952999979257584,
+        "busqueda_comprimida": 335.540600001812
+    },
+    {
+        "busqueda_directa": 6.849600002169609,
+        "busqueda_comprimida": 373.3977999985218
+    },
+    {
+        "busqueda_directa": 3.8843999952077866,
+        "busqueda_comprimida": 318.5309000015259
+    },
+    {
+        "busqueda_directa": 4.030799999833107,
+        "busqueda_comprimida": 294.66830000281334
+    },
+    {
+        "busqueda_directa": 4.099000006914139,
+        "busqueda_comprimida": 347.5380000025034
+    },
+    {
+        "busqueda_directa": 3.165000006556511,
+        "busqueda_comprimida": 341.78810000419617
+    },
+    {
+        "busqueda_directa": 3.5717999935150146,
+        "busqueda_comprimida": 362.6439999938011
+    },
+    {
+        "busqueda_directa": 3.1517999917268753,
+        "busqueda_comprimida": 296.0309000015259
+    },
+    {
+        "busqueda_directa": 3.166500002145767,
+        "busqueda_comprimida": 329.5570999979973
+    },
+    {
+        "busqueda_directa": 3.363400012254715,
+        "busqueda_comprimida": 360.847000002861
+    },
+    {
+        "busqueda_directa": 3.126800000667572,
+        "busqueda_comprimida": 299.9969000071287
+    },
+    {
+        "busqueda_directa": 3.096900001168251,
+        "busqueda_comprimida": 346.46260000765324
+    },
+    {
+        "busqueda_directa": 3.1806000024080276,
+        "busqueda_comprimida": 377.8522000014782
+    },
+    {
+        "busqueda_directa": 4.2369000017642975,
+        "busqueda_comprimida": 310.4949999898672
+    },
+    {
+        "busqueda_directa": 3.188500002026558,
+        "busqueda_comprimida": 334.1077000051737
+    },
+    {
+        "busqueda_directa": 12.273799985647202,
+        "busqueda_comprimida": 346.6884000003338
+    },
+    {
+        "busqueda_directa": 5.169200003147125,
+        "busqueda_comprimida": 299.3715000003576
+    },
+    {
+        "busqueda_directa": 3.0620999932289124,
+        "busqueda_comprimida": 335.480499997735
+    },
+    {
+        "busqueda_directa": 3.121399998664856,
+        "busqueda_comprimida": 349.17609998583794
+    },
+    {
+        "busqueda_directa": 3.11939999461174,
+        "busqueda_comprimida": 302.32150000333786
+    },
+    {
+        "busqueda_directa": 3.269900009036064,
+        "busqueda_comprimida": 346.20200000703335
+    },
+    {
+        "busqueda_directa": 3.1887999922037125,
+        "busqueda_comprimida": 357.6174999922514
+    },
+    {
+        "busqueda_directa": 3.2148999869823456,
+        "busqueda_comprimida": 298.4109999984503
+    },
+    {
+        "busqueda_directa": 3.230999991297722,
+        "busqueda_comprimida": 331.8776999861002
+    },
+    {
+        "busqueda_directa": 3.5481999963521957,
+        "busqueda_comprimida": 386.3711999952793
+    },
+    {
+        "busqueda_directa": 3.277199998497963,
+        "busqueda_comprimida": 325.0332999974489
+    },
+    {
+        "busqueda_directa": 3.066899999976158,
+        "busqueda_comprimida": 334.33169999718666
+    },
+    {
+        "busqueda_directa": 3.0720999985933304,
+        "busqueda_comprimida": 353.43850000202656
+    },
+    {
+        "busqueda_directa": 3.0518999993801117,
+        "busqueda_comprimida": 303.45439998805523
+    },
+    {
+        "busqueda_directa": 3.1642999947071075,
+        "busqueda_comprimida": 339.51289999485016
+    },
+    {
+        "busqueda_directa": 4.200199991464615,
+        "busqueda_comprimida": 349.83689999580383
+    },
+    {
+        "busqueda_directa": 5.765100002288818,
+        "busqueda_comprimida": 298.4762000143528
+    },
+    {
+        "busqueda_directa": 3.0803000032901764,
+        "busqueda_comprimida": 324.07410000264645
+    },
+    {
+        "busqueda_directa": 3.481100007891655,
+        "busqueda_comprimida": 356.37180000543594
+    },
+    {
+        "busqueda_directa": 3.416700005531311,
+        "busqueda_comprimida": 295.3508000075817
+    },
+    {
+        "busqueda_directa": 3.0728999972343445,
+        "busqueda_comprimida": 331.79379999637604
+    },
+    {
+        "busqueda_directa": 4.517099991440773,
+        "busqueda_comprimida": 356.2116000056267
+    },
+    {
+        "busqueda_directa": 3.954600006341934,
+        "busqueda_comprimida": 308.5837000012398
+    },
+    {
+        "busqueda_directa": 3.0937999933958054,
+        "busqueda_comprimida": 338.3440999984741
+    },
+    {
+        "busqueda_directa": 4.038099989295006,
+        "busqueda_comprimida": 351.60199999809265
+    },
+    {
+        "busqueda_directa": 3.3706999868154526,
+        "busqueda_comprimida": 304.84620000422
+    },
+    {
+        "busqueda_directa": 3.157800003886223,
+        "busqueda_comprimida": 338.93009999394417
+    },
+    {
+        "busqueda_directa": 3.079699993133545,
+        "busqueda_comprimida": 342.39160001277924
+    },
+    {
+        "busqueda_directa": 3.1596999913454056,
+        "busqueda_comprimida": 300.51009999215603
+    },
+    {
+        "busqueda_directa": 3.0623000115156174,
+        "busqueda_comprimida": 335.8261999934912
+    },
+    {
+        "busqueda_directa": 3.037300005555153,
+        "busqueda_comprimida": 352.67960000038147
+    },
+    {
+        "busqueda_directa": 3.50730000436306,
+        "busqueda_comprimida": 301.5908000022173
+    },
+    {
+        "busqueda_directa": 5.1237000077962875,
+        "busqueda_comprimida": 320.67299999296665
+    },
+    {
+        "busqueda_directa": 3.164799988269806,
+        "busqueda_comprimida": 443.25239999592304
+    },
+    {
+        "busqueda_directa": 3.723700001835823,
+        "busqueda_comprimida": 344.82459999620914
+    },
+    {
+        "busqueda_directa": 4.076900005340576,
+        "busqueda_comprimida": 343.25280000269413
+    },
+    {
+        "busqueda_directa": 3.180899992585182,
+        "busqueda_comprimida": 348.5705000013113
+    },
+    {
+        "busqueda_directa": 3.1246999949216843,
+        "busqueda_comprimida": 302.3487000018358
+    },
+    {
+        "busqueda_directa": 3.2286999970674515,
+        "busqueda_comprimida": 336.6106999963522
+    },
+    {
+        "busqueda_directa": 3.0610999912023544,
+        "busqueda_comprimida": 353.62010000646114
+    },
+    {
+        "busqueda_directa": 3.3199999928474426,
+        "busqueda_comprimida": 306.2993000000715
+    },
+    {
+        "busqueda_directa": 3.1326999962329865,
+        "busqueda_comprimida": 327.6565999984741
+    },
+    {
+        "busqueda_directa": 3.1843000054359436,
+        "busqueda_comprimida": 351.5101000070572
+    },
+    {
+        "busqueda_directa": 3.0556000024080276,
+        "busqueda_comprimida": 305.0372000038624
+    },
+    {
+        "busqueda_directa": 3.0846000015735626,
+        "busqueda_comprimida": 326.70209999382496
+    },
+    {
+        "busqueda_directa": 3.0892000049352646,
+        "busqueda_comprimida": 356.74970000982285
+    },
+    {
+        "busqueda_directa": 3.0602999925613403,
+        "busqueda_comprimida": 295.6259000003338
+    },
+    {
+        "busqueda_directa": 5.569700002670288,
+        "busqueda_comprimida": 328.4209000021219
+    },
+    {
+        "busqueda_directa": 3.0717999935150146,
+        "busqueda_comprimida": 347.2284000068903
+    },
+    {
+        "busqueda_directa": 3.031900003552437,
+        "busqueda_comprimida": 303.6499999910593
+    },
+    {
+        "busqueda_directa": 3.336999997496605,
+        "busqueda_comprimida": 325.2276000082493
+    },
+    {
+        "busqueda_directa": 3.0363999903202057,
+        "busqueda_comprimida": 349.5147000104189
+    },
+    {
+        "busqueda_directa": 3.3478999882936478,
+        "busqueda_comprimida": 299.82379999756813
+    },
+    {
+        "busqueda_directa": 3.7813999950885773,
+        "busqueda_comprimida": 330.3125
+    }
+]

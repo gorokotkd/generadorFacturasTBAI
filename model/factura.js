@@ -36,7 +36,7 @@ var FacturaSchema = Schema({
         type: Schema.Types.String,
         required : true
     },
-    DetallesFactura: {
+    /*DetallesFactura: {
         required : true,
         type : [
             {
@@ -58,7 +58,7 @@ var FacturaSchema = Schema({
                 }
             }
         ]
-    },
+    },*/
     FacturaComprimida : {
         required : true,
         type : Schema.Types.String

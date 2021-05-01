@@ -1,70 +1,65 @@
 'use strict'
 
-const { uniqueNamesGenerator, names, adjectives, colors } = require('unique-names-generator');
-const namesConfig = {
-    dictionaries: [names, adjectives, colors]
-}
-
 const MAX_NUMBER = 100000;
 
 
-const sujetos_config = {
-    destinatarios: -1, //Numero de destinatarios. (-1) si no existen destinatarios
+var sujetos_config = {
+    destinatarios: 2, //Numero de destinatarios. (-1) si no existen destinatarios
     emitidaPorTercerosODestinatario: true //Indica si quiero el elemento emitida por terceros
 };
 
-const cabecera_factura_config = {
+var cabecera_factura_config = {
     serieFactura: true,
     facturaSimplificada: true,
-    facturaEmitidaSustitucionSimplificada: true,
+    facturaEmitidaSustitucionSimplificada: false,
     facturaRectificativa: {
-        value: true, //Indica si quiero el elemento FacturaRectificativa
+        value: false, //Indica si quiero el elemento FacturaRectificativa
         importeRectificacion: true,
-        cuotaRecargo: false
+        cuotaRecargo: true
     },
     facturaRectificadaSustituida: {
-        value: false, //Indica si quiero el elemento FacturaRectificadaSustituida
+        value: true, //Indica si quiero el elemento FacturaRectificadaSustituida
         serieFactura: true,
-        numFacturas: 1
+        numFacturas: 2 //(1 a 100)
     }
 };
-const datos_factura_config = {
-    fechaOperacion: false,
-    detallesFactura: { numDetalles: 1 },
-    retencionSoportada: false,
-    baseImponibleACoste: true,
-    numClaves: 1
+var datos_factura_config = {
+    fechaOperacion: true,
+    detallesFactura: { numDetalles: 3 },
+    retencionSoportada: true,
+    baseImponibleACoste: false,
+    numClaves: 1 // 1 a 3
 };
-const tipo_desglose_config = {
+var tipo_desglose_config = {
     desgloseFactura: false, //TipoDesglose --> DesgloseFactura / Si es true da igual lo que valga desgloseTipoOperacion
-    desgloseTipoOperacion: { prestacionServicios: false, entrega: false }, // Solo se genera si desgloseFactura
+    desgloseTipoOperacion: { prestacionServicios: true, entrega: false }, // Solo se genera si desgloseFactura
     //no esta definido o es false y ademas prestacionServicios o entrega  o los dos es true.
     desglose: {
         sujeta: {
             value: false, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
             exenta: {
-                value: false,// Si es true genero la factura sujeta exenta
-                numDetallesExenta: 1 //Numero de deralles de la factura exenta (1 a 7)
+                value: true,// Si es true genero la factura sujeta exenta
+                numDetallesExenta: 7 //Numero de deralles de la factura exenta (1 a 7)
             },
             noExenta: {
                 value: true, // Si es true genero la factura NoExenta
-                numDetallesNoExenta: 1, //Numero de detalles (1 a 2)
-                numDetallesIVA: 1 //Numero de detalles de desglose de IVA (1 a 6)
+                numDetallesNoExenta: 2, //Numero de detalles (1 a 2)
+                numDetallesIVA: 6 //Numero de detalles de desglose de IVA (1 a 6)
             }
         },
         noSujeta: {
-            value: false, //Si es true genero la factura NoSujeta
-            numDetallesNoSujeta: 1 //Numero de detalles de la factura NoSujeta
+            value: true, //Si es true genero la factura NoSujeta
+            numDetallesNoSujeta: 2 //Numero de detalles de la factura NoSujeta (1 a 2)
         }
     }
 };
 
-const huellaTaBAI_config = {
+var huellaTBAI_config = {
     encadenamiento: {
         value: true, //Si es true genero el elemento EncadenamientoFacturaAnterior
         serieFacturaAnterior: true //Si es true genero el campo SerieFacturaAnterior
     },
-    entidadNIF: false, //Si es true la entidad se identifica mediante el NIF. (Si es false o no existe se identifica con el otro metodo)
+    entidadNIF: true, //Si es true la entidad se identifica mediante el NIF. (Si es false o no existe se identifica con el otro metodo)
     entidadIdOtro: true, // Si es true la entidad se identifica de otra forma
     numSerieDispositivo: true //Indica si quiero el campo numSerieDispositivo
 };
@@ -715,7 +710,7 @@ function huellaTBAI(json, options = {
 }
 
 module.exports = {
-    generate: function generate(nif, fechaExp) {
+    generate: function generate(nif, fechaExp, sujetos_config, cabecera_factura_config, datos_factura_config, tipo_desglose_config, huellaTBAI_config) {
         var json = {
             "Sujetos": {
                 "Emisor": {
@@ -758,10 +753,15 @@ module.exports = {
 
         /* HUELLA TBAI*/
 
-        huellaTBAI(json.HuellaTBAI, huellaTaBAI_config);
+        huellaTBAI(json.HuellaTBAI, huellaTBAI_config);
 
         return json;
-    }
+    },
+    sujetos_config: sujetos_config,
+    cabecera_factura_config: cabecera_factura_config,
+    datos_factura_config: datos_factura_config,
+    tipo_desglose_config: tipo_desglose_config,
+    huellaTBAI_config: huellaTBAI_config
 };
 
 const rectificativaType_list = ["S", "I"];
