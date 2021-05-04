@@ -55,7 +55,11 @@ function insert_agrupadas(data) {
 function compressData(data){
     return new Promise((resolve) => {
         zlib.gzip(data, {level: GZIP_LEVEL}, (err, result) =>{
-            if(!err) resolve(result.toString('hex'));
+            if(!err) resolve({
+                result: result.toString('base64'),
+                bytes: result.byteLength
+            });
+                //result.toString('hex'));
             //console.log(err);
         });
     });
@@ -63,7 +67,7 @@ function compressData(data){
 
 function unCompressData(data){
     return new Promise((resolve, reject) => {
-        zlib.gunzip(Buffer.from(data, "hex"), (err, result) =>{
+        zlib.gunzip(Buffer.from(data, "base64"), (err, result) =>{
             if(!err) resolve(result.toString());
             reject(err);
         });
@@ -186,8 +190,11 @@ var controller = {
         var array = [];
         var json = {};
         var total_fact = 0;
-        const NUM_FACTURAS = 500000;
-        const NUM_GRUPO = 100;
+        const NUM_FACTURAS = 1000;
+        const NUM_GRUPO = 1;
+
+
+        //fs.writeFileSync("./files/idents_grandes.txt", "Numfactura / Identificador / Ratio de Compresion\n", {flag: 'w'});
 
         for (var i = 0; i < NUM_FACTURAS / NUM_GRUPO; i++) {
             array = [];
@@ -218,21 +225,33 @@ var controller = {
                 json.Descripcion = DATA.getDescripcion(facturaTbai);
                 //json.DetallesFactura = DATA.getDetallesFactura(facturaTbai);
                 var comprimir_factura_start = performance.now();
-                json.FacturaComprimida = await compressData(facturaTbai);
+                let compresion = await compressData(facturaTbai);
+                json.FacturaComprimida = compresion.result;
                 var comprimir_factura_fin = performance.now();
+
+                var bytes_sin_comprimir = new TextEncoder().encode(facturaTbai).byteLength;
+                var bytes_comprimida = compresion.bytes;
+
                 //factura.save();
                 array.push(json);
                 //fs.writeFileSync('./idents_grandes.txt',total_fact + " // "+json._id+"\n", {flag: 'a'});
                 /*console.log("Factura número "+total_fact+"\nTiempo en generar datos factura --> "+(genera_factura_fin-genera_factura_start)+
                 "\nTiempo en firmar la factura --> "+(firmar_factura_fin-firmar_factura_start)+"\nTiempo en comprimir factura --> "+(comprimir_factura_fin-comprimir_factura_start)
                  + "\n==========================================================================");*/
+                 //fs.writeFileSync("./files/idents_grandes.txt", total_fact + " / "+json._id+ " / "+(1-(bytes_comprimida/bytes_sin_comprimir)) + "\n", {flag: 'a'});
 
             }
-            fs.writeFileSync('./files/idents.txt',array[getRandomInt(0, array.length)]._id+"\n", {flag: 'a'});
+            //fs.writeFileSync('./files/idents.txt',array[getRandomInt(0, array.length)]._id+"\n", {flag: 'a'});
             //save(array).then(console.log);
+            var insertar_start = performance.now();
             await insert(array);
+            var insertar_stop = performance.now();
+
+            console.log("Factura número "+total_fact+"\nTiempo en generar datos factura --> "+(genera_factura_fin-genera_factura_start)+
+                "\nTiempo en firmar la factura --> "+(firmar_factura_fin-firmar_factura_start)+"\nTiempo en comprimir factura --> "+(comprimir_factura_fin-comprimir_factura_start)+ "\nTiempo en guardar factura --> " + (insertar_stop - insertar_start)
+                 + "\n==========================================================================");
             total_fact += NUM_GRUPO;
-            console.log("Creadas un total de --> " + total_fact);
+            //console.log("Creadas un total de --> " + total_fact);
 
         }//End for
         res.status(200).send("OK");
@@ -258,8 +277,8 @@ var controller = {
         sig.signingKey = privateKey;
 
         
-        const MAX_GRUPO = 10000
-        for(var i = 1000; i <= MAX_GRUPO; i+=10){
+        const MAX_GRUPO = 1000
+        for(var i = 70; i <= MAX_GRUPO; i+=10){
             //console.log(i);
             let nif_pos = Math.floor(Math.random() * nif_list.length);
             let nif = nif_list[nif_pos];
@@ -271,8 +290,14 @@ var controller = {
 
             let facturas_agrupadas = agruparNFacturas(i, nif, fechaExpInicio, fechaExpFin);
             //let compress = pako.gzip(facturas_agrupadas.agrupacion, {level: GZIP_LEVEL}).toString();
-            let compress = await compressData(facturas_agrupadas.agrupacion);
+            let tiempo_comprimir_start = performance.now();
+            let compression = await compressData(facturas_agrupadas.agrupacion);
+            let tiempo_comprimir_fin = performance.now();
+            console.log(tiempo_comprimir_fin-tiempo_comprimir_start);
+            let compress = compression.result;
 
+            var bytes_sin_comprimir = new TextEncoder().encode(facturas_agrupadas.agrupacion).byteLength;
+            var bytes_comprimida = compression.bytes;
 
 
             var data_to_insert = {};
@@ -282,13 +307,13 @@ var controller = {
             data_to_insert.idents = facturas_agrupadas.tbai_idents;
             data_to_insert.agrupacion = compress;
             
+            
             let numParticiones = 0;
             let bytes = new TextEncoder().encode(JSON.stringify(data_to_insert)).byteLength;
             if(bytes % (15*MB) == 0){
                 numParticiones = Math.floor(bytes / (15*MB));
             }else{
-                numParticiones = 1 + Math.floor(bytes / (15*MB));
-                
+                numParticiones = 1 + Math.floor(bytes / (15*MB));                
             }
             //console.log(numParticiones);
             let array = [];
@@ -305,7 +330,8 @@ var controller = {
                 for(var k = 0; k < numParticiones; k++){
                     //let agrupacion = agruparNFacturas(i/numParticiones, nif, fechaExpInicio, fechaExpFin);
                     let agrupacion = facturas_array.slice((k*i)/numParticiones, ((k+1)*i)/numParticiones).join('');
-                    let agrupacion_compress = await compressData(agrupacion);
+                    let res = await compressData(agrupacion);
+                    let agrupacion_compress = res.result;
                     let new_data_to_insert = {};
                     new_data_to_insert.nif = nif;
                     new_data_to_insert.fechaInicio = moment(fechaExpInicio, "DD-MM-YYYY").toDate();
@@ -317,7 +343,7 @@ var controller = {
             }//end if
 
             await insert_agrupadas(array);
-            fs.writeFileSync('./files/identsGrupos.txt', i + " / " + array[array.length-1].idents[array[array.length-1].idents.length-1] + " / "+numParticiones+ "\n", { flag: 'a' });
+            fs.writeFileSync('./files/identsGrupos.txt', i + " / " + array[array.length-1].idents[array[array.length-1].idents.length-1] + " / "+numParticiones+ " / "+ (1-(bytes_comprimida/bytes_sin_comprimir))+"\n", { flag: 'a' });
             console.log("Insertadas " + i + " agrupaciones.");
 
         }//end for
@@ -325,8 +351,8 @@ var controller = {
         res.status(200).send("OK");
     },
     test: async function(req, res){
-/*
-        fs.writeFileSync("./files/test_agrupadas.csv", "Numero de facturas Agrupadas;Tiempo de búsqueda en BD;Tiempo de descompresión;Tiempo de búsqueda de factura\n", {flag: 'w'});
+
+        fs.writeFileSync("./files/test_facturas_grandes_agrupadas.csv", "Total Facturas Agrupadas;Numero de Particiones;Ratio De Compresión;Tiempo de búsqueda en BD;Tiempo de descompresión;Tiempo de búsqueda factura\n", {flag: 'w'});
         const file = fs.readFileSync("./files/identsGrupos.txt").toString();
 
         const lines = file.split("\n");
@@ -334,12 +360,11 @@ var controller = {
         for(var i = 0; i < lines.length-1; i++){
             let line_split = lines[i].split(" / ");
             let resul = await findByTBAI(line_split[1]);
-            fs.writeFileSync("./files/test_agrupadas.csv", line_split[0]+";"+resul.stats.busqueda_datos+";"+resul.stats.descompresion+";"+resul.stats.busqueda_factura+"\n", {flag: 'a'});
+            fs.writeFileSync("./files/test_facturas_grandes_agrupadas.csv", line_split[0]+";"+line_split[2]+";"+line_split[3]+";"+resul.stats.busqueda_datos+";"+resul.stats.descompresion+";"+resul.stats.busqueda_factura+"\n", {flag: 'a'});
         }
         
         return res.status(200).send("OK");
-*/
-
+/*
         const file = fs.readFileSync("./files/idents_facturas_detalles_crecientes.txt").toString();
         const lines = file.split("\n");
         fs.writeFileSync('./files/test_facturas_crecientes.csv', 'Tiempo Búsqueda Directa;Tiempo Búsqueda comprimida;Tamaño(KB)\n', {flag:'w'});
@@ -364,6 +389,7 @@ var controller = {
         }
 
         res.status(200).send('OK');
+        */
     },
     ascendingDB: async function(req, res){
         var privateKey = fs.readFileSync('./keys/user1.pem');
@@ -423,7 +449,7 @@ var controller = {
                 json.Descripcion = DATA.getDescripcion(facturaTbai);
                 //json.DetallesFactura = DATA.getDetallesFactura(facturaTbai);
                 var comprimir_factura_start = performance.now();
-                json.FacturaComprimida = await compressData(facturaTbai);
+                json.FacturaComprimida = await compressData(facturaTbai).result;
                 var comprimir_factura_fin = performance.now();
                 //factura.save();
                 array.push(json);
@@ -502,7 +528,7 @@ async function findByTBAI(tbai_id){
                             //var facturasDescom = pako.inflate(array);
                             //var facturas_string = new TextDecoder().decode(facturasDescom);
                             //var facturas_string = await unCompressData(docs[i].agrupacion);
-
+                            //console.log(docs[i]);
                             unCompressData(docs[i].agrupacion).then((resul) =>{
                                 var descompresion_fin = performance.now();
                             

@@ -4,39 +4,39 @@ const MAX_NUMBER = 100000;
 
 
 var sujetos_config = {
-    destinatarios: 2, //Numero de destinatarios. (-1) si no existen destinatarios
+    destinatarios: 100, //Numero de destinatarios. (-1) si no existen destinatarios
     emitidaPorTercerosODestinatario: true //Indica si quiero el elemento emitida por terceros
 };
 
 var cabecera_factura_config = {
     serieFactura: true,
     facturaSimplificada: true,
-    facturaEmitidaSustitucionSimplificada: false,
+    facturaEmitidaSustitucionSimplificada: true,
     facturaRectificativa: {
-        value: false, //Indica si quiero el elemento FacturaRectificativa
+        value: true, //Indica si quiero el elemento FacturaRectificativa
         importeRectificacion: true,
         cuotaRecargo: true
     },
     facturaRectificadaSustituida: {
         value: true, //Indica si quiero el elemento FacturaRectificadaSustituida
         serieFactura: true,
-        numFacturas: 2 //(1 a 100)
+        numFacturas: 100 //(1 a 100)
     }
 };
 var datos_factura_config = {
     fechaOperacion: true,
-    detallesFactura: { numDetalles: 3 },
+    detallesFactura: { numDetalles: 1000 },
     retencionSoportada: true,
-    baseImponibleACoste: false,
-    numClaves: 1 // 1 a 3
+    baseImponibleACoste: true,
+    numClaves: 3 // 1 a 3
 };
 var tipo_desglose_config = {
     desgloseFactura: false, //TipoDesglose --> DesgloseFactura / Si es true da igual lo que valga desgloseTipoOperacion
-    desgloseTipoOperacion: { prestacionServicios: true, entrega: false }, // Solo se genera si desgloseFactura
+    desgloseTipoOperacion: { prestacionServicios: true, entrega: true }, // Solo se genera si desgloseFactura
     //no esta definido o es false y ademas prestacionServicios o entrega  o los dos es true.
     desglose: {
         sujeta: {
-            value: false, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
+            value: true, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
             exenta: {
                 value: true,// Si es true genero la factura sujeta exenta
                 numDetallesExenta: 7 //Numero de deralles de la factura exenta (1 a 7)
