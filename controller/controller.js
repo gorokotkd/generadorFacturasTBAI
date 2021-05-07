@@ -190,11 +190,11 @@ var controller = {
         var array = [];
         var json = {};
         var total_fact = 0;
-        const NUM_FACTURAS = 1000;
-        const NUM_GRUPO = 1;
+        const NUM_FACTURAS = 10000;
+        const NUM_GRUPO = 10;
 
 
-        //fs.writeFileSync("./files/idents_grandes.txt", "Numfactura / Identificador / Ratio de Compresion\n", {flag: 'w'});
+        fs.writeFileSync("./files/idents.txt", "Numfactura / Identificador / Ratio de Compresion\n", {flag: 'w'});
 
         for (var i = 0; i < NUM_FACTURAS / NUM_GRUPO; i++) {
             array = [];
@@ -241,7 +241,7 @@ var controller = {
                  //fs.writeFileSync("./files/idents_grandes.txt", total_fact + " / "+json._id+ " / "+(1-(bytes_comprimida/bytes_sin_comprimir)) + "\n", {flag: 'a'});
 
             }
-            //fs.writeFileSync('./files/idents.txt',array[getRandomInt(0, array.length)]._id+"\n", {flag: 'a'});
+            fs.writeFileSync('./files/idents.txt',array[getRandomInt(0, array.length)]._id+"\n", {flag: 'a'});
             //save(array).then(console.log);
             var insertar_start = performance.now();
             await insert(array);
@@ -278,7 +278,7 @@ var controller = {
 
         
         const MAX_GRUPO = 1000
-        for(var i = 70; i <= MAX_GRUPO; i+=10){
+        for(var i = 960; i <= MAX_GRUPO; i+=10){
             //console.log(i);
             let nif_pos = Math.floor(Math.random() * nif_list.length);
             let nif = nif_list[nif_pos];
@@ -352,15 +352,17 @@ var controller = {
     },
     test: async function(req, res){
 
-        fs.writeFileSync("./files/test_facturas_grandes_agrupadas.csv", "Total Facturas Agrupadas;Numero de Particiones;Ratio De Compresión;Tiempo de búsqueda en BD;Tiempo de descompresión;Tiempo de búsqueda factura\n", {flag: 'w'});
-        const file = fs.readFileSync("./files/identsGrupos.txt").toString();
+        //fs.writeFileSync("./files/test_facturas_grandes_agrupadas.csv", "Total Facturas Agrupadas;Numero de Particiones;Ratio De Compresión;Tiempo de búsqueda en BD;Tiempo de descompresión;Tiempo de búsqueda factura\n", {flag: 'w'});
+        fs.writeFileSync("./files/test_obtener_facturas_pequenas.csv", "Numero de Factura;Tiempo de búsqueda en BD;Tiempo de descompresión\n", {flag: 'w'});
+        const file = fs.readFileSync("./files/idents.txt").toString();
 
         const lines = file.split("\n");
 
         for(var i = 0; i < lines.length-1; i++){
-            let line_split = lines[i].split(" / ");
-            let resul = await findByTBAI(line_split[1]);
-            fs.writeFileSync("./files/test_facturas_grandes_agrupadas.csv", line_split[0]+";"+line_split[2]+";"+line_split[3]+";"+resul.stats.busqueda_datos+";"+resul.stats.descompresion+";"+resul.stats.busqueda_factura+"\n", {flag: 'a'});
+            //let line_split = lines[i].split(" / ");
+            let resul = await findByTBAI(lines[i]);
+            //fs.writeFileSync("./files/test_facturas_grandes_agrupadas.csv", line_split[0]+";"+line_split[2]+";"+line_split[3]+";"+resul.stats.busqueda_datos+";"+resul.stats.descompresion+";"+resul.stats.busqueda_factura+"\n", {flag: 'a'});
+            fs.writeFileSync("./files/test_obtener_facturas_pequenas.csv", (i+1)+";"+resul.stats.busqueda_datos+";"+resul.stats.descompresion+"\n", {flag: 'a'});
         }
         
         return res.status(200).send("OK");
@@ -397,7 +399,6 @@ var controller = {
         sig.addReference("//*[local-name(.)='Cabecera' or local-name(.) = 'Sujetos' or local-name(.) = 'Factura' or local-name(.) = 'HuellaTBAI']");
         sig.signingKey = privateKey;
         var facturaTbai;
-        var factura;
         var nif_pos;
         var nif;
         var data;
@@ -522,13 +523,7 @@ async function findByTBAI(tbai_id){
                     for(var i = 0; i < docs.length; i++){
                         if(docs[i].idents.includes(tbai_id)){
                             var pos = Array.from(docs[i].idents).indexOf(tbai_id);
-                            
-                            //var array = JSON.parse("[" + docs[i].agrupacion + "]");
                             var descompresion_start = performance.now();
-                            //var facturasDescom = pako.inflate(array);
-                            //var facturas_string = new TextDecoder().decode(facturasDescom);
-                            //var facturas_string = await unCompressData(docs[i].agrupacion);
-                            //console.log(docs[i]);
                             unCompressData(docs[i].agrupacion).then((resul) =>{
                                 var descompresion_fin = performance.now();
                             
@@ -536,8 +531,6 @@ async function findByTBAI(tbai_id){
                                 var facturas_array = resul.split(/(?=\<\?xml version="1\.0" encoding="utf-8"\?\>)/);
                                 let data = facturas_array[pos];
                                 var busqueda_factura_fin = performance.now();
-        
-                                //return res.status(200).send(facturas_array[pos]);
                                 resolve ({
                                     code: 200,
                                     data: data,
@@ -556,9 +549,6 @@ async function findByTBAI(tbai_id){
                 var descompresion_start = performance.now();
                 unCompressData(factura.FacturaComprimida).then((resul) => {
                     var descompresion_fin = performance.now();
-                    //console.log(facturaDescom);
-                    //return res.status(200).send(new TextDecoder().decode(facturaDescom));
-                    //fs.writeFileSync('./files/factura.xml', resul);
                     resolve ({
                         code:200,
                         data: resul,
@@ -588,7 +578,7 @@ function agruparNFacturas(num, nif, fechaInicio, fechaFin){
         let xml = generator.generate(data).toString();
         sig.computeSignature(xml);
         let factura = sig.getSignedXml();
-
+        console.log("NumFactura --> "+i+" // Tamano (MB) --> "+((new TextEncoder().encode(agrupacion).byteLength)/MB));
         agrupacion += factura;
         tbai_idents.push(DATA.getIdentTBAI(factura));
     }
@@ -598,70 +588,5 @@ function agruparNFacturas(num, nif, fechaInicio, fechaFin){
 
     return to_return;
 }
-
-const sujetos_config = {
-    destinatarios: 2, //Numero de destinatarios. (-1) si no existen destinatarios
-    emitidaPorTercerosODestinatario: true //Indica si quiero el elemento emitida por terceros
-};
-
-const cabecera_factura_config = {
-    serieFactura: true,
-    facturaSimplificada: true,
-    facturaEmitidaSustitucionSimplificada: false,
-    facturaRectificativa: {
-        value: false, //Indica si quiero el elemento FacturaRectificativa
-        importeRectificacion: true,
-        cuotaRecargo: true
-    },
-    facturaRectificadaSustituida: {
-        value: true, //Indica si quiero el elemento FacturaRectificadaSustituida
-        serieFactura: true,
-        numFacturas: 2 //(1 a 100)
-    }
-};
-const datos_factura_config = {
-    fechaOperacion: true,
-    detallesFactura: { numDetalles: 3 },
-    retencionSoportada: true,
-    baseImponibleACoste: false,
-    numClaves: 1 // 1 a 3
-};
-const tipo_desglose_config = {
-    desgloseFactura: false, //TipoDesglose --> DesgloseFactura / Si es true da igual lo que valga desgloseTipoOperacion
-    desgloseTipoOperacion: { prestacionServicios: true, entrega: false }, // Solo se genera si desgloseFactura
-    //no esta definido o es false y ademas prestacionServicios o entrega  o los dos es true.
-    desglose: {
-        sujeta: {
-            value: false, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
-            exenta: {
-                value: true,// Si es true genero la factura sujeta exenta
-                numDetallesExenta: 7 //Numero de deralles de la factura exenta (1 a 7)
-            },
-            noExenta: {
-                value: true, // Si es true genero la factura NoExenta
-                numDetallesNoExenta: 2, //Numero de detalles (1 a 2)
-                numDetallesIVA: 6 //Numero de detalles de desglose de IVA (1 a 6)
-            }
-        },
-        noSujeta: {
-            value: true, //Si es true genero la factura NoSujeta
-            numDetallesNoSujeta: 2 //Numero de detalles de la factura NoSujeta (1 a 2)
-        }
-    }
-};
-
-const huellaTaBAI_config = {
-    encadenamiento: {
-        value: true, //Si es true genero el elemento EncadenamientoFacturaAnterior
-        serieFacturaAnterior: true //Si es true genero el campo SerieFacturaAnterior
-    },
-    entidadNIF: true, //Si es true la entidad se identifica mediante el NIF. (Si es false o no existe se identifica con el otro metodo)
-    entidadIdOtro: true, // Si es true la entidad se identifica de otra forma
-    numSerieDispositivo: true //Indica si quiero el campo numSerieDispositivo
-};
-
-
-
-
 
 module.exports = controller;

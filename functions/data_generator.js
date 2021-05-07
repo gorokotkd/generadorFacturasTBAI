@@ -4,35 +4,35 @@ const MAX_NUMBER = 100000;
 
 
 var sujetos_config = {
-    destinatarios: 100, //Numero de destinatarios. (-1) si no existen destinatarios
+    destinatarios: 1, //Numero de destinatarios. (-1) si no existen destinatarios
     emitidaPorTercerosODestinatario: true //Indica si quiero el elemento emitida por terceros
 };
 
 var cabecera_factura_config = {
     serieFactura: true,
-    facturaSimplificada: true,
-    facturaEmitidaSustitucionSimplificada: true,
+    facturaSimplificada: false,
+    facturaEmitidaSustitucionSimplificada: false,
     facturaRectificativa: {
-        value: true, //Indica si quiero el elemento FacturaRectificativa
+        value: false, //Indica si quiero el elemento FacturaRectificativa
         importeRectificacion: true,
         cuotaRecargo: true
     },
     facturaRectificadaSustituida: {
-        value: true, //Indica si quiero el elemento FacturaRectificadaSustituida
+        value: false, //Indica si quiero el elemento FacturaRectificadaSustituida
         serieFactura: true,
         numFacturas: 100 //(1 a 100)
     }
 };
 var datos_factura_config = {
     fechaOperacion: true,
-    detallesFactura: { numDetalles: 1000 },
+    detallesFactura: { numDetalles: 2 },
     retencionSoportada: true,
     baseImponibleACoste: true,
-    numClaves: 3 // 1 a 3
+    numClaves: 1 // 1 a 3
 };
 var tipo_desglose_config = {
     desgloseFactura: false, //TipoDesglose --> DesgloseFactura / Si es true da igual lo que valga desgloseTipoOperacion
-    desgloseTipoOperacion: { prestacionServicios: true, entrega: true }, // Solo se genera si desgloseFactura
+    desgloseTipoOperacion: { prestacionServicios: false, entrega: false }, // Solo se genera si desgloseFactura
     //no esta definido o es false y ademas prestacionServicios o entrega  o los dos es true.
     desglose: {
         sujeta: {
@@ -56,7 +56,7 @@ var tipo_desglose_config = {
 
 var huellaTBAI_config = {
     encadenamiento: {
-        value: true, //Si es true genero el elemento EncadenamientoFacturaAnterior
+        value: false, //Si es true genero el elemento EncadenamientoFacturaAnterior
         serieFacturaAnterior: true //Si es true genero el campo SerieFacturaAnterior
     },
     entidadNIF: true, //Si es true la entidad se identifica mediante el NIF. (Si es false o no existe se identifica con el otro metodo)
