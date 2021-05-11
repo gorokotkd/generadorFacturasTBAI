@@ -4,13 +4,13 @@ const MAX_NUMBER = 100000;
 
 
 var sujetos_config = {
-    destinatarios: 1, //Numero de destinatarios. (-1) si no existen destinatarios
-    emitidaPorTercerosODestinatario: true //Indica si quiero el elemento emitida por terceros
+    destinatarios: 2, //Numero de destinatarios. (-1) si no existen destinatarios
+    emitidaPorTercerosODestinatario: false //Indica si quiero el elemento emitida por terceros
 };
 
 var cabecera_factura_config = {
     serieFactura: true,
-    facturaSimplificada: false,
+    facturaSimplificada: true,
     facturaEmitidaSustitucionSimplificada: false,
     facturaRectificativa: {
         value: false, //Indica si quiero el elemento FacturaRectificativa
@@ -24,9 +24,9 @@ var cabecera_factura_config = {
     }
 };
 var datos_factura_config = {
-    fechaOperacion: true,
-    detallesFactura: { numDetalles: 2 },
-    retencionSoportada: true,
+    fechaOperacion: false,
+    detallesFactura: { numDetalles: 3 },
+    retencionSoportada: false,
     baseImponibleACoste: true,
     numClaves: 1 // 1 a 3
 };

@@ -11,16 +11,12 @@ var router = express.Router();
 
 //Rutas
 
-router.get('/home', controller.home);
-router.get('/sign', controller.sign);
+
 router.get('/validate', controller.validate);
-router.get('/generator', controller.generate);
-router.get('/generate-data', controller.generateData);
 router.get('/createdb', controller.createDb);
 router.get('/gr', controller.getFacturaByTbai);
 router.get('/agrupar', controller.agrupar);
 router.get('/test', controller.test);
-router.get('/ascendingDB', controller.ascendingDB);
 
 
 
