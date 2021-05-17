@@ -27,7 +27,7 @@ var cabecera_factura_config = {
 var datos_factura_config = {
     fechaOperacion: true,
     detallesFactura: {
-        numDetalles: 1,
+        numDetalles: 5,
         minImporteUnitario: 1,
         maxImporteUnitario: 100
     },
@@ -171,8 +171,8 @@ function randomHour(start, end) {
  * @returns El desglose actualizado
  */
 function desgloseSujetaNoSujeta(desglose, detalles, options = {
-    sujeta: {
-        value: false,   //Indica si quiero o no que exista el elemento Sujeta, si es false lo demas no se evalua
+    //sujeta: {
+    //    value: false,   //Indica si quiero o no que exista el elemento Sujeta, si es false lo demas no se evalua
         /*exenta: {
             value: false, //Indica si quiero o no que exista el elemento Exenta.
             numDetallesExenta: -1 //Numero de detalles en Exenta, si el valor no es valido se da uno aleatorio.
@@ -182,146 +182,155 @@ function desgloseSujetaNoSujeta(desglose, detalles, options = {
             numDetallesNoExenta: 1, //Indica el numero de detalles en NoExenta
             numDetallesIVA: 1 //Indica el numero de detalles en el desglose de IVA
         }*/
-    },
-    noSujeta: {
-        value: false, //Indica si quiero o no que exista el elemento NoSujeta
-        numDetallesNoSujeta: -1 //Indica el numero de detalles del elemento NoSujeta
-    }
+    //},
+    //noSujeta: {
+    //    value: false, //Indica si quiero o no que exista el elemento NoSujeta
+    //    numDetallesNoSujeta: -1 //Indica el numero de detalles del elemento NoSujeta
+    //}
 }) {
-    if (options.hasOwnProperty('sujeta')) {//Creo el desglose "Sujeta"
-        if (options.sujeta.hasOwnProperty('value')) {
-            if (options.sujeta.value) {
-                desglose.Sujeta = {};
+    //if (options.hasOwnProperty('sujeta')) {//Creo el desglose "Sujeta"
+        //if (options.sujeta.hasOwnProperty('value')) {
+            //if (options.sujeta.value) {
+                var array = Array.from(new Set(detalles.filter(d => d.Sujeta)));
+                if(array.length > 0){
+                    desglose.Sujeta = {};
 
-                var max_exentas = detalles.filter(d => d.hasOwnProperty('Exenta')).length;
-                //if (options.sujeta.hasOwnProperty('exenta')) {
-                if(max_exentas > 0){
-                    var causas_exencion = Array.from(new Set(detalles.filter(d => d.hasOwnProperty('Exenta')).map(d => d.CausaExencion)));
+                    var max_exentas = array.filter(d => d.hasOwnProperty('Exenta')).length;
+                    //if (options.sujeta.hasOwnProperty('exenta')) {
+                    if(max_exentas > 0){
+                        var causas_exencion = Array.from(new Set(array.filter(d => d.hasOwnProperty('Exenta')).map(d => d.CausaExencion)));
 
-                    //if (options.sujeta.exenta.hasOwnProperty('value')) {
-                        //if (options.sujeta.exenta.value) {
-                            //if (options.sujeta.exenta.numDetallesExenta != -1) {
-                                /*var max = 1;
-                                if (options.sujeta.exenta.hasOwnProperty('numDetallesExenta')) {
-                                    if (options.sujeta.exenta.numDetallesExenta > 0 && options.sujeta.exenta.numDetallesExenta < 8) {
-                                        max = options.sujeta.exenta.numDetallesExenta;
+                        //if (options.sujeta.exenta.hasOwnProperty('value')) {
+                            //if (options.sujeta.exenta.value) {
+                                //if (options.sujeta.exenta.numDetallesExenta != -1) {
+                                    /*var max = 1;
+                                    if (options.sujeta.exenta.hasOwnProperty('numDetallesExenta')) {
+                                        if (options.sujeta.exenta.numDetallesExenta > 0 && options.sujeta.exenta.numDetallesExenta < 8) {
+                                            max = options.sujeta.exenta.numDetallesExenta;
+                                        } else {
+                                            max = getRandomInt(1, 8);
+                                        }
                                     } else {
                                         max = getRandomInt(1, 8);
+                                    }*/
+                                    desglose.Sujeta.Exenta = [];
+                                    for (var i = 0; i < causas_exencion.length; i++) {
+                                        var exenta = {
+                                            "CausaExencion": causas_exencion[i],
+                                            "BaseImponible": array.filter(d => d.hasOwnProperty('Exenta')).filter(d => d.CausaExencion == causas_exencion[i]).map(d => d.ImporteTotal).reduce((a,b) => a + b, 0)
+                                        };
+                                        desglose.Sujeta.Exenta.push(exenta);
                                     }
-                                } else {
-                                    max = getRandomInt(1, 8);
-                                }*/
-                                desglose.Sujeta.Exenta = [];
-                                for (var i = 0; i < causas_exencion.length; i++) {
-                                    var exenta = {
-                                        "CausaExencion": causas_exencion[i],
-                                        "BaseImponible": detalles.filter(d => d.hasOwnProperty('Exenta')).filter(d => d.CausaExencion == causas_exencion[i]).map(d => d.ImporteTotal).reduce((a,b) => a + b, 0)
-                                    };
-                                    desglose.Sujeta.Exenta.push(exenta);
-                                }
+                                //}
                             //}
                         //}
-                    //}
-                }//Fin Exenta
+                    }//Fin Exenta
 
-                var maxDetallesNoExenta = detalles.filter(d => !d.hasOwnProperty('Exenta')).length;
+                    var maxDetallesNoExenta = array.filter(d => !d.hasOwnProperty('Exenta')).length;
 
-                //if (options.sujeta.hasOwnProperty('noExenta')) {
-                if(maxDetallesNoExenta > 0){
-                    //if (options.sujeta.noExenta.hasOwnProperty('value')) {
-                        //if (options.sujeta.noExenta.value) {
-                            //var maxDetallesNoExenta = getRandomInt(1, 3);
-                            //var maxDetallesIVA = getRandomInt(1, 7);
+                    //if (options.sujeta.hasOwnProperty('noExenta')) {
+                    if(maxDetallesNoExenta > 0){
+                        //if (options.sujeta.noExenta.hasOwnProperty('value')) {
+                            //if (options.sujeta.noExenta.value) {
+                                //var maxDetallesNoExenta = getRandomInt(1, 3);
+                                //var maxDetallesIVA = getRandomInt(1, 7);
 
-                            /*
-                            if (options.sujeta.noExenta.hasOwnProperty('numDetallesNoExenta')) {
-                                if (options.sujeta.noExenta.numDetallesNoExenta > 0 && options.sujeta.noExenta.numDetallesNoExenta < 3) {
-                                    maxDetallesNoExenta = options.sujeta.noExenta.numDetallesNoExenta;
-                                }
-                            }*/
-                            /*
-                            if (options.sujeta.noExenta.hasOwnProperty('numDetallesIVA')) {
-                                if (options.sujeta.noExenta.numDetallesIVA > 0 && options.sujeta.noExenta.numDetallesIVA < 7) {
-                                    maxDetallesIVA = options.sujeta.noExenta.numDetallesIVA;
-                                }
-                            }*/
+                                /*
+                                if (options.sujeta.noExenta.hasOwnProperty('numDetallesNoExenta')) {
+                                    if (options.sujeta.noExenta.numDetallesNoExenta > 0 && options.sujeta.noExenta.numDetallesNoExenta < 3) {
+                                        maxDetallesNoExenta = options.sujeta.noExenta.numDetallesNoExenta;
+                                    }
+                                }*/
+                                /*
+                                if (options.sujeta.noExenta.hasOwnProperty('numDetallesIVA')) {
+                                    if (options.sujeta.noExenta.numDetallesIVA > 0 && options.sujeta.noExenta.numDetallesIVA < 7) {
+                                        maxDetallesIVA = options.sujeta.noExenta.numDetallesIVA;
+                                    }
+                                }*/
 
-                            //Necesito los detalles, por cada uno de ellos miro su tipoImpositivo, en funcion de eso, 
-                            //creo un nuevo grupo de detalles de IVA o uso uno existente. SI existe voy acumulando el total.
-                            maxDetallesNoExenta = 1;
-                            var tipoImpositivoList = Array.from(new Set(detalles.filter(d => !d.hasOwnProperty('Exenta')).map(d => d.TipoImpositivo)));
-                            var maxDetallesIVA = tipoImpositivoList.length;
+                                //Necesito los detalles, por cada uno de ellos miro su tipoImpositivo, en funcion de eso, 
+                                //creo un nuevo grupo de detalles de IVA o uso uno existente. SI existe voy acumulando el total.
+                                maxDetallesNoExenta = 1;
+                                var tipoImpositivoList = Array.from(new Set(array.filter(d => !d.hasOwnProperty('Exenta')).map(d => d.TipoImpositivo)));
+                                var maxDetallesIVA = tipoImpositivoList.length;
 
-                            desglose.Sujeta.NoExenta = [];
-                            for (var i = 0; i < maxDetallesNoExenta; i++) {
-                                var noExenta = {
-                                    "TipoNoExenta": "S1" /*+ getRandomInt(1, 3)*/,
-                                    "DesgloseIVA": []
-                                };
-                                for (var j = 0; j < maxDetallesIVA; j++) {
-                                    var desgloseIva = {
-                                        "BaseImponible": detalles.filter(d => d.TipoImpositivo==tipoImpositivoList[j]).map(d => (d.hasOwnProperty("Descuento")) ? ((d.ImporteUnitario - d.Descuento) * d.Cantidad) : (d.ImporteUnitario * d.Cantidad)).reduce((a,b) => a + b, 0).toFixed(2)
+                                desglose.Sujeta.NoExenta = [];
+                                for (var i = 0; i < maxDetallesNoExenta; i++) {
+                                    var noExenta = {
+                                        "TipoNoExenta": "S1" /*+ getRandomInt(1, 3)*/,
+                                        "DesgloseIVA": []
                                     };
-                                    //console.log( detalles.filter(d => d.TipoImpositivo===tipoImpositivoList[i]));
-                                    //desgloseIva.BaseImponible = desgloseIva.BaseImponible.toFixed(2);
-                                    var rand = getRandomInt(0, 2);
-                                    //if (rand == 0) {
-                                        //desgloseIva.TipoImpositivo = getRandomArbitrary(0, 101, 2);
-                                        desgloseIva.TipoImpositivo = tipoImpositivoList[j];
-                                    //}
+                                    for (var j = 0; j < maxDetallesIVA; j++) {
+                                        var desgloseIva = {
+                                            "BaseImponible": array.filter(d => d.TipoImpositivo==tipoImpositivoList[j]).map(d => (d.hasOwnProperty("Descuento")) ? ((d.ImporteUnitario - d.Descuento) * d.Cantidad) : (d.ImporteUnitario * d.Cantidad)).reduce((a,b) => a + b, 0).toFixed(2)
+                                        };
+                                        //console.log( detalles.filter(d => d.TipoImpositivo===tipoImpositivoList[i]));
+                                        //desgloseIva.BaseImponible = desgloseIva.BaseImponible.toFixed(2);
+                                        var rand = getRandomInt(0, 2);
+                                        //if (rand == 0) {
+                                            //desgloseIva.TipoImpositivo = getRandomArbitrary(0, 101, 2);
+                                            desgloseIva.TipoImpositivo = tipoImpositivoList[j];
+                                        //}
 
-                                    rand = getRandomInt(0, 2);
-                                    //if (rand == 0) {
-                                        desgloseIva.CuotaImpuesto = (desgloseIva.BaseImponible * ((desgloseIva.TipoImpositivo/100))).toFixed(2);
-                                    //}
+                                        rand = getRandomInt(0, 2);
+                                        //if (rand == 0) {
+                                            desgloseIva.CuotaImpuesto = (desgloseIva.BaseImponible * ((desgloseIva.TipoImpositivo/100))).toFixed(2);
+                                        //}
 
-                                    
+                                        
 
-                                    rand = getRandomInt(0, 2);
-                                    if (rand == 0) {
-                                        desgloseIva.TipoRecargoEquivalencia = getRandomArbitrary(0, 101, 2);
-                                    }
+                                        rand = getRandomInt(0, 2);
+                                        if (rand == 0) {
+                                            desgloseIva.TipoRecargoEquivalencia = getRandomArbitrary(0, 101, 2);
+                                        }
 
-                                    rand = getRandomInt(0, 2);
-                                    if (rand == 0) {
-                                        desgloseIva.CuotaRecargoEquivalencia = getRandomArbitrary(0, MAX_NUMBER, 2);
-                                    }
+                                        rand = getRandomInt(0, 2);
+                                        if (rand == 0) {
+                                            desgloseIva.CuotaRecargoEquivalencia = getRandomArbitrary(0, MAX_NUMBER, 2);
+                                        }
 
-                                    rand = getRandomInt(0, 2);
-                                    if (rand == 0) {
-                                        desgloseIva.OperacionEnRecargoDeEquivalenciaORegimenSimplificado = sinNo_list[getRandomInt(0, 2)];
-                                    }
-                                    noExenta.DesgloseIVA.push(desgloseIva);
+                                        rand = getRandomInt(0, 2);
+                                        if (rand == 0) {
+                                            desgloseIva.OperacionEnRecargoDeEquivalenciaORegimenSimplificado = sinNo_list[getRandomInt(0, 2)];
+                                        }
+                                        noExenta.DesgloseIVA.push(desgloseIva);
+                                    }//End for
+                                    desglose.Sujeta.NoExenta.push(noExenta);
                                 }//End for
-                                desglose.Sujeta.NoExenta.push(noExenta);
-                            }//End for
+                            //}
                         //}
-                    //}
-                }//Fin NoExenta
-            }
-        }
-    }//Fin Sujeta
+                    }//Fin NoExenta
+                }
+                
+            //}
+        //}
+    //}//Fin Sujeta
 
-    if (options.hasOwnProperty('noSujeta')) {//Creo el desglose "NoSujeta"
-        if (options.noSujeta.hasOwnProperty('value')) {
-            if (options.noSujeta.value) {
-                var maxDetallesNoSujeta = 1
-                if (options.noSujeta.hasOwnProperty('numDetallesNoSujeta')) {
+
+    //if (options.hasOwnProperty('noSujeta')) {//Creo el desglose "NoSujeta"
+        //if (options.noSujeta.hasOwnProperty('value')) {
+            //if (options.noSujeta.value) {
+                
+                var array = Array.from(new Set(detalles.filter(d => !d.Sujeta)));
+                var maxDetallesNoSujeta = array.length
+                /*if (options.noSujeta.hasOwnProperty('numDetallesNoSujeta')) {
                     if (options.noSujeta.numDetallesNoSujeta > 0 && options.noSujeta.numDetallesNoSujeta < 3) {
                         maxDetallesNoSujeta = options.noSujeta.numDetallesNoSujeta;
                     }
+                }*/
+                if(maxDetallesNoSujeta > 0){
+                    desglose.NoSujeta = [];
+                    for (var i = 0; i < maxDetallesNoSujeta; i++) {
+                        var desgloseNoSujeta = {
+                            "Causa": array[i].CausaNoSujeta,
+                            "Importe": ((array[i].ImporteUnitario*array[i].Cantidad)*array[i].Descuento).toFixed(2)
+                        };
+                        desglose.NoSujeta.push(desgloseNoSujeta);
+                    }//End for
                 }
-                desglose.NoSujeta = [];
-                for (var i = 0; i < maxDetallesNoSujeta; i++) {
-                    var desgloseNoSujeta = {
-                        "Causa": noSujeta_list[i],
-                        "Importe": getRandomArbitrary(0, MAX_NUMBER, 2)
-                    };
-                    desglose.NoSujeta.push(desgloseNoSujeta);
-                }//End for
-            }
-        }
-    }//End NoSujeeta
+            //}
+        //}
+    //}//End NoSujeeta
     return desglose;
 }//End function
 
@@ -534,7 +543,7 @@ function detallesDatosFactura(json, options = {
             "ImporteUnitario": getRandomArbitrary(options.minImporteUnitario, options.maxImporteUnitario, 2),
             "TipoImpositivo": tipoImpositivo_list[getRandomInt(0, tipoImpositivo_list.length)]//Campo auxiliar para calcular el IVA
         };
-
+        detalle.Sujeta = true;
         if(tipoDesglose == 0){
             detalle.TipoDesglose = "DesgloseFactura";
         }else{
@@ -545,6 +554,11 @@ function detallesDatosFactura(json, options = {
             //Detalle exento de IVA
             detalle.Exenta = true;
             detalle.CausaExencion = "E" + getRandomInt(1,7);
+        }else{
+            if(getRandomInt(1,101) < 25){
+                detalle.Sujeta = false;
+                detalle.CausaNoSujeta = noSujeta_list[getRandomInt(0, noSujeta_list.length)];
+            }
         }
         
 
