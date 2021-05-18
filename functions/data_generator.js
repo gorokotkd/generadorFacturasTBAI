@@ -170,10 +170,10 @@ function randomHour(start, end) {
  * @param {JSON} options - Opciones de configuracion del desglose
  * @returns El desglose actualizado
  */
-function desgloseSujetaNoSujeta(desglose, detalles, options = {
+function desgloseSujetaNoSujeta(desglose, detalles/*, options = {
     //sujeta: {
     //    value: false,   //Indica si quiero o no que exista el elemento Sujeta, si es false lo demas no se evalua
-        /*exenta: {
+        exenta: {
             value: false, //Indica si quiero o no que exista el elemento Exenta.
             numDetallesExenta: -1 //Numero de detalles en Exenta, si el valor no es valido se da uno aleatorio.
         },
@@ -181,13 +181,13 @@ function desgloseSujetaNoSujeta(desglose, detalles, options = {
             value: false, //Indica si quiero o no que exista el elemento NoExenta.
             numDetallesNoExenta: 1, //Indica el numero de detalles en NoExenta
             numDetallesIVA: 1 //Indica el numero de detalles en el desglose de IVA
-        }*/
+        }
     //},
     //noSujeta: {
     //    value: false, //Indica si quiero o no que exista el elemento NoSujeta
     //    numDetallesNoSujeta: -1 //Indica el numero de detalles del elemento NoSujeta
     //}
-}) {
+}*/) {
     //if (options.hasOwnProperty('sujeta')) {//Creo el desglose "Sujeta"
         //if (options.sujeta.hasOwnProperty('value')) {
             //if (options.sujeta.value) {
@@ -643,13 +643,13 @@ function datosFactura(json, options = {
  * @param {JSON} json - Elemento TipoDesglose de la factura
  * @param {JSON} options - Parametros de configuracion del desglose
  */
-function tipoDesglose(json, detalles, options = {
+function tipoDesglose(json, detalles/*, options = {
     //desgloseFactura: true, //TipoDesglose --> DesgloseFactura / Si es true da igual lo que valga desgloseTipoOperacion
     //desgloseTipoOperacion: { prestacionServicios: false, entrega: false }, // Solo se genera si desgloseFactura
     //no esta definido o es false y ademas existe prestacionServicios o entrega y ademas es true alguno de los dos.
     desglose: {
         sujeta: {
-            /*value: false, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
+            value: false, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
             exenta: {
                 value: false,// Si es true genero la factura sujeta exenta
                 numDetallesExenta: 0 //Numero de deralles de la factura exenta (1 a 7)
@@ -658,29 +658,29 @@ function tipoDesglose(json, detalles, options = {
                 value: false, // Si es true genero la factura NoExenta
                 numDetallesNoExenta: 0, //Numero de detalles (1 a 2)
                 numDetallesIVA: 0 //Numero de detalles de desglose de IVA (1 a 6)
-            }*/
+            }
         },
         noSujeta: {
             value: false, //Si es true genero la factura NoSujeta
             numDetallesNoSujeta: 0 //Numero de detalles de la factura NoSujeta
         }
     }
-}) {
+}*/) {
 
     var tipo_desglose = detalles.map(d => d.TipoDesglose);
 
     if(tipo_desglose.includes("DesgloseFactura")){
         json.DesgloseFactura = {};
-        json.DesgloseFactura = desgloseSujetaNoSujeta(json.DesgloseFactura, detalles, options.desglose);
+        json.DesgloseFactura = desgloseSujetaNoSujeta(json.DesgloseFactura, detalles/*, options.desglose*/);
     }else{
         json.DesgloseTipoOperacion = {};
 
         if(tipo_desglose.includes(desgloseTipoOperacion_list[0])){//PrestacionServicios
-            desgloseSujetaNoSujeta(json.DesgloseTipoOperacion.PrestacionServicios = {}, detalles.filter(d => d.TipoDesglose == desgloseTipoOperacion_list[0]), options.desglose);
+            desgloseSujetaNoSujeta(json.DesgloseTipoOperacion.PrestacionServicios = {}, detalles.filter(d => d.TipoDesglose == desgloseTipoOperacion_list[0])/*, options.desglose*/);
         }
 
         if(tipo_desglose.includes(desgloseTipoOperacion_list[1])){//Entrega
-            desgloseSujetaNoSujeta(json.DesgloseTipoOperacion.Entrega = {}, detalles.filter(d => d.TipoDesglose == desgloseTipoOperacion_list[1]), options.desglose);
+            desgloseSujetaNoSujeta(json.DesgloseTipoOperacion.Entrega = {}, detalles.filter(d => d.TipoDesglose == desgloseTipoOperacion_list[1])/*, options.desglose*/);
         }
     }
 /*
@@ -830,7 +830,7 @@ module.exports = {
 
         datosFactura(json.Factura.DatosFactura, datos_factura_config);
 
-        tipoDesglose(json.Factura.TipoDesglose, json.Factura.DatosFactura.DetallesFactura, tipo_desglose_config);
+        tipoDesglose(json.Factura.TipoDesglose, json.Factura.DatosFactura.DetallesFactura/*, tipo_desglose_config*/);
 
         /* HUELLA TBAI*/
 
@@ -841,7 +841,7 @@ module.exports = {
     sujetos_config: sujetos_config,
     cabecera_factura_config: cabecera_factura_config,
     datos_factura_config: datos_factura_config,
-    tipo_desglose_config: tipo_desglose_config,
+    //tipo_desglose_config: tipo_desglose_config,
     huellaTBAI_config: huellaTBAI_config
 };
 

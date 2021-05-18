@@ -79,7 +79,7 @@ function randomDate(start, end) {
 
 var controller = {
     unaFactura: function (req, res) {
-        let data = dataGenerator.generate("12345678A", new Date(), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.tipo_desglose_config, dataGenerator.huellaTBAI_config);
+        let data = dataGenerator.generate("12345678A", new Date(), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.huellaTBAI_config);
         let xml = generator.generate(data);
         res.status(200).send(xml);
         //res.status(200).send(data);
@@ -136,7 +136,7 @@ var controller = {
 
                 //GENERACION Y FIRMA DE FACTURA
                 var genera_factura_start = performance.now();
-                data = dataGenerator.generate(nif, moment(randomDate(new Date(2021, 0, 1), new Date()), "DD-MM-YYYY").toDate(), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.tipo_desglose_config, dataGenerator.huellaTBAI_config);
+                data = dataGenerator.generate(nif, moment(randomDate(new Date(2021, 0, 1), new Date()), "DD-MM-YYYY").toDate(), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.huellaTBAI_config);
                 xml = generator.generate(data).toString();
                 var genera_factura_fin = performance.now();
 
@@ -341,7 +341,7 @@ var controller = {
 
             //GENERACION Y FIRMA DE FACTURA
             var genera_factura_start = performance.now();
-            let data = dataGenerator.generate(nif, moment(randomDate(new Date(2021, 0, 1), new Date(2021, 1, 1)), "DD-MM-YYYY"), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.tipo_desglose_config, dataGenerator.huellaTBAI_config);
+            let data = dataGenerator.generate(nif, moment(randomDate(new Date(2021, 0, 1), new Date(2021, 1, 1)), "DD-MM-YYYY"), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.huellaTBAI_config);
             let xml = generator.generate(data).toString();
             var genera_factura_fin = performance.now();
             //console.log(data);
@@ -644,7 +644,7 @@ function agruparNFacturas(num, nif, fechaInicio, fechaFin) {
     var agrupacion = "";
     for (var i = 0; i < num; i++) {
         let data = dataGenerator.generate(nif, moment(randomDate(moment(fechaInicio, "DD-MM-YYYY").toDate(), moment(fechaFin, "DD-MM-YYYY").toDate()), "DD-MM-YYYY"),
-            dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.tipo_desglose_config, dataGenerator.huellaTBAI_config);
+            dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.huellaTBAI_config);
         let xml = generator.generate(data).toString();
         sig.computeSignature(xml);
         let factura = sig.getSignedXml();
