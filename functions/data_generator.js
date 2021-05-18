@@ -6,7 +6,8 @@ const moment = require('moment');
 
 var sujetos_config = {
     destinatarios: 1, //Numero de destinatarios. (-1) si no existen destinatarios
-    emitidaPorTercerosODestinatario: true //Indica si quiero el elemento emitida por terceros
+    emitidaPorTercerosODestinatario: true, //Indica si quiero el elemento emitida por terceros,
+    nif: ["12345678A", "Empresa"] //par NIF + Nombre Empresa
 };
 
 var cabecera_factura_config = {
@@ -22,19 +23,21 @@ var cabecera_factura_config = {
         value: false, //Indica si quiero el elemento FacturaRectificadaSustituida
         serieFactura: true,
         numFacturas: 100 //(1 a 100)
-    }
+    },
+    FechaExpedicionFactura: moment(new Date()).format("DD-MM-YYYY"),
+    HoraExpedicionFactura: moment(new Date()).format("HH:mm:ss")
 };
 var datos_factura_config = {
     fechaOperacion: true,
     detallesFactura: {
-        numDetalles: 5,
+        numDetalles: 100,
         minImporteUnitario: 1,
         maxImporteUnitario: 100
     },
     retencionSoportada: true,
     baseImponibleACoste: true,
     numClaves: 1 // 1 a 3
-};
+};/*
 var tipo_desglose_config = {
     //desgloseFactura: false, //TipoDesglose --> DesgloseFactura / Si es true da igual lo que valga desgloseTipoOperacion
     //desgloseTipoOperacion: { prestacionServicios: false, entrega: false }, // Solo se genera si desgloseFactura
@@ -42,7 +45,7 @@ var tipo_desglose_config = {
     desglose: {
         sujeta: {
             value: true, // Si es true, se genera la factura sujeta, aunque puede que este vacia.
-           /* exenta: {
+            exenta: {
                 value: true,// Si es true genero la factura sujeta exenta
                 numDetallesExenta: 7 //Numero de deralles de la factura exenta (1 a 7)
             },
@@ -50,7 +53,7 @@ var tipo_desglose_config = {
                 value: true, // Si es true genero la factura NoExenta
                 numDetallesNoExenta: 2, //Numero de detalles (1 a 2)
                 numDetallesIVA: 6 //Numero de detalles de desglose de IVA (1 a 6)
-            }*/
+            }
         },
         noSujeta: {
             value: true, //Si es true genero la factura NoSujeta
@@ -58,10 +61,10 @@ var tipo_desglose_config = {
         }
     }
 };
-
+*/
 var huellaTBAI_config = {
     encadenamiento: {
-        value: true, //Si es true genero el elemento EncadenamientoFacturaAnterior
+        value: false, //Si es true genero el elemento EncadenamientoFacturaAnterior
         serieFacturaAnterior: true //Si es true genero el campo SerieFacturaAnterior
     },
     entidadNIF: true, //Si es true la entidad se identifica mediante el NIF. (Si es false o no existe se identifica con el otro metodo)
@@ -312,18 +315,30 @@ function desgloseSujetaNoSujeta(desglose, detalles/*, options = {
             //if (options.noSujeta.value) {
                 
                 var array = Array.from(new Set(detalles.filter(d => !d.Sujeta)));
-                var maxDetallesNoSujeta = array.length
+
+                var lista_casusas = Array.from(new Set(array.map(d => d.CausaNoSujeta)));
+
                 /*if (options.noSujeta.hasOwnProperty('numDetallesNoSujeta')) {
                     if (options.noSujeta.numDetallesNoSujeta > 0 && options.noSujeta.numDetallesNoSujeta < 3) {
                         maxDetallesNoSujeta = options.noSujeta.numDetallesNoSujeta;
                     }
                 }*/
-                if(maxDetallesNoSujeta > 0){
+                //console.log(array);
+                if(lista_casusas.length > 0){
                     desglose.NoSujeta = [];
-                    for (var i = 0; i < maxDetallesNoSujeta; i++) {
+                    for (var i = 0; i < lista_casusas.length; i++) {
+                        var array_causa = array.filter(d => d.CausaNoSujeta == lista_casusas[i]);
+                        var importe = 0;
+                        for(var j = 0; j < array_causa.length; j++){
+                            if(array_causa[j].hasOwnProperty('Descuento')){
+                                importe += Number(((array_causa[j].ImporteUnitario*array_causa[j].Cantidad)*array_causa[j].Descuento).toFixed(2));
+                            }else{
+                                importe += Number(((array_causa[j].ImporteUnitario*array_causa[j].Cantidad)).toFixed(2));
+                            }
+                        }
                         var desgloseNoSujeta = {
-                            "Causa": array[i].CausaNoSujeta,
-                            "Importe": ((array[i].ImporteUnitario*array[i].Cantidad)*array[i].Descuento).toFixed(2)
+                            "Causa": lista_casusas[i],
+                            "Importe": importe.toFixed(2)
                         };
                         desglose.NoSujeta.push(desgloseNoSujeta);
                     }//End for
@@ -791,19 +806,19 @@ function huellaTBAI(json, options = {
 }
 
 module.exports = {
-    generate: function generate(nif, fechaExp, sujetos_config, cabecera_factura_config, datos_factura_config, tipo_desglose_config, huellaTBAI_config) {
+    generate: function generate(sujetos_config, cabecera_factura_config, datos_factura_config, tipo_desglose_config, huellaTBAI_config) {
         var json = {
             "Sujetos": {
                 "Emisor": {
-                    "NIF": nif,
-                    "ApellidosNombreRazonSocial": getRandomString(getRandomInt(1, 120))
+                    "NIF": sujetos_config.nif[0],
+                    "ApellidosNombreRazonSocial": sujetos_config.nif[1]/*getRandomString(getRandomInt(1, 120))*/
                 }
             },
             "Factura": {
                 "Cabecera": {
                     "NumFactura": getRandomInt(0, MAX_NUMBER),
-                    "FechaExpedicionFactura": moment(fechaExp).format("DD-MM-YYYY"),              
-                    "HoraExpedicionFactura": randomHour(new Date(2020, 0, 1), new Date(2020, 1, 1))
+                    "FechaExpedicionFactura": cabecera_factura_config.FechaExpedicionFactura,              
+                    "HoraExpedicionFactura": cabecera_factura_config.HoraExpedicionFactura
                 },
                 "DatosFactura": {
                     "DescripcionFactura": getRandomString(getRandomInt(1, 250))
@@ -846,7 +861,7 @@ module.exports = {
 };
 
 const desgloseTipoOperacion_list = ["PrestacionServicios", "Entrega"];
-const tipoImpositivo_list = [4, 10, 21];
+const tipoImpositivo_list = [10, 21];
 const rectificativaType_list = ["S", "I"];
 const sinNo_list = ["S", "N"];
 const emitidaPorTerceros_list = ["N", "T", "D"];

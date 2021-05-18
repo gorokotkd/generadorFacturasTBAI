@@ -14,6 +14,7 @@ const cassandra = require('cassandra-driver');
 var generator = require('../functions/generator')
 var dataGenerator = require('../functions/data_generator');
 const nif_list = require('../files/nif_list').nif_list;
+const companies_nif_list = require('../files/companies_nif').companies_nif_list;
 var Factura = require('../model/factura');
 var AgrupacionFactura = require('../model/facturaAgrupada');
 var DATA = require('../functions/getData');
@@ -79,7 +80,9 @@ function randomDate(start, end) {
 
 var controller = {
     unaFactura: function (req, res) {
-        let data = dataGenerator.generate("12345678A", new Date(), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.huellaTBAI_config);
+        let nif_comp = companies_nif_list[getRandomInt(0,companies_nif_list.length)];
+        dataGenerator.sujetos_config.nif=nif_comp;
+        let data = dataGenerator.generate(dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config/*, dataGenerator.tipo_desglose_config*/, dataGenerator.huellaTBAI_config);
         let xml = generator.generate(data);
         res.status(200).send(xml);
         //res.status(200).send(data);
@@ -136,7 +139,7 @@ var controller = {
 
                 //GENERACION Y FIRMA DE FACTURA
                 var genera_factura_start = performance.now();
-                data = dataGenerator.generate(nif, moment(randomDate(new Date(2021, 0, 1), new Date()), "DD-MM-YYYY").toDate(), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.huellaTBAI_config);
+                data = dataGenerator.generate(nif, moment(randomDate(new Date(2021, 0, 1), new Date()), "DD-MM-YYYY").toDate(), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config/*, dataGenerator.tipo_desglose_config*/, dataGenerator.huellaTBAI_config);
                 xml = generator.generate(data).toString();
                 var genera_factura_fin = performance.now();
 
@@ -201,8 +204,8 @@ var controller = {
         sig.signingKey = privateKey;
 
 
-        const MAX_GRUPO = 5080
-        for (var i = 1000; i <= MAX_GRUPO; i += 10) {
+        const MAX_GRUPO = 990
+        for (var i = 10; i <= MAX_GRUPO; i += 10) {
             //console.log(i);
             let nif_pos = Math.floor(Math.random() * nif_list.length);
             let nif = nif_list[nif_pos];
@@ -282,7 +285,7 @@ var controller = {
             }//end if
 
             await insert_agrupadas(array);
-            fs.writeFileSync('./files/identsGrupos_pequenas.txt', i + " / " + array[array.length - 1].idents[array[array.length - 1].idents.length - 1] + " / " + numParticiones + " / " + (1 - (bytes_comprimida / bytes_sin_comprimir)) + "\n", { flag: 'a' });
+            fs.writeFileSync('./files/identsGrupos_pequenas_1000.txt', i + " / " + array[array.length - 1].idents[array[array.length - 1].idents.length - 1] + " / " + numParticiones + " / " + (1 - (bytes_comprimida / bytes_sin_comprimir)) + "\n", { flag: 'a' });
             console.log("Insertadas " + i + " agrupaciones.");
 
         }//end for
@@ -291,19 +294,19 @@ var controller = {
     },
     test: async function (req, res) {
 
-        //fs.writeFileSync("./files/test_facturas_pequenas_agrupadas_con_indice.csv", "Total Facturas Agrupadas;Numero de Particiones"/*;Ratio De Compresión*/ + ";Tiempo de búsqueda en BD;Tiempo de descompresión;Tiempo de búsqueda factura\n", { flag: 'w' });
+        fs.writeFileSync("./files/test_facturas_pequenas_1000.csv", "Total Facturas Agrupadas;Numero de Particiones"/*;Ratio De Compresión*/ + ";Tiempo de búsqueda en BD;Tiempo de descompresión;Tiempo de búsqueda factura\n", { flag: 'w' });
         //fs.writeFileSync("./files/test_obtener_facturas_pequenas.csv", "Numero de Factura;Tiempo de búsqueda en BD;Tiempo de descompresión\n", {flag: 'w'});
-        fs.writeFileSync("./files/test_facturas_grandes_sin_detalles.csv", "Numero Factura;Tiempo en Comprimir;Tiempo de Insercion;Ratio De Compresión;Tiempo de búsqueda en BD;Tiempo de descompresión;Tiempo Total insercion;Tiempo insertar detalles\n", { flag: 'w' });
+        //fs.writeFileSync("./files/test_facturas_pequenas_1000.csv", "Numero Factura;Tiempo en Comprimir;Tiempo de Insercion;Ratio De Compresión;Tiempo de búsqueda en BD;Tiempo de descompresión;Tiempo Total insercion;Tiempo insertar detalles\n", { flag: 'w' });
 
-        const file = fs.readFileSync("./files/idents_grandes_sin_detalles.txt").toString();
+        const file = fs.readFileSync("./files/identsGrupos_pequenas_1000.txt").toString();
 
         const lines = file.split("\n");
 
         for (var i = 1; i < lines.length - 1; i++) {
             let line_split = lines[i].split(" / ");
             let resul = await findByTBAI(line_split[1]);
-            //fs.writeFileSync("./files/test_facturas_pequenas_agrupadas_con_indice.csv", line_split[0] + ";" + line_split[2]/*+";"+line_split[3]*/ + ";" + resul.stats.busqueda_datos + ";" + resul.stats.descompresion + ";" + resul.stats.busqueda_factura + "\n", { flag: 'a' });
-            fs.writeFileSync("./files/test_facturas_grandes_sin_detalles.csv", (i) + ";" + line_split[3] + ";" + line_split[4] + ";" + line_split[2] + ";" + resul.stats.busqueda_datos + ";" + resul.stats.descompresion + ";" + line_split[7] + ";" + line_split[8] + "\n", { flag: 'a' });
+            fs.writeFileSync("./files/test_facturas_pequenas_1000.csv", line_split[0] + ";" + line_split[2]/*+";"+line_split[3]*/ + ";" + resul.stats.busqueda_datos + ";" + resul.stats.descompresion + ";" + resul.stats.busqueda_factura + "\n", { flag: 'a' });
+            //fs.writeFileSync("./files/test_facturas_pequenas_1000.csv", (i) + ";" + line_split[3] + ";" + line_split[4] + ";" + line_split[2] + ";" + resul.stats.busqueda_datos + ";" + resul.stats.descompresion + ";" + line_split[7] + ";" + line_split[8] + "\n", { flag: 'a' });
             //fs.writeFileSync("./files/test_obtener_facturas_pequenas.csv", (i+1)+";"+resul.stats.busqueda_datos+";"+resul.stats.descompresion+"\n", {flag: 'a'});
         }
 
@@ -341,7 +344,7 @@ var controller = {
 
             //GENERACION Y FIRMA DE FACTURA
             var genera_factura_start = performance.now();
-            let data = dataGenerator.generate(nif, moment(randomDate(new Date(2021, 0, 1), new Date(2021, 1, 1)), "DD-MM-YYYY"), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.huellaTBAI_config);
+            let data = dataGenerator.generate(nif, moment(randomDate(new Date(2021, 0, 1), new Date(2021, 1, 1)), "DD-MM-YYYY"), dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config/*, dataGenerator.tipo_desglose_config*/, dataGenerator.huellaTBAI_config);
             let xml = generator.generate(data).toString();
             var genera_factura_fin = performance.now();
             //console.log(data);
@@ -398,8 +401,8 @@ var controller = {
 
         const MAX_AGRUPADAS = 1000;
 
-        //fs.writeFileSync('./cassandra_files/idents_agrupadas_grandes.txt', 'NumAgrupaciones / Ident / TiempoCompresion / TiempoInsercion\n', {flag: 'w'});
-        for (var i = 440; i <= MAX_AGRUPADAS; i += 10) {
+        fs.writeFileSync('./cassandra_files/idents_agrupadas_pequenas_1000.txt', 'NumAgrupaciones / Ident / TiempoCompresion / TiempoInsercion\n', {flag: 'w'});
+        for (var i = 10; i <= MAX_AGRUPADAS; i += 10) {
             let nif_pos = Math.floor(Math.random() * nif_list.length);
             let nif = nif_list[nif_pos];
 
@@ -427,7 +430,7 @@ var controller = {
             await client.execute(insert_query, params, { prepare: true });
             var insertar_fin = performance.now();
 
-            fs.writeFileSync('./cassandra_files/idents_agrupadas_grandes.txt', i + ' / ' + resultado.tbai_idents[i - 1] + ' / ' + (comprimir_fin - comprimir_start) + ' / ' + (insertar_fin - insertar_start) + '\n', { flag: 'a' });
+            fs.writeFileSync('./cassandra_files/idents_agrupadas_pequenas_1000.txt', i + ' / ' + resultado.tbai_idents[i - 1] + ' / ' + (comprimir_fin - comprimir_start) + ' / ' + (insertar_fin - insertar_start) + '\n', { flag: 'a' });
             console.log("Generadas " + i + " agrupaciones.");
         }
 
@@ -483,11 +486,11 @@ var controller = {
             .catch(function (err) {
                 console.error('There was an error when connecting', err);
                 return client.shutdown().then(() => { throw err; });
-            });
+        });
 
-        const file = fs.readFileSync('./cassandra_files/idents_agrupadas_pequenas.txt').toString();
+        const file = fs.readFileSync('./cassandra_files/idents_agrupadas_grandes.txt').toString();
         //fs.writeFileSync('./cassandra_files/test_obtener_facturas_grandes.csv', 'Numero factura; Tiempo en insertar Total;Tiempo en insertar en BD;Tiempo en comprimir;Tiempo en obtener de BD; Tiempo en Descomprimir\n', { flag: 'w' });
-        fs.writeFileSync('./cassandra_files/test_agrupadas_pequenas_new.csv', 'Numero factura; Tiempo en Comprimir;Tiempo en insertar;Tiempo en obtener de BD; Tiempo en Descomprimir;Tiempo en Buscar Factura\n', { flag: 'w' });
+        fs.writeFileSync('./cassandra_files/test_agrupadas_grandes_con_array.csv', 'Numero factura; Tiempo en Comprimir;Tiempo en insertar;Tiempo en obtener de BD; Tiempo en Descomprimir;Tiempo en Buscar Factura\n', { flag: 'w' });
         var lines = file.split('\n');
 
         for (var i = 1; i < lines.length - 1; i++) {
@@ -522,7 +525,7 @@ var controller = {
                     var pos = Array.from(result.rows[0].tbai_id_list).indexOf(line_split[1]);
                     let data = facturas_array[pos];
                     busqueda_factura_agrupacion_fin = performance.now();
-                    fs.writeFileSync('./cassandra_files/test_agrupadas_pequenas_new.csv', line_split[0] + ";" + line_split[2] + ";" + line_split[3] + ";"+ (busqueda_fin - busqueda_start) + ";" + (compresion_fin - compresion_start) +";"+(busqueda_factura_agrupacion_fin- busqueda_factura_agrupacion_start)+ "\n", { flag: 'a' });
+                    fs.writeFileSync('./cassandra_files/test_agrupadas_grandes_con_array.csv', line_split[0] + ";" + line_split[2] + ";" + line_split[3] + ";"+ (busqueda_fin - busqueda_start) + ";" + (compresion_fin - compresion_start) +";"+(busqueda_factura_agrupacion_fin- busqueda_factura_agrupacion_start)+ "\n", { flag: 'a' });
                 }
                //res.status(200).send("OK");
 
@@ -539,6 +542,71 @@ var controller = {
         }
 
         await client.shutdown().then(console.log("Connection closed"));
+        res.status(200).send("OK");
+    },
+    testCassandraSingleData : async function(req, res){
+        const client = new cassandra.Client({
+            contactPoints: ['127.0.0.1'],
+            keyspace: 'ticketbai',
+            localDataCenter: 'datacenter1'
+        });
+
+        client.connect()
+            .then(function () {
+                console.log('Connected to cluster with %d host(s): %j', client.hosts.length, client.hosts.keys());
+                //console.log('Keyspaces: %j', Object.keys(client.metadata.keyspaces));
+            })
+            .catch(function (err) {
+                console.error('There was an error when connecting', err);
+                return client.shutdown().then(() => { throw err; });
+        });
+
+        const file = fs.readFileSync("./cassandra_files/idents_facturas_grandes.txt").toString();
+        fs.writeFileSync("./cassandra_files/test_get_single_data_grandes.csv", "NumFactura;Tiempo Busqueda RAW; Tiempo Busqueda Comprimida\n", {flag:'w'});
+
+        var lines = file.split("\n");
+
+        for(var i = 1; i < lines.length-1; i++){
+            var line_split = lines[i].split(" / ");
+
+            var query = "select importe from facturas where nif=? and fecha=? and tbai_id=?";
+            var params = [
+                line_split[1].split("-")[1],
+                moment(line_split[1].split("-")[2], "DDMMYY").format("YYYY-MM-DD"),
+                line_split[1]
+            ]
+            var obtener_dato_raw_start = performance.now();
+            let q1 = await client.execute(query, params, {prepare: true});
+            let dato = q1.rows[0].importe;
+            var obtener_dato_raw_fin = performance.now();
+
+
+            query = "select * from facturas where nif=? and fecha=? and tbai_id=?";
+            var obtener_dato_comprimida_start = performance.now();
+            let q2 = await client.execute(query, params, {prepare: true});
+            let xml = q2.rows[0].xml;
+            let factura_descomprimida = await unCompressData(xml);
+            dato = DATA.getImporteTotalFactura(factura_descomprimida);
+            var obtener_dato_comprimida_fin = performance.now();
+
+            fs.writeFileSync("./cassandra_files/test_get_single_data_grandes.csv", i+";"+ (obtener_dato_raw_fin-obtener_dato_raw_start)+";" + (obtener_dato_comprimida_fin-obtener_dato_comprimida_start) +"\n", {flag:'a'});
+        }
+    },
+    companies: function (req, res){
+
+        var companies = fs.readFileSync('./files/companies.csv').toString();
+
+        var lines = companies.split("\n");
+        fs.writeFileSync('./files/companies_nif.js', 'const companies_nif_list = [["'+nif_list[0] + '", "'+lines[1].split(',')[1] +'"]', {flag: 'w'});
+
+        for(var i = 2; i < lines.length; i++){
+            let line_split = lines[i].split(',');
+            let nif = nif_list[i-1];
+            fs.writeFileSync('./files/companies_nif.js', ',["'+nif + '", "'+line_split[1].replace(/"/gi, '') +'"]', {flag: 'a'});
+        }
+
+        fs.writeFileSync('./files/companies_nif.js', '];\nexports.companies_nif_list = companies_nif_list;', {flag:'a'})
+
         res.status(200).send("OK");
     }
 };
@@ -644,7 +712,7 @@ function agruparNFacturas(num, nif, fechaInicio, fechaFin) {
     var agrupacion = "";
     for (var i = 0; i < num; i++) {
         let data = dataGenerator.generate(nif, moment(randomDate(moment(fechaInicio, "DD-MM-YYYY").toDate(), moment(fechaFin, "DD-MM-YYYY").toDate()), "DD-MM-YYYY"),
-            dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.huellaTBAI_config);
+            dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config/*, dataGenerator.tipo_desglose_config*/, dataGenerator.huellaTBAI_config);
         let xml = generator.generate(data).toString();
         sig.computeSignature(xml);
         let factura = sig.getSignedXml();

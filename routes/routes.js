@@ -21,7 +21,9 @@ router.get('/agrupar', controller.agrupar);
 router.get('/agruparcassandra', controller.agruparCassandra);
 router.get('/test', controller.test);
 router.get('/testcassandra', controller.testCassandra);
+router.get('/testsingledata', controller.testCassandraSingleData);
 router.get('/factura', controller.unaFactura);
+router.get('/companies', controller.companies);
 
 
 
