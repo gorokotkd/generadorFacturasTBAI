@@ -32,7 +32,8 @@ var datos_factura_config = {
     detallesFactura: {
         numDetalles: 100,
         minImporteUnitario: 1,
-        maxImporteUnitario: 100
+        maxImporteUnitario: 100,
+        tipoImpositivo: 21
     },
     retencionSoportada: true,
     baseImponibleACoste: true,
@@ -556,7 +557,7 @@ function detallesDatosFactura(json, options = {
             "DescripcionDetalle": getRandomString(getRandomInt(1, 251)),
             "Cantidad": getRandomInt(1,3),
             "ImporteUnitario": getRandomArbitrary(options.minImporteUnitario, options.maxImporteUnitario, 2),
-            "TipoImpositivo": tipoImpositivo_list[getRandomInt(0, tipoImpositivo_list.length)]//Campo auxiliar para calcular el IVA
+            "TipoImpositivo": options.tipoImpositivo//tipoImpositivo_list[getRandomInt(0, tipoImpositivo_list.length)]//Campo auxiliar para calcular el IVA
         };
         detalle.Sujeta = true;
         if(tipoDesglose == 0){

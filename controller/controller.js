@@ -81,9 +81,32 @@ function randomDate(start, end) {
 var controller = {
     unaFactura: function (req, res) {
         let nif_comp = companies_nif_list[getRandomInt(0,companies_nif_list.length)];
+
+        /**Modifico los valores que quiero*/
         dataGenerator.sujetos_config.nif=nif_comp;
-        let data = dataGenerator.generate(dataGenerator.sujetos_config, dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config/*, dataGenerator.tipo_desglose_config*/, dataGenerator.huellaTBAI_config);
+        dataGenerator.cabecera_factura_config.FechaExpedicionFactura = new Date();
+        dataGenerator.cabecera_factura_config.HoraExpedicionFactura = new Date();
+        dataGenerator.datos_factura_config.detallesFactura.tipoImpositivo = 10;
+
+        //Generacion de datos
+        let data = dataGenerator.generate(dataGenerator.sujetos_config, 
+            dataGenerator.cabecera_factura_config, dataGenerator.datos_factura_config, dataGenerator.huellaTBAI_config);
+        //Transformo los datos a xml
         let xml = generator.generate(data);
+
+        /**PROCESO DE FIRMA DE UNA FACTUA */
+        var privateKey = fs.readFileSync('./keys/user1.pem');
+        var sig = new SignedXml();
+        sig.addReference("//*[local-name(.)='Cabecera' or local-name(.) = "+
+        +"'Sujetos' or local-name(.) = 'Factura' or local-name(.) = 'HuellaTBAI']");
+        sig.signingKey = privateKey;
+        //Firmo la factura
+        sig.computeSignature(xml);
+        //Obtengo la factura firmada
+        let factura_firmada = sig.getSignedXml();
+
+
+
         res.status(200).send(xml);
         //res.status(200).send(data);
     },
